@@ -43,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
       <head>
+        <link rel="icon" type="image/png" href="/Botifyx_Icon.png" style={{borderRadius: "50%"}}/>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

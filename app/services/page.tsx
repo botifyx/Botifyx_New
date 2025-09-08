@@ -199,7 +199,7 @@ export default function ServicesPage() {
                   <ul className="space-y-2">
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center text-sm text-gray-700">
-                        <div className={`w-2 h-2 ${service.color.replace('text-', 'bg-')} rounded-full mr-3 flex-shrink-0`}></div>
+                        <div className={`flex-shrink-0`}></div>
                         {feature}
                       </li>
                     ))}

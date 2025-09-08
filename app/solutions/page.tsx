@@ -235,7 +235,7 @@ export default function SolutionsPage() {
                       <ul className="space-y-2">
                         {solution.features.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-center text-sm text-gray-700">
-                            <div className={`w-2 h-2 ${solution.color.replace('text-', 'bg-')} rounded-full mr-3 flex-shrink-0`}></div>
+                            <div className={`flex-shrink-0`}></div>
                             {feature}
                           </li>
                         ))}
@@ -247,7 +247,7 @@ export default function SolutionsPage() {
                       <ul className="space-y-2">
                         {solution.benefits.map((benefit, benefitIndex) => (
                           <li key={benefitIndex} className="flex items-center text-sm text-gray-700">
-                            <div className="w-2 h-2 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
+                            <div className="flex-shrink-0"></div>
                             {benefit}
                           </li>
                         ))}

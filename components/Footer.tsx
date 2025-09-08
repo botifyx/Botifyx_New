@@ -1,41 +1,81 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react';
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+  ArrowRight,
+} from "lucide-react";
+import { useState } from "react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const footerLinks = {
     services: [
-      { name: 'Web Development', href: '/services#web-development' },
-      { name: 'Mobile Apps', href: '/services#mobile-apps' },
-      { name: 'Testing Services', href: '/services#testing' },
-      { name: 'AI/ML Solutions', href: '/solutions#ai-ml' },
-      { name: 'Chatbot Development', href: '/solutions#chatbots' },
+      { name: "Web Development", href: "/services#web-development" },
+      { name: "Mobile Apps", href: "/services#mobile-apps" },
+      { name: "Testing Services", href: "/services#testing" },
+      { name: "AI/ML Solutions", href: "/solutions#ai-ml" },
+      { name: "Chatbot Development", href: "/solutions#chatbots" },
     ],
     company: [
-      { name: 'About Us', href: '/about' },
-      { name: 'Our Work', href: '/work' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Contact', href: '/contact' },
+      { name: "About Us", href: "/about" },
+      { name: "Our Work", href: "/work" },
+      { name: "Blog", href: "/blog" },
+      { name: "Contact", href: "/contact" },
     ],
     support: [
-      { name: 'Help Center', href: '/support' },
-      { name: 'Documentation', href: '/docs' },
-      { name: 'API Reference', href: '/api' },
-      { name: 'Status Page', href: '/status' },
-      { name: 'Privacy Policy', href: '/privacy' },
-    ]
+      { name: "Help Center", href: "/support" },
+      { name: "Documentation", href: "/docs" },
+      { name: "API Reference", href: "/api" },
+      { name: "Status Page", href: "/status" },
+      { name: "Privacy Policy", href: "/privacy" },
+    ],
   };
 
   const socialLinks = [
-    { name: 'Facebook', icon: Facebook, href: '#' },
-    { name: 'Twitter', icon: Twitter, href: '#' },
-    { name: 'LinkedIn', icon: Linkedin, href: '#' },
-    { name: 'Instagram', icon: Instagram, href: '#' },
+    { name: "Facebook", icon: Facebook, href: "#" },
+    { name: "Twitter", icon: Twitter, href: "#" },
+    { name: "LinkedIn", icon: Linkedin, href: "#" },
+    { name: "Instagram", icon: Instagram, href: "#" },
   ];
+
+  const handleSubscribe = async () => {
+    if (!email) return;
+
+    setIsSubmitting(true);
+    setStatus("idle");
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <footer className="bg-dark text-white">
@@ -47,19 +87,35 @@ const Footer = () => {
               Stay Updated with <span className="gradient-text">Botifyx</span>
             </h3>
             <p className="text-gray-400 text-lg mb-8">
-              Get the latest insights on web development, AI, and digital transformation
+              Get the latest insights on web development, AI, and digital
+              transformation
             </p>
-            
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 transition-colors duration-300"
               />
-              <button className="btn-primary flex items-center justify-center whitespace-nowrap">
-                Subscribe
+              <button
+                onClick={handleSubscribe}
+                disabled={isSubmitting}
+                className="btn-primary flex items-center justify-center whitespace-nowrap"
+              >
+                {isSubmitting ? "Please Wait..." : "Subscribe"}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </button>
+              {status === "success" && (
+                <p className="mt-2 text-green-500 text-sm">
+                  Subscribed successfully!
+                </p>
+              )}
+              {status === "error" && (
+                <p className="mt-2 text-red-500 text-sm">
+                  Something went wrong. Try again.
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -79,23 +135,29 @@ const Footer = () => {
                 className="h-10 w-auto brightness-0 invert"
               />
             </Link> */}
-            
+
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Transforming businesses through innovative web development, comprehensive testing, 
-              and cutting-edge AI solutions.
+              Transforming businesses through innovative web development,
+              comprehensive testing, and cutting-edge AI solutions.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary-500" />
-                <a href="mailto:info@botifyx.in" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <a
+                  href="mailto:info@botifyx.in"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
                   info@botifyx.in
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary-500" />
-                <a href="tel:+919566443876" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <a
+                  href="tel:+919566443876"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
                   +91 95664 43876
                 </a>
               </div>
@@ -151,7 +213,8 @@ const Footer = () => {
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
                   <Link
-                    href={link.href}
+                    // href={link.href}
+                    href="#"
                     className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group"
                   >
                     <span>{link.name}</span>
@@ -171,7 +234,7 @@ const Footer = () => {
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
               © {currentYear} Botifyx. All rights reserved.
             </div>
-            
+
             {/* Social Links */}
             {/* <div className="flex items-center space-x-4">
               {socialLinks.map((social) => {

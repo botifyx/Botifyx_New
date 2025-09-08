@@ -181,7 +181,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="section-padding">
+      {/* <section className="section-padding">
         <div className="container-custom">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-manrope font-bold text-gray-900 mb-6">
@@ -218,7 +218,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Timeline */}
       <section className="section-padding bg-gray-50">

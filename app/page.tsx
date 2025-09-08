@@ -32,18 +32,10 @@ export default function Home() {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      company: "TechStart Inc.",
-      role: "CTO",
       content: "Botifyx delivered our project ahead of schedule with exceptional quality. Their testing approach caught critical issues we never would have found.",
-      avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150"
     },
     {
-      name: "Michael Chen",
-      company: "Digital Solutions Ltd",
-      role: "Product Manager",
       content: "The AI chatbot they built for us increased our customer satisfaction by 40%. Outstanding work and ongoing support.",
-      avatar: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150"
     }
   ];
 
