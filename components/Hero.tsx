@@ -36,7 +36,7 @@ const Hero = () => {
             <div className="space-y-6">
               <div className="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
                 <span className="w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
-                Trusted by 500+ businesses worldwide
+                Trusted by 50+ businesses worldwide
               </div>
               
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-manrope font-bold text-gray-900 leading-tight">
@@ -77,7 +77,7 @@ const Hero = () => {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-500">500+</div>
+                <div className="text-3xl font-bold text-primary-500">50+</div>
                 <div className="text-sm text-gray-600">Projects Delivered</div>
               </div>
               <div className="text-center">
