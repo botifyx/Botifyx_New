@@ -63,7 +63,8 @@ const CaseStudyCard = ({ title, description, image, tags, link }: CaseStudyCardP
 
         {/* Read More Link */}
         <Link
-          href={link}
+          // href={link}
+          href="#"
           className="inline-flex items-center text-primary-500 font-semibold text-sm group-hover:text-primary-600 transition-colors duration-300"
         >
           <span>Read full case study</span>

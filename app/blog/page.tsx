@@ -161,7 +161,8 @@ export default function BlogPage() {
                     </div>
                     
                     <Link
-                      href={`/blog/${featuredPost.slug}`}
+                      // href={`/blog/${featuredPost.slug}`}
+                      href="#"
                       className="inline-flex items-center text-primary-500 font-semibold hover:text-primary-600 transition-colors duration-300"
                     >
                       Read More
@@ -244,7 +245,8 @@ export default function BlogPage() {
                     </div>
                     
                     <Link
-                      href={`/blog/${post.slug}`}
+                      // href={`/blog/${post.slug}`}
+                      href="#"
                       className="inline-flex items-center text-primary-500 font-semibold text-sm hover:text-primary-600 transition-colors duration-300"
                     >
                       Read More
