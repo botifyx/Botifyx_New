@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Botifyx - Aify. Autofy. Amplify.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'brand-dark': '#0a0a1a',
+              'brand-dark-2': '#1a1a2e',
+              'brand-primary': '#4f46e5',
+              'brand-secondary': '#7c3aed',
+              'brand-accent': '#00f5d4',
+            },
+            typography: (theme) => ({
+              DEFAULT: {
+                css: {
+                  '--tw-prose-body': theme('colors.gray[800]'),
+                  '--tw-prose-invert-body': theme('colors.gray[200]'),
+                },
+              },
+            }),
+            animation: {
+              'gradient-x': 'gradient-x 15s ease infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'gradient-xy': 'gradient-xy 30s ease infinite',
+              'bounce': 'bounce 1s infinite',
+              'pulse-slow': 'pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              'gradient-x': {
+                '0%, 100%': { 'background-position': '0% 50%' },
+                '50%': { 'background-position': '100% 50%' },
+              },
+              'float': {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              'gradient-xy': {
+                '0%, 100%': { 'background-position': '0% 50%' },
+                '25%': { 'background-position': '100% 0%' },
+                '50%': { 'background-position': '100% 100%' },
+                '75%': { 'background-position': '0% 100%' },
+              },
+              bounce: {
+                '0%, 100%': {
+                    transform: 'translateY(-25%)',
+                    animationTimingFunction: 'cubic-bezier(0.8,0,1,1)'
+                },
+                '50%': {
+                    transform: 'none',
+                    animationTimingFunction: 'cubic-bezier(0,0,0.2,1)'
+                }
+              },
+              'pulse-slow': {
+                '0%, 100%': {
+                  transform: 'scale(1)',
+                },
+                '50%': {
+                  transform: 'scale(1.1)',
+                },
+              },
+            }
+          }
+        }
+      }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "dompurify": "https://aistudiocdn.com/dompurify@^3.3.0",
+    "@google/generative-ai": "https://aistudiocdn.com/google-generative-ai@^0.14.0",
+    "marked": "https://aistudiocdn.com/marked@^14.0.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

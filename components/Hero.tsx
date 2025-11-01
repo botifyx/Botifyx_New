@@ -1,135 +1,64 @@
-'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { ArrowRight, Play, CheckCircle } from 'lucide-react';
+import React from 'react';
 
-const Hero = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const Hero: React.FC = () => {
+  const handleScrollClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId.substring(1));
+    if (element) {
+        const headerOffset = 80; // Height of the fixed header
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  const features = [
-    "Lightning-fast development",
-    "Comprehensive testing suite",
-    "Enterprise-grade security",
-    "24/7 support & maintenance"
-  ];
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+  };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse-slow"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse-slow"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-50 rounded-full mix-blend-multiply filter blur-2xl opacity-50"></div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent animate-gradient-xy opacity-20" style={{ backgroundSize: '400% 400%' }}></div>
       </div>
-
-      <div className="container-custom relative z-10 pt-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Content */}
-          <div className={`space-y-8 transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <div className="space-y-6">
-              <div className="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
-                <span className="w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
-                Trusted by 50+ businesses worldwide
-              </div>
-              
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-manrope font-bold text-gray-900 leading-tight">
-                Build fast.{' '}
-                <span className="gradient-text">Test hard.</span>{' '}
-                Ship secure.
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-2xl">
-                Transform your digital vision into reality with our comprehensive development, 
-                testing, and AI solutions. From concept to deployment, we ensure your success.
-              </p>
-            </div>
-
-            {/* Feature List */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700 font-medium">{feature}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/contact" className="btn-primary inline-flex items-center justify-center group">
-                Start my prototype
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-              
-              <Link href="/work" className="btn-secondary inline-flex items-center justify-center group">
-                <Play className="mr-2 w-5 h-5" />
-                View our work
-              </Link>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-500">50+</div>
-                <div className="text-sm text-gray-600">Projects Delivered</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-500">99.9%</div>
-                <div className="text-sm text-gray-600">Uptime Guarantee</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary-500">24/7</div>
-                <div className="text-sm text-gray-600">Support Available</div>
-              </div>
-            </div>
+      
+      <div className="relative z-10 container mx-auto px-6 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-tight">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent">Aify.</span> Autofy. <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-accent to-brand-secondary">Amplify.</span>
+          </h1>
+          <p className="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Transform your digital vision into reality with our comprehensive development, testing, and AI solutions. From concept to deployment, we ensure your success.
+          </p>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <a href="#services" onClick={(e) => handleScrollClick(e, '#services')} className="w-full sm:w-auto bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold py-3 px-8 rounded-lg text-lg hover:opacity-90 transition-opacity duration-300">
+              Explore Our Solutions
+            </a>
+            <a href="#process" onClick={(e) => handleScrollClick(e, '#process')} className="w-full sm:w-auto bg-transparent dark:bg-brand-dark-2 border border-brand-primary text-brand-primary dark:text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-brand-primary/10 dark:hover:bg-brand-primary/20 transition-colors duration-300">
+              Our Proven Process
+            </a>
           </div>
-
-          {/* Right Column - Visual */}
-          <div className={`relative transition-all duration-1000 delay-300 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <div className="relative">
-              {/* Main Image Container */}
-              <div className="relative bg-white rounded-2xl shadow-2xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                <div className="bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl p-6 text-white">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                      <div className="text-sm opacity-75">Live Project</div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="h-4 bg-white/20 rounded animate-pulse"></div>
-                      <div className="h-4 bg-white/20 rounded w-3/4 animate-pulse"></div>
-                      <div className="h-4 bg-white/20 rounded w-1/2 animate-pulse"></div>
-                    </div>
-                    <div className="flex space-x-2 pt-4">
-                      <div className="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
-                        <CheckCircle className="w-4 h-4 text-green-800" />
-                      </div>
-                      <div className="w-8 h-8 bg-yellow-400 rounded-full animate-spin"></div>
-                      <div className="w-8 h-8 bg-blue-400 rounded-full animate-bounce"></div>
-                    </div>
-                  </div>
+        </div>
+        
+        <div className="mt-16 relative w-full flex justify-center items-center">
+            <div className="absolute w-64 h-64 md:w-96 md:h-96 bg-brand-primary/20 rounded-full blur-3xl animate-float"></div>
+            <div className="absolute w-56 h-56 md:w-80 md:h-80 bg-brand-accent/20 rounded-full blur-3xl animate-float animation-delay-3000"></div>
+            <div className="relative w-48 h-48 md:w-64 md:h-64 animate-float" style={{animationDelay: '1s'}}>
+                <div className="absolute inset-0 border-4 border-brand-secondary/30 rounded-full animate-spin" style={{animationDuration: '20s', animationDirection: 'reverse'}}></div>
+                <div className="absolute inset-4 border-2 border-brand-accent/40 rounded-full animate-spin" style={{animationDuration: '15s'}}></div>
+                <div className="absolute inset-8 flex items-center justify-center">
+                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                        <defs>
+                            <linearGradient id="brain-gradient" gradientTransform="rotate(90)">
+                                <stop offset="0%" stopColor="#7c3aed" />
+                                <stop offset="100%" stopColor="#00f5d4" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50,5 C25,5 5,25 5,50 C5,75 25,95 50,95 C75,95 95,75 95,50 C95,25 75,5 50,5 Z M50,15 C69.3,15 85,30.7 85,50 C85,69.3 69.3,85 50,85 C30.7,85 15,69.3 15,50 C15,30.7 30.7,15 50,15 Z M50,25 C63.8,25 75,36.2 75,50 C75,63.8 63.8,75 50,75 C36.2,75 25,63.8 25,50 C25,36.2 36.2,25 50,25 Z M50,35 C58.3,35 65,41.7 65,50 C65,58.3 58.3,65 50,65 C41.7,65 35,58.3 35,50 C35,41.7 41.7,35 50,35 Z" fill="url(#brain-gradient)" opacity="0.1"></path>
+                    </svg>
                 </div>
-              </div>
-
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -left-4 w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg animate-bounce-slow">
-                <span className="text-white font-bold">AI</span>
-              </div>
-              
-              <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-green-500 rounded-full flex items-center justify-center shadow-lg animate-pulse-slow">
-                <CheckCircle className="w-8 h-8 text-white" />
-              </div>
             </div>
-          </div>
         </div>
       </div>
     </section>
