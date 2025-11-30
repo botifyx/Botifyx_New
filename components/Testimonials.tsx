@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons/FeatureIcons';
 
 const testimonials = [
@@ -20,6 +20,8 @@ const testimonials = [
 const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
@@ -36,12 +38,37 @@ const Testimonials: React.FC = () => {
     }
   }, [currentIndex, isPaused]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="testimonials" className="py-20 bg-gray-50 dark:bg-brand-dark-2/50">
+    <section id="testimonials" ref={sectionRef} className={`py-20 bg-gray-50 dark:bg-brand-dark-2/50 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white">What Our Clients Say</h2>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">
+          <p className="mt-4 text-gray-700 dark:text-gray-400">
             Real stories from businesses we've helped transform and amplify.
           </p>
         </div>
@@ -58,7 +85,7 @@ const Testimonials: React.FC = () => {
                 className={`absolute w-full transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
               >
                 <blockquote className="text-center">
-                  <p className="text-xl md:text-2xl italic text-gray-700 dark:text-gray-200 leading-relaxed">
+                  <p className="text-xl md:text-2xl italic text-gray-800 dark:text-gray-200 leading-relaxed">
                     "{testimonial.quote}"
                   </p>
                 </blockquote>

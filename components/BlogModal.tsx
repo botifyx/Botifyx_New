@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import DOMPurify from 'dompurify';
-import { XIcon, LinkedInIcon, LinkIcon, BookOpenIcon } from './icons/FeatureIcons';
+import { XIcon, LinkedInIcon, LinkIcon, BookOpenIcon, CpuChipIcon, MailIcon, CloseIcon } from './icons/FeatureIcons';
 
 interface Post {
   title: string;
@@ -66,9 +67,9 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, allPosts, onSelectPost, onC
           if (score >= 90) return 'Very Easy';
           if (score >= 70) return 'Easy';
           if (score >= 60) return 'Standard';
-          if (score >= 50) return 'Fairly Difficult';
-          if (score >= 30) return 'Difficult';
-          return 'Very Difficult';
+          if (score >= 50) return 'Complex';
+          if (score >= 30) return 'Technical';
+          return 'Very Technical';
       };
       
       const wordCount = countWords(text);
@@ -92,7 +93,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, allPosts, onSelectPost, onC
 
   const handleClose = () => {
     setIsClosing(true);
-    setTimeout(onClose, 300); // Match animation duration
+    setTimeout(onClose, 300);
   };
   
   useEffect(() => {
@@ -108,7 +109,6 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, allPosts, onSelectPost, onC
   }, []);
   
   useEffect(() => {
-    // Scroll to top when post changes
     if (contentRef.current) {
         contentRef.current.scrollTo(0, 0);
     }
@@ -116,7 +116,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, allPosts, onSelectPost, onC
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
-    target.onerror = null; // prevent infinite loop if placeholder is also broken
+    target.onerror = null;
     target.src = PLACEHOLDER_IMAGE;
   };
 
@@ -141,70 +141,120 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, allPosts, onSelectPost, onC
 
   const sanitizedContent = DOMPurify.sanitize(post.content);
 
+  // Calculate readability ring color
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return 'text-green-400 border-green-400';
+    if (score >= 60) return 'text-brand-accent border-brand-accent';
+    if (score >= 40) return 'text-yellow-400 border-yellow-400';
+    return 'text-red-400 border-red-400';
+  };
+
   return (
     <div 
-        className={`fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}
+        className={`fixed inset-0 bg-brand-dark/90 backdrop-blur-lg flex items-center justify-center z-50 p-4 transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}
         onClick={handleClose}
         aria-modal="true"
         role="dialog"
-        aria-labelledby="blog-modal-title"
     >
       <div 
-        className={`relative bg-white dark:bg-brand-dark w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-transform duration-300 ${isClosing ? 'scale-95' : 'scale-100'}`}
+        className={`relative bg-gray-50 dark:bg-[#0a0a1a] w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:border-brand-primary/30 transition-all duration-300 ${isClosing ? 'scale-95 opacity-0' : 'scale-100 opacity-100'}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-brand-primary/20 flex-shrink-0 flex-wrap gap-4">
-            <div className="flex items-baseline flex-wrap gap-x-3 gap-y-1">
-                <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">{post.author}</span>
-                <span className="text-gray-400 dark:text-gray-600">•</span>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                    {new Date(post.pubDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                </span>
-                {readabilityInfo.score > 0 && (
-                    <>
-                        <span className="text-gray-400 dark:text-gray-600">•</span>
-                        <div className="flex items-center space-x-1.5 text-sm text-gray-600 dark:text-gray-400" title={`Flesch Reading Ease Score: ${readabilityInfo.score}`}>
-                            <BookOpenIcon className="w-4 h-4 text-brand-secondary" />
-                            <span>{readabilityInfo.label} ({readabilityInfo.score})</span>
-                        </div>
-                    </>
-                )}
+        {/* Modal Header */}
+        <header className="flex items-center justify-between p-5 border-b border-gray-200 dark:border-brand-primary/10 bg-white/70 dark:bg-brand-dark/70 backdrop-blur-md z-10 sticky top-0">
+            <div className="flex flex-col">
+                <div className="flex items-center space-x-2 text-xs font-mono text-gray-500 dark:text-gray-400 mb-1">
+                     <span className="uppercase text-brand-primary dark:text-brand-accent">@{post.author.replace(/\s+/g, '_')}</span>
+                     <span>//</span>
+                     <span>{new Date(post.pubDate).toISOString().split('T')[0]}</span>
+                </div>
             </div>
           <button 
             onClick={handleClose} 
-            className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-brand-dark-2 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            className="group p-2 rounded-full hover:bg-gray-200 dark:hover:bg-brand-primary/20 transition-colors"
             aria-label="Close post"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <CloseIcon className="w-6 h-6 text-gray-400 group-hover:text-red-500 transition-colors" />
           </button>
         </header>
 
-        <div ref={contentRef} className="flex-grow overflow-y-auto p-6 md:p-8 styled-scrollbar">
-          <article>
-            <div className="relative w-full aspect-video overflow-hidden rounded-lg mb-8 border border-gray-200 dark:border-brand-primary/20">
-                <img src={post.thumbnail} alt={post.title} onError={handleImageError} className="absolute inset-0 w-full h-full object-cover" />
+        <div ref={contentRef} className="flex-grow overflow-y-auto styled-scrollbar bg-white dark:bg-[#0a0a1a]">
+          <div className="p-6 md:p-10">
+            {/* Hero Image */}
+            <div className="relative w-full aspect-video overflow-hidden rounded-xl mb-8 shadow-lg group border border-gray-200 dark:border-white/5">
+                <img 
+                    src={post.thumbnail} 
+                    alt={post.title} 
+                    onError={handleImageError} 
+                    referrerPolicy="no-referrer"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-transparent to-transparent"></div>
+                <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
+                    {post.categories && post.categories.map(cat => (
+                        <span key={cat} className="inline-block bg-brand-primary/20 backdrop-blur-md border border-brand-primary/30 text-white text-xs font-mono font-bold px-3 py-1 rounded">
+                            #{cat}
+                        </span>
+                    ))}
+                </div>
             </div>
             
-            <h1 id="blog-modal-title" className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6">{post.title}</h1>
+            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-8 leading-tight">
+                {post.title}
+            </h1>
             
+            {readabilityInfo.score > 0 && (
+                <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-6 mb-10 p-5 bg-gray-100 dark:bg-brand-dark-2/40 rounded-xl border border-gray-200 dark:border-brand-primary/10">
+                    <div className="flex items-center space-x-2">
+                        <BookOpenIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                        <span className="text-sm font-semibold text-gray-800 dark:text-gray-300 uppercase tracking-wider">Analysis:</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-3">
+                        <div className={`relative flex items-center justify-center w-12 h-12 rounded-full border-4 ${getScoreColor(readabilityInfo.score).split(' ')[1]}`}>
+                             <span className={`text-xs font-bold ${getScoreColor(readabilityInfo.score).split(' ')[0]}`}>{readabilityInfo.score}</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">READABILITY_INDEX</span>
+                            <span className={`text-sm font-bold uppercase ${getScoreColor(readabilityInfo.score).split(' ')[0]}`}>
+                                {readabilityInfo.label}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div 
-                className="prose dark:prose-invert prose-lg max-w-none text-gray-700 dark:text-gray-300 prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-brand-primary dark:prose-a:text-brand-accent prose-strong:text-gray-800 dark:prose-strong:text-gray-200"
+                className="prose dark:prose-invert prose-lg max-w-none text-gray-800 dark:text-gray-300 prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-brand-primary dark:prose-a:text-brand-accent prose-img:rounded-xl prose-img:shadow-lg prose-pre:bg-gray-900 prose-pre:text-gray-100 dark:prose-pre:bg-black/50"
                 dangerouslySetInnerHTML={{ __html: sanitizedContent }} 
             />
-          </article>
+          </div>
           
           {relatedPosts.length > 0 && (
-            <div className="mt-12 pt-8 border-t border-gray-200 dark:border-brand-primary/20">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Related Posts</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-gray-100 dark:bg-[#050510] p-8 border-t border-gray-200 dark:border-brand-primary/10">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                <CpuChipIcon className="w-5 h-5 mr-2 text-brand-secondary" />
+                Related Intelligence
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {relatedPosts.map(relatedPost => (
                   <button
                     key={relatedPost.guid}
                     onClick={() => onSelectPost(relatedPost)}
-                    className="text-left p-4 rounded-lg bg-gray-50 dark:bg-brand-dark-2/50 border border-gray-200 dark:border-brand-primary/20 hover:border-brand-accent/50 dark:hover:bg-brand-primary/10 transition-all transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                    className="text-left group"
                   >
-                    <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2 line-clamp-2">{relatedPost.title}</h3>
-                    <span className="text-sm font-semibold text-brand-secondary dark:text-brand-accent">Read Now &rarr;</span>
+                    <div className="aspect-video rounded-lg overflow-hidden mb-3 border border-gray-200 dark:border-white/10 relative">
+                        <img 
+                            src={relatedPost.thumbnail} 
+                            alt="" 
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                            referrerPolicy="no-referrer"
+                        />
+                        <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/20 transition-colors duration-300"></div>
+                    </div>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-200 text-sm line-clamp-2 group-hover:text-brand-primary dark:group-hover:text-brand-accent transition-colors">
+                        {relatedPost.title}
+                    </h3>
                   </button>
                 ))}
               </div>
@@ -212,68 +262,62 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, allPosts, onSelectPost, onC
           )}
         </div>
         
-        <footer className="p-4 bg-gray-50 dark:bg-brand-dark-2/50 border-t border-gray-200 dark:border-brand-primary/20 flex-shrink-0 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-2">
-                <a
-                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(post.link)}&text=${encodeURIComponent(post.title)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center space-x-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[#1DA1F2] hover:bg-[#0c85d0] transition-colors"
-                    aria-label="Share on Twitter"
+        {/* Footer */}
+        <footer className="p-4 bg-white dark:bg-brand-dark-2 border-t border-gray-200 dark:border-brand-primary/10 flex-shrink-0 flex items-center justify-between z-10 sticky bottom-0">
+            <div className="flex space-x-2">
+                <button
+                    onClick={handleCopyLink}
+                    className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-brand-dark transition-colors relative group"
+                    title="Copy Link"
                 >
-                    <XIcon className="w-5 h-5" />
-                    <span>Twitter</span>
-                </a>
+                    <LinkIcon className="w-5 h-5 group-hover:text-brand-primary" />
+                    {isCopied && <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-1 px-2 rounded shadow-lg whitespace-nowrap">Link Copied!</span>}
+                </button>
+                
+                {/* Social Sharing Buttons */}
                 <a
                     href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(post.link)}&title=${encodeURIComponent(post.title)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center space-x-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[#0A66C2] hover:bg-[#0854a0] transition-colors"
-                    aria-label="Share on LinkedIn"
+                    className="p-2 rounded-lg text-gray-500 hover:text-[#0A66C2] hover:bg-gray-100 dark:hover:bg-brand-dark transition-colors"
+                    title="Share on LinkedIn"
                 >
                     <LinkedInIcon className="w-5 h-5" />
-                    <span>LinkedIn</span>
                 </a>
-                <button
-                    onClick={handleCopyLink}
-                    className="relative inline-flex items-center justify-center space-x-2 px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 dark:text-gray-200 bg-gray-200 dark:bg-brand-dark-2 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-                    aria-label="Copy link"
+
+                <a
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(post.link)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg text-gray-500 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-brand-dark transition-colors"
+                    title="Share on X"
                 >
-                    <LinkIcon className="w-5 h-5" />
-                    {isCopied && (
-                        <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-100 transition-opacity">
-                            Link Copied!
-                        </span>
-                    )}
-                </button>
+                    <XIcon className="w-5 h-5" />
+                </a>
+
+                <a
+                    href={`mailto:?subject=${encodeURIComponent(post.title)}&body=Check out this article: ${encodeURIComponent(post.link)}`}
+                    className="p-2 rounded-lg text-gray-500 hover:text-red-500 hover:bg-gray-100 dark:hover:bg-brand-dark transition-colors"
+                    title="Share via Email"
+                >
+                    <MailIcon className="w-5 h-5" />
+                </a>
             </div>
             <a 
                 href={post.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold py-2 px-6 rounded-lg hover:opacity-90 transition-opacity duration-300"
+                className="bg-gray-900 dark:bg-white text-white dark:text-black font-semibold py-2 px-6 rounded-lg text-sm hover:opacity-90 transition-opacity shadow-lg"
             >
-                Read on Medium
+                Read Original
             </a>
         </footer>
       </div>
       <style>{`
-        .prose > p { margin-bottom: 1.25em; }
-        .prose > h2 { margin-top: 2em; margin-bottom: 1em; }
-        .prose > h3 { margin-top: 1.6em; margin-bottom: 0.8em; }
-        .prose blockquote { border-left-color: #4f46e5; }
-        .prose pre { background-color: #1a1a2e; }
-        .dark .prose pre { background-color: #0a0a1a; }
-        .styled-scrollbar::-webkit-scrollbar { width: 8px; }
+        .styled-scrollbar::-webkit-scrollbar { width: 6px; }
         .styled-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .styled-scrollbar::-webkit-scrollbar-thumb { background-color: #7c3aed; border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
-        .dark .styled-scrollbar::-webkit-scrollbar-thumb { background-color: #00f5d4; }
-        .line-clamp-2 {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-        }
+        .styled-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(124, 58, 237, 0.5); border-radius: 10px; }
+        .dark .styled-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(0, 245, 212, 0.3); }
       `}</style>
     </div>
   );

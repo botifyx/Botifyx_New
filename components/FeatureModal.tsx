@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 interface Feature {
@@ -6,6 +7,7 @@ interface Feature {
   title: string;
   description: string;
   details: string;
+  technologies: string[];
 }
 
 interface FeatureModalProps {
@@ -66,9 +68,27 @@ const FeatureModal: React.FC<FeatureModalProps> = ({ feature, onClose }) => {
         </header>
 
         <div className="flex-grow overflow-y-auto p-6 md:p-8 styled-scrollbar">
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
             {feature.details}
           </p>
+          
+          {feature.technologies && feature.technologies.length > 0 && (
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-brand-primary/20">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                Key Technologies & Methodologies
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {feature.technologies.map((tech) => (
+                  <span 
+                    key={tech} 
+                    className="bg-brand-primary/10 text-brand-primary dark:bg-brand-accent/10 dark:text-brand-accent font-medium px-3 py-1.5 rounded-full text-sm"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
        <style>{`

@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Features from './components/Features';
-import Process from './components/Process';
-import Footer from './components/Footer';
-import Services from './components/Services';
-import Testimonials from './components/Testimonials';
-import Blog from './components/Blog';
-import Chatbot from './components/Chatbot';
-import Checkpoints from './components/Checkpoints';
+import Loader from './components/Loader';
+
+// Lazy load components that are below the fold for faster initial load.
+const Services = lazy(() => import('./components/Services'));
+const Portfolio = lazy(() => import('./components/Portfolio'));
+const Features = lazy(() => import('./components/Features'));
+const Process = lazy(() => import('./components/Process'));
+const Checkpoints = lazy(() => import('./components/Checkpoints'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Blog = lazy(() => import('./components/Blog'));
+const Footer = lazy(() => import('./components/Footer'));
+const Chatbot = lazy(() => import('./components/Chatbot'));
+const ScrollToTop = lazy(() => import('./components/ScrollToTop'));
+
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(() => {
@@ -26,6 +33,18 @@ const App: React.FC = () => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
+  // Effect to handle the removal of the preloader once the app has mounted.
+  useEffect(() => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      // Fade out after a short delay to allow content to render
+      setTimeout(() => {
+        preloader.classList.add('opacity-0');
+        setTimeout(() => preloader.remove(), 500); // Remove from DOM after transition
+      }, 100);
+    }
+  }, []);
+
   const toggleTheme = () => {
     setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
   };
@@ -37,15 +56,21 @@ const App: React.FC = () => {
         <Header theme={theme} toggleTheme={toggleTheme} />
         <main>
           <Hero />
-          <Services />
-          <Features />
-          <Process />
-          <Checkpoints />
-          <Testimonials />
-          <Blog />
+          <Suspense fallback={<Loader />}>
+            <Services />
+            <Portfolio />
+            <Features />
+            <Process />
+            <Checkpoints />
+            <Testimonials />
+            <Blog />
+          </Suspense>
         </main>
-        <Footer />
-        <Chatbot />
+        <Suspense fallback={null}>
+          <Footer />
+          <Chatbot />
+          <ScrollToTop />
+        </Suspense>
       </div>
     </div>
   );
