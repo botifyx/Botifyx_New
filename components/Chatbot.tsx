@@ -1,337 +1,276 @@
 
-import React, { useState, useEffect, useRef } from 'react';
-import { GoogleGenAI, Chat } from "@google/genai";
-import { XIcon, SendIcon, ChatbotIcon, RefreshIcon } from './icons/FeatureIcons';
-import { marked } from 'marked';
-import DOMPurify from 'dompurify';
+import React, { useState, useRef, useEffect } from 'react';
+import { MessageSquare, X, Send, Bot, User, ArrowRight, Loader2, Trash2, Sparkles, Handshake, HelpCircle, Lightbulb } from 'lucide-react';
+import { GoogleGenAI, Type } from '@google/genai';
+import { ALL_SERVICES, ECOSYSTEM, INDUSTRIES } from '../constants.tsx';
 
 interface Message {
-    id: string;
-    text: string;
-    sender: 'user' | 'bot';
-    timestamp: Date;
+  role: 'user' | 'model';
+  text: string;
 }
 
-interface LocationData {
-    city: string;
-    country: string;
-    countryCode: string;
+interface ChatbotProps {
+  onNavigate: (route: string) => void;
 }
 
-const Chatbot: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [input, setInput] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [location, setLocation] = useState<LocationData | null>(null);
-    const [chatSession, setChatSession] = useState<Chat | null>(null);
-    const messagesEndRef = useRef<HTMLDivElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+const CHAT_HISTORY_KEY = 'botifyx_chat_history';
 
-    // 1. Fetch User Location on Mount
-    useEffect(() => {
-        const fetchLocation = async () => {
-            try {
-                // Using a free IP geolocation service
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                if (data.country_name) {
-                    setLocation({
-                        city: data.city,
-                        country: data.country_name,
-                        countryCode: data.country_code
-                    });
-                }
-            } catch (error) {
-                console.warn("Could not fetch location, defaulting to global persona.");
-                setLocation({ city: 'Earth', country: 'Global', countryCode: 'GL' });
-            }
-        };
-        fetchLocation();
-    }, []);
+export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    // 2. Initialize Chat Session when Location is ready or Chat is opened
-    useEffect(() => {
-        if (isOpen && !chatSession && location) {
-            initializeChat(location);
+  const quickActions = [
+    { label: "What can you build for me?", icon: <Lightbulb size={14} /> },
+    { label: "Tell me about RAG Chatbots", icon: <HelpCircle size={14} /> },
+    { label: "I'd like to start a project", icon: <Handshake size={14} /> },
+  ];
+
+  useEffect(() => {
+    const savedHistory = localStorage.getItem(CHAT_HISTORY_KEY);
+    if (savedHistory) {
+      try {
+        const parsedHistory = JSON.parse(savedHistory);
+        if (Array.isArray(parsedHistory) && parsedHistory.length > 0) {
+          setMessages(parsedHistory);
+          return;
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOpen, location]);
+      } catch (e) {
+        console.error('Failed to parse chat history', e);
+      }
+    }
+    setMessages([
+      { role: 'model', text: 'Hi! I’m the BotifyX Assistant. I’m here to help you understand how we can make technology work better for your business. What can I help you find today?' }
+    ]);
+  }, []);
 
-    const initializeChat = async (loc: LocationData) => {
-        const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
-        if (!apiKey) {
-             setMessages([{ 
-                id: 'err-key', 
-                text: "API Key is missing. Please configure GEMINI_API_KEY in .env.local", 
-                sender: 'bot', 
-                timestamp: new Date() 
-            }]);
-            return;
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(messages));
+    }
+    scrollToBottom();
+  }, [messages, isLoading]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const clearHistory = () => {
+    const defaultMsg: Message[] = [
+      { role: 'model', text: 'History cleared. How can I help you today?' }
+    ];
+    setMessages(defaultMsg);
+    localStorage.removeItem(CHAT_HISTORY_KEY);
+  };
+
+  const handleSend = async (overrideText?: string) => {
+    const messageText = overrideText || input;
+    if (!messageText.trim() || isLoading) return;
+
+    const userMessage = messageText.trim();
+    setInput('');
+    const newMessages: Message[] = [...messages, { role: 'user', text: userMessage }];
+    setMessages(newMessages);
+    setIsLoading(true);
+
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      
+      const systemInstruction = `
+        You are the BotifyX Strategic Guide, an expert tech partner who is empathetic, proactive, and human-centric. 
+        Your goal is to bridge the gap between complex business problems and elegant technology solutions.
+
+        TONE & STYLE:
+        - Professional yet friendly, like a co-founder or strategic partner.
+        - Explain "why" before "how". 
+        - Avoid technical gatekeeping. If using terms like "RAG", "Scalability", or "Adaptive UX", explain them through analogies.
+
+        KNOWLEDGE BASE:
+        Services we provide:
+        ${ALL_SERVICES.map(s => `- ${s.title}: ${s.shortDesc} (Ideal for: ${s.idealFor.join(', ')})`).join('\n')}
+        
+        Industries we dominate:
+        ${INDUSTRIES.map(i => `- ${i.name}: ${i.description}`).join('\n')}
+
+        PROACTIVE GUIDANCE RULES:
+        1. ANALYZE INTENT: Determine if the user has a business pain (slow apps, messy data, low engagement), a learning goal (what is AI?), or a direct commercial intent (hire us).
+        2. SUGGEST RELEVANT SERVICES: If a user mentions a problem, proactively map it to one of our services. For example, if they mention messy documents, suggest "Enterprise AI Assistants & Knowledge Systems".
+        3. INDUSTRY ALIGNMENT: If the user's query relates to one of our focus industries (${INDUSTRIES.map(i => i.name).join(', ')}), mention our specific expertise there.
+        4. MANDATORY CTA: If the conversation touches upon business needs, growth, or potential projects, ALWAYS include a clear Call To Action. 
+           - For early-stage interest: "Would you like to explore our [Service Name] page to see how we build this?"
+           - For high intent: "Shall we book a discovery call to map out a roadmap for your project?"
+
+        KEY VALUE PROPOSITIONS:
+        - RAG (Retrieval-Augmented Generation): Explain it as "Open-Book AI" that uses the company's private data to give 100% accurate, non-hallucinating answers.
+        - Performance & Green Tech: We optimize code to save battery/power and load instantly.
+        - Security: Private vaults for data. No public model training.
+
+        FUNCTION CALLING:
+        - If the user explicitly wants to start a project, hire BotifyX, or speak to a human, call 'navigate_to_contact'.
+      `;
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: [
+          ...newMessages.map(m => ({
+            role: m.role,
+            parts: [{ text: m.text }]
+          }))
+        ],
+        config: {
+          systemInstruction,
+          tools: [{
+            functionDeclarations: [{
+              name: 'navigate_to_contact',
+              description: 'Redirects the user to the contact form or project inquiry page when they express intent to hire, book a call, or start a project.',
+              parameters: { 
+                type: Type.OBJECT, 
+                properties: {
+                  context: {
+                    type: Type.STRING,
+                    description: 'The specific project or service interest mentioned by the user.'
+                  }
+                },
+                required: ['context']
+              }
+            }]
+          }]
         }
+      });
 
-        try {
-            const ai = new GoogleGenAI({ apiKey });
-            
-            // Dynamic System Instruction based on Location
-            const systemPrompt = `
-                You are "Bofy", the intelligent AI assistant for Botifyx (a web & AI development agency). 
-                
-                USER CONTEXT:
-                The user is visiting from ${loc.city}, ${loc.country}.
-                
-                PERSONALITY DIRECTIVES:
-                1. **Localize your Tone**: Adapt your greeting, slang, and metaphors to match ${loc.country}.
-                   - If India: Use warmth, "Namaste" or "Hello ji", slightly formal but friendly.
-                   - If USA: Be enthusiastic, direct, use "Awesome", "Hey there".
-                   - If UK: Be polite, witty, use "Cheers", and use British spelling (Colour, Optimise).
-                   - If Australia: Use "G'day", "Mate", be relaxed.
-                   - If Japan: Be very polite and respectful.
-                   - Default: Tech-savvy, professional, helpful.
-                
-                2. **Role**: You help users navigate Botifyx services (Web Dev, App Dev, AI Solutions). You are confident and knowledgeable.
-                3. **Conciseness**: Keep responses short (under 3 sentences) unless asked for details.
-                4. **Formatting**: Use markdown for emphasis if needed.
-                
-                Start by greeting them specifically acknowledging their location in a subtle, natural way.
-            `;
-
-            const chat = ai.chats.create({
-                model: 'gemini-2.5-flash',
-                config: {
-                    systemInstruction: systemPrompt,
-                    temperature: 0.7,
-                }
-            });
-
-            setChatSession(chat);
-
-            // Generate initial greeting
-            setIsLoading(true);
-            const response = await chat.sendMessage({ message: "Generate a short, localized welcome message for me based on my location." });
-            
-            setMessages([
-                {
-                    id: 'init-1',
-                    text: response.text || "Hello! I'm Bofy. How can I help you amplify your business today?",
-                    sender: 'bot',
-                    timestamp: new Date()
-                }
-            ]);
-            setIsLoading(false);
-
-        } catch (error) {
-            console.error("Failed to init chat", error);
-            setMessages([{ id: 'err', text: "Systems initializing... I'm Bofy. How can I help?", sender: 'bot', timestamp: new Date() }]);
+      if (response.functionCalls && response.functionCalls.length > 0) {
+        const call = response.functionCalls[0];
+        if (call.name === 'navigate_to_contact') {
+          setMessages(prev => [...prev, { 
+            role: 'model', 
+            text: "Excellent choice! I'm moving you over to our **Project Discovery** form. It takes less than a minute to fill out, and our engineering leads will review it personally." 
+          }]);
+          setTimeout(() => {
+            onNavigate('#/contact');
+            setIsOpen(false);
+          }, 2000);
         }
-    };
+      } else {
+        const text = response.text || "I'm sorry, I hit a temporary lag in my neural network. Could you please rephrase that? I'm here to help!";
+        setMessages(prev => [...prev, { role: 'model', text }]);
+      }
+    } catch (error) {
+      console.error('Chat error:', error);
+      setMessages(prev => [...prev, { role: 'model', text: "I'm experiencing a brief connectivity glitch. Please try again in a moment, or use our contact form if you'd like to get in touch right now!" }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages, isOpen]);
-
-    const handleSend = async (e?: React.FormEvent) => {
-        e?.preventDefault();
-        if (!input.trim() || !chatSession) return;
-
-        const userMsg: Message = {
-            id: Date.now().toString(),
-            text: input,
-            sender: 'user',
-            timestamp: new Date()
-        };
-
-        setMessages(prev => [...prev, userMsg]);
-        setInput('');
-        setIsLoading(true);
-
-        try {
-            const result = await chatSession.sendMessage({ message: input });
-            const botMsg: Message = {
-                id: (Date.now() + 1).toString(),
-                text: result.text || "I'm processing that...",
-                sender: 'bot',
-                timestamp: new Date()
-            };
-            setMessages(prev => [...prev, botMsg]);
-        } catch (error) {
-            console.error("Chat error", error);
-            setMessages(prev => [...prev, { 
-                id: Date.now().toString(), 
-                text: "I encountered a network glitch. Could you repeat that?", 
-                sender: 'bot', 
-                timestamp: new Date() 
-            }]);
-        } finally {
-            setIsLoading(false);
-            // Keep focus on input for desktop
-            if (window.innerWidth > 768) {
-                inputRef.current?.focus();
-            }
-        }
-    };
-
-    const handleReset = () => {
-        setMessages([]);
-        setChatSession(null);
-        if (location) initializeChat(location);
-    };
-
-    // Auto-focus input when opened
-    useEffect(() => {
-        if (isOpen && !isLoading) {
-            setTimeout(() => inputRef.current?.focus(), 300);
-        }
-    }, [isOpen, isLoading]);
-
-    const renderMessageText = (text: string) => {
-        const rawMarkup = marked.parse(text);
-        const sanitizedMarkup = DOMPurify.sanitize(rawMarkup as string);
-        return { __html: sanitizedMarkup };
-    };
-
-    return (
-        <>
-            {/* Toggle Button */}
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className={`fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary ${
-                    isOpen 
-                    ? 'bg-gray-800 text-white rotate-90' 
-                    : 'bg-gradient-to-r from-brand-primary to-brand-secondary text-white hover:scale-110 animate-bounce-slow'
-                }`}
-                aria-label="Toggle Bofy Chat"
-            >
-                {isOpen ? <XIcon className="w-6 h-6" /> : <ChatbotIcon className="w-8 h-8" />}
-                
-                {/* Status Dot */}
-                {!isOpen && (
-                    <span className="absolute top-0 right-0 flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-accent"></span>
-                    </span>
-                )}
-            </button>
-
-            {/* Chat Window */}
-            <div 
-                className={`fixed bottom-24 right-6 w-[90vw] md:w-[380px] h-[500px] max-h-[70vh] z-40 flex flex-col rounded-2xl overflow-hidden border border-brand-primary/30 shadow-[0_0_40px_rgba(79,70,229,0.3)] backdrop-blur-xl bg-white/80 dark:bg-[#0a0a1a]/90 transition-all duration-500 origin-bottom-right ${
-                    isOpen 
-                    ? 'opacity-100 scale-100 translate-y-0' 
-                    : 'opacity-0 scale-90 translate-y-10 pointer-events-none'
-                }`}
-            >
-                {/* Header */}
-                <div className="flex items-center justify-between p-4 bg-gradient-to-r from-brand-primary/90 to-brand-secondary/90 text-white shadow-md">
-                    <div className="flex items-center space-x-3">
-                        <div className="relative">
-                            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
-                                <ChatbotIcon className="w-6 h-6 text-brand-accent" />
-                            </div>
-                            <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-brand-primary"></div>
-                        </div>
-                        <div>
-                            <h3 className="font-bold text-lg leading-none">Bofy</h3>
-                            <p className="text-[10px] text-white/80 font-mono mt-1 flex items-center">
-                                <span className="inline-block w-1.5 h-1.5 bg-brand-accent rounded-full mr-1 animate-pulse"></span>
-                                AI ASSISTANT • {location ? location.countryCode : 'ONLINE'}
-                            </p>
-                        </div>
-                    </div>
-                    <button 
-                        onClick={handleReset} 
-                        className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white/80 hover:text-white"
-                        title="Reset Conversation"
-                    >
-                        <RefreshIcon className="w-4 h-4" />
-                    </button>
+  return (
+    <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-end">
+      {isOpen && (
+        <div className="mb-4 w-[90vw] sm:w-[420px] h-[650px] rounded-[2.5rem] shadow-[0_30px_90px_-20px_rgba(0,0,0,0.5)] border flex flex-col overflow-hidden animate-in slide-in-from-bottom-6 duration-500 ease-out bg-slate-900 border-slate-800">
+          {/* Header */}
+          <div className="p-7 bg-brand-primary text-brand-base flex items-center justify-between shadow-lg">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-brand-base flex items-center justify-center shadow-md">
+                <Sparkles className="w-6 h-6 text-brand-primary animate-pulse" />
+              </div>
+              <div>
+                <h4 className="font-black text-sm uppercase tracking-widest leading-none mb-1 text-brand-base">BotifyX Assistant</h4>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-brand-base animate-ping" />
+                  <span className="text-[9px] font-black uppercase tracking-tighter opacity-70 italic text-brand-base">Online & Helpful</span>
                 </div>
-
-                {/* Messages Area */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-4 styled-scrollbar bg-gray-50/50 dark:bg-black/20">
-                    {messages.length === 0 && isLoading && (
-                        <div className="flex justify-center items-center h-full text-gray-400 text-sm animate-pulse">
-                            Connecting to neural network...
-                        </div>
-                    )}
-                    
-                    {messages.map((msg) => (
-                        <div 
-                            key={msg.id} 
-                            className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                        >
-                            <div 
-                                className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
-                                    msg.sender === 'user' 
-                                    ? 'bg-brand-primary text-white rounded-br-none' 
-                                    : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-100 dark:border-gray-700 rounded-bl-none'
-                                }`}
-                            >
-                                {msg.sender === 'bot' ? (
-                                    <div dangerouslySetInnerHTML={renderMessageText(msg.text)} />
-                                ) : (
-                                    msg.text
-                                )}
-                            </div>
-                        </div>
-                    ))}
-                    
-                    {/* Typing Indicator */}
-                    {isLoading && messages.length > 0 && (
-                        <div className="flex justify-start">
-                            <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm flex items-center space-x-1">
-                                <div className="w-1.5 h-1.5 bg-brand-secondary rounded-full animate-bounce"></div>
-                                <div className="w-1.5 h-1.5 bg-brand-secondary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                                <div className="w-1.5 h-1.5 bg-brand-secondary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                            </div>
-                        </div>
-                    )}
-                    <div ref={messagesEndRef} />
-                </div>
-
-                {/* Input Area */}
-                <div className="p-3 bg-white dark:bg-brand-dark-2 border-t border-gray-200 dark:border-brand-primary/20">
-                    <form onSubmit={handleSend} className="flex items-center space-x-2 bg-gray-100 dark:bg-black/30 rounded-full border border-gray-200 dark:border-gray-700 px-2 py-1 focus-within:ring-2 focus-within:ring-brand-primary/50 focus-within:border-brand-primary transition-all">
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            placeholder="Ask Bofy anything..."
-                            className="flex-1 bg-transparent border-none focus:ring-0 text-sm text-gray-900 dark:text-white placeholder-gray-500 h-10 px-2"
-                            disabled={isLoading}
-                        />
-                        <button 
-                            type="submit" 
-                            disabled={!input.trim() || isLoading}
-                            className={`p-2 rounded-full transition-all duration-300 ${
-                                input.trim() && !isLoading 
-                                ? 'bg-brand-primary text-white shadow-lg hover:bg-brand-secondary transform hover:scale-105' 
-                                : 'bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed'
-                            }`}
-                        >
-                            <SendIcon className="w-4 h-4 ml-0.5" />
-                        </button>
-                    </form>
-                    <div className="text-center mt-2">
-                        <p className="text-[10px] text-gray-400 dark:text-gray-500">
-                            Bofy is powered by Gemini AI.
-                        </p>
-                    </div>
-                </div>
+              </div>
             </div>
-            
-            <style>{`
-                .styled-scrollbar::-webkit-scrollbar { width: 4px; }
-                .styled-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(124, 58, 237, 0.3); border-radius: 4px; }
-                .animate-bounce-slow { animation: bounce 3s infinite; }
-            `}</style>
-        </>
-    );
-};
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={clearHistory} 
+                className="hover:bg-brand-base/10 p-2.5 rounded-xl transition-all"
+                title="Clear Chat"
+              >
+                <Trash2 className="w-4 h-4 text-brand-base" />
+              </button>
+              <button onClick={() => setIsOpen(false)} className="hover:bg-brand-base/10 p-2.5 rounded-xl transition-all">
+                <X className="w-5 h-5 text-brand-base" />
+              </button>
+            </div>
+          </div>
 
-export default Chatbot;
+          {/* Messages Area */}
+          <div className="flex-grow overflow-y-auto p-6 space-y-6 scrollbar-hide bg-slate-950/50">
+            {messages.map((m, i) => (
+              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
+                <div className={`max-w-[88%] p-5 rounded-[1.8rem] text-sm font-bold leading-relaxed shadow-sm ${
+                  m.role === 'user' 
+                    ? 'bg-brand-primary text-brand-base rounded-tr-none' 
+                    : 'bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700'
+                }`}>
+                  {m.text}
+                </div>
+              </div>
+            ))}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="bg-slate-800 border-slate-700 p-5 rounded-3xl rounded-tl-none border">
+                  <Loader2 className="w-5 h-5 animate-spin text-brand-primary" />
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Footer & Input Area */}
+          <div className="p-6 border-t space-y-4 bg-slate-900 border-slate-800">
+            {/* Quick Actions */}
+            <div className="flex flex-wrap gap-2">
+              {quickActions.map((action, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSend(action.label)}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border bg-slate-800 text-slate-400 border-transparent hover:bg-brand-primary hover:text-brand-base hover:border-brand-primary active:scale-95"
+                >
+                  {action.icon}
+                  {action.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Main Input */}
+            <div className="flex gap-3 p-2.5 rounded-2xl border transition-colors bg-slate-950 border-slate-800 focus-within:border-brand-primary">
+              <input 
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                placeholder="Type your question..."
+                className="flex-grow bg-transparent px-4 py-2 text-sm outline-none font-bold text-white placeholder:text-slate-600"
+              />
+              <button 
+                onClick={() => handleSend()}
+                disabled={!input.trim() || isLoading}
+                className="bg-brand-primary text-brand-base p-4 rounded-xl hover:scale-105 active:scale-90 transition-all disabled:opacity-30 disabled:hover:scale-100 shadow-lg shadow-brand-primary/20"
+              >
+                <Send className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Toggle Button */}
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-20 h-20 bg-brand-primary text-brand-base rounded-[2.2rem] shadow-[0_15px_40px_-10px_rgba(0,255,157,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-500 group relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
+        {isOpen ? (
+          <X className="w-9 h-9" />
+        ) : (
+          <div className="relative">
+             <MessageSquare className="w-9 h-9" />
+             <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-brand-base rounded-full border-[3px] border-brand-primary animate-pulse" />
+          </div>
+        )}
+      </button>
+    </div>
+  );
+};

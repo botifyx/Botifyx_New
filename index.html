@@ -1,10 +1,22 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Botifyx - Aify. Autofy. Amplify.</title>
+    <title>BotifyX | AI-Native Digital Frontier Engineering</title>
+    
+    <!-- SEO & Metadata -->
+    <meta name="description" content="Design, build, and scale AI-native digital platforms. We embed intelligence at the core of business for innovation and secure growth." />
+    <meta name="keywords" content="AI, Machine Learning, RAG, Web Engineering, Mobile Apps, Enterprise AI, BotifyX" />
+    <meta property="og:title" content="BotifyX - Technology For Humans" />
+    <meta property="og:description" content="Building smart, high-performance tools that help business grow while keeping things simple." />
+    <meta property="og:type" content="website" />
+    
+    <!-- Performance Hints -->
+    <link rel="preconnect" href="https://esm.sh" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -12,106 +24,153 @@
         theme: {
           extend: {
             colors: {
-              'brand-dark': '#0a0a1a',
-              'brand-dark-2': '#1a1a2e',
-              'brand-primary': '#4f46e5',
-              'brand-secondary': '#7c3aed',
-              'brand-accent': '#00f5d4',
+              brand: {
+                primary: '#00ff9d',
+                secondary: '#6366f1',
+                base: {
+                  DEFAULT: '#0a0f14',
+                  light: '#f8fafc'
+                },
+                surface: {
+                  DEFAULT: '#121921',
+                  light: '#ffffff'
+                },
+                accent: '#00e5ff'
+              }
             },
-            typography: (theme) => ({
-              DEFAULT: {
-                css: {
-                  '--tw-prose-body': theme('colors.gray[800]'),
-                  '--tw-prose-invert-body': theme('colors.gray[200]'),
-                },
-              },
-            }),
-            animation: {
-              'gradient-x': 'gradient-x 15s ease infinite',
-              'float': 'float 6s ease-in-out infinite',
-              'gradient-xy': 'gradient-xy 20s ease infinite',
-              'bounce': 'bounce 1s infinite',
-              'pulse-slow': 'pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
-              'gradient-x': {
-                '0%, 100%': { 'background-position': '0% 50%' },
-                '50%': { 'background-position': '100% 50%' },
-              },
-              'float': {
-                '0%, 100%': { transform: 'translateY(0px)' },
-                '50%': { transform: 'translateY(-20px)' },
-              },
-              'gradient-xy': {
-                '0%': { 'background-position': '0% 0%' },
-                '25%': { 'background-position': '100% 0%' },
-                '50%': { 'background-position': '100% 100%' },
-                '75%': { 'background-position': '0% 100%' },
-                '100%': { 'background-position': '0% 0%' },
-              },
-              bounce: {
-                '0%, 100%': {
-                    transform: 'translateY(-25%)',
-                    animationTimingFunction: 'cubic-bezier(0.8,0,1,1)'
-                },
-                '50%': {
-                    transform: 'none',
-                    animationTimingFunction: 'cubic-bezier(0,0,0.2,1)'
-                }
-              },
-              'pulse-slow': {
-                '0%, 100%': {
-                  transform: 'scale(1)',
-                  opacity: 0.8,
-                },
-                '50%': {
-                  transform: 'scale(1.1)',
-                  opacity: 1,
-                },
-              },
+            fontFamily: {
+              sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+              mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'monospace'],
             }
           }
         }
       }
     </script>
-<script type="importmap">
+    <style>
+      :root {
+        --emerald-glow: 0 0 20px rgba(0, 255, 157, 0.2);
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: #0a0f14;
+        color: #f8fafc;
+        overflow-x: hidden;
+      }
+
+      [id] {
+        scroll-margin-top: 100px;
+      }
+
+      /* Fix for Italic Clipping in Gradient Text */
+      .gradient-text {
+        background: linear-gradient(135deg, #00ff9d 0%, #00e5ff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+        padding-right: 0.2em;
+        margin-right: -0.2em;
+        will-change: transform;
+      }
+
+      .tech-border {
+        position: relative;
+        border: 1px solid rgba(0, 255, 157, 0.05);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .tech-border:hover {
+        border-color: rgba(0, 255, 157, 0.5);
+        box-shadow: var(--emerald-glow);
+      }
+
+      .tech-border::before {
+        content: '';
+        position: absolute;
+        top: -1px; left: -1px; width: 10px; height: 10px;
+        border-top: 2px solid #00ff9d; border-left: 2px solid #00ff9d;
+        opacity: 0; transition: opacity 0.3s;
+      }
+
+      .tech-border:hover::before {
+        opacity: 1;
+      }
+
+      @keyframes neuralPulse {
+        0%, 100% { opacity: 0.1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(1.2); }
+      }
+
+      .neural-node {
+        position: absolute;
+        width: 4px; height: 4px;
+        background: #00ff9d;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #00ff9d;
+        animation: neuralPulse 4s infinite ease-in-out;
+        pointer-events: none;
+      }
+
+      .scanline {
+        width: 100%;
+        height: 100px;
+        z-index: 5;
+        background: linear-gradient(0deg, rgba(0, 255, 157, 0) 0%, rgba(0, 255, 157, 0.03) 50%, rgba(0, 255, 157, 0) 100%);
+        opacity: 0.2;
+        position: absolute;
+        bottom: 100%;
+        animation: scanlineMove 12s linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes scanlineMove {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(200vh); }
+      }
+
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #0a0f14; }
+      ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: #00ff9d; }
+
+      .mono-label {
+        font-family: ui-monospace, 'JetBrains Mono', monospace;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-size: 10px;
+      }
+
+      /* Reduce motion preference */
+      @media (prefers-reduced-motion: reduce) {
+        *, ::before, ::after {
+          animation-delay: -1ms !important;
+          animation-duration: 1ms !important;
+          animation-iteration-count: 1 !important;
+          background-attachment: initial !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0s !important;
+          transition-delay: 0s !important;
+        }
+      }
+    </style>
+    <script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "dompurify": "https://aistudiocdn.com/dompurify@^3.3.0",
-    "@google/generative-ai": "https://aistudiocdn.com/google-generative-ai@^0.14.0",
-    "marked": "https://aistudiocdn.com/marked@^14.0.0",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.475.0?external=react",
+    "@google/genai": "https://esm.sh/@google/genai@1.3.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-<body>
-    <div id="preloader" class="fixed inset-0 bg-brand-dark z-[100] flex justify-center items-center transition-opacity duration-500 ease-in-out">
-      <div class="relative w-48 h-12">
-        <svg viewBox="0 0 220 40" width="100%" height="100%">
-          <defs>
-            <linearGradient id="logo-text-grad-loader" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#4f46e5" />
-              <stop offset="100%" stop-color="#7c3aed" />
-            </linearGradient>
-            <filter id="x-glow-loader" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-          <text x="0" y="30" font-family="sans-serif" font-size="32" font-weight="bold" fill="url(#logo-text-grad-loader)">Botify</text>
-          <text x="115" y="30" font-family="sans-serif" font-size="32" font-weight="bold" fill="#00f5d4" filter="url(#x-glow-loader)" class="animate-pulse-slow">x</text>
-        </svg>
-      </div>
-    </div>
+  <body class="dark transition-colors duration-500 selection:bg-brand-primary selection:text-brand-base">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
 </body>
 </html>
