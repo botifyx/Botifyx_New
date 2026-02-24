@@ -77,38 +77,26 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
 
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      
-      const systemInstruction = `
-        You are the BotifyX Strategic Guide, an expert tech partner who is empathetic, proactive, and human-centric. 
-        Your goal is to bridge the gap between complex business problems and elegant technology solutions.
 
-        TONE & STYLE:
-        - Professional yet friendly, like a co-founder or strategic partner.
-        - Explain "why" before "how". 
-        - Avoid technical gatekeeping. If using terms like "RAG", "Scalability", or "Adaptive UX", explain them through analogies.
+      const systemInstruction = `
+        Role: BotifyX Strategic Partner.
+        Tone: Sophisticated, consultative, and visionary. Avoid marketing jargon and informalisms like "messy data".
+        
+        CRITICAL CONVERSATION RULES:
+        1. STRUCTURE: Start with a brief, professional opening. Use clear paragraph breaks between ideas.
+        2. STYLE: Use precise, high-level vocabulary (e.g., "Unstructured data ecosystems" instead of "messy data").
+        3. BREVITY: Each paragraph should be 1-2 impactful sentences. 
+        4. VALUE: Map user needs to strategic outcomes first, then technical features.
+        5. ANALOGIES: Keep them subtle. E.g., RAG is "Enterprise Intelligence from your private data".
 
         KNOWLEDGE BASE:
-        Services we provide:
-        ${ALL_SERVICES.map(s => `- ${s.title}: ${s.shortDesc} (Ideal for: ${s.idealFor.join(', ')})`).join('\n')}
+        Services: ${ALL_SERVICES.map(s => s.title).join(', ')}.
+        Industries: ${INDUSTRIES.map(i => i.name).join(', ')}.
         
-        Industries we dominate:
-        ${INDUSTRIES.map(i => `- ${i.name}: ${i.description}`).join('\n')}
-
-        PROACTIVE GUIDANCE RULES:
-        1. ANALYZE INTENT: Determine if the user has a business pain (slow apps, messy data, low engagement), a learning goal (what is AI?), or a direct commercial intent (hire us).
-        2. SUGGEST RELEVANT SERVICES: If a user mentions a problem, proactively map it to one of our services. For example, if they mention messy documents, suggest "Enterprise AI Assistants & Knowledge Systems".
-        3. INDUSTRY ALIGNMENT: If the user's query relates to one of our focus industries (${INDUSTRIES.map(i => i.name).join(', ')}), mention our specific expertise there.
-        4. MANDATORY CTA: If the conversation touches upon business needs, growth, or potential projects, ALWAYS include a clear Call To Action. 
-           - For early-stage interest: "Would you like to explore our [Service Name] page to see how we build this?"
-           - For high intent: "Shall we book a discovery call to map out a roadmap for your project?"
-
-        KEY VALUE PROPOSITIONS:
-        - RAG (Retrieval-Augmented Generation): Explain it as "Open-Book AI" that uses the company's private data to give 100% accurate, non-hallucinating answers.
-        - Performance & Green Tech: We optimize code to save battery/power and load instantly.
-        - Security: Private vaults for data. No public model training.
-
-        FUNCTION CALLING:
-        - If the user explicitly wants to start a project, hire BotifyX, or speak to a human, call 'navigate_to_contact'.
+        INTERACTIVE RULES:
+        - If the user discusses complex challenges -> Propose a high-level strategic alignment with one of our services.
+        - If there is commercial interest -> Use 'navigate_to_contact'.
+        - Conclude with a single, professional inquiry to maintain the flow.
       `;
 
       const response = await ai.models.generateContent({
@@ -125,8 +113,8 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
             functionDeclarations: [{
               name: 'navigate_to_contact',
               description: 'Redirects the user to the contact form or project inquiry page when they express intent to hire, book a call, or start a project.',
-              parameters: { 
-                type: Type.OBJECT, 
+              parameters: {
+                type: Type.OBJECT,
                 properties: {
                   context: {
                     type: Type.STRING,
@@ -143,9 +131,9 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
       if (response.functionCalls && response.functionCalls.length > 0) {
         const call = response.functionCalls[0];
         if (call.name === 'navigate_to_contact') {
-          setMessages(prev => [...prev, { 
-            role: 'model', 
-            text: "Excellent choice! I'm moving you over to our **Project Discovery** form. It takes less than a minute to fill out, and our engineering leads will review it personally." 
+          setMessages(prev => [...prev, {
+            role: 'model',
+            text: "Excellent choice! I'm moving you over to our **Project Discovery** form. It takes less than a minute to fill out, and our engineering leads will review it personally."
           }]);
           setTimeout(() => {
             onNavigate('#/contact');
@@ -183,14 +171,14 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <button 
-                onClick={clearHistory} 
+              <button
+                onClick={clearHistory}
                 className="hover:bg-brand-base/10 p-2.5 rounded-xl transition-all"
                 title="Clear Chat"
               >
                 <Trash2 className="w-4 h-4 text-brand-base" />
               </button>
-              <button onClick={() => setIsOpen(false)} className="hover:bg-brand-base/10 p-2.5 rounded-xl transition-all">
+              <button onClick={() => setIsOpen(false)} className="hover:bg-brand-base/10 p-2.5 rounded-xl transition-all" title="Close Assistant">
                 <X className="w-5 h-5 text-brand-base" />
               </button>
             </div>
@@ -200,11 +188,10 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
           <div className="flex-grow overflow-y-auto p-6 space-y-6 scrollbar-hide bg-slate-950/50">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
-                <div className={`max-w-[88%] p-5 rounded-[1.8rem] text-sm font-bold leading-relaxed shadow-sm ${
-                  m.role === 'user' 
-                    ? 'bg-brand-primary text-brand-base rounded-tr-none' 
-                    : 'bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700'
-                }`}>
+                <div className={`max-w-[88%] p-5 rounded-[1.8rem] text-sm font-bold leading-relaxed shadow-sm whitespace-pre-wrap ${m.role === 'user'
+                  ? 'bg-brand-primary text-brand-base rounded-tr-none'
+                  : 'bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700'
+                  }`}>
                   {m.text}
                 </div>
               </div>
@@ -237,17 +224,18 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
 
             {/* Main Input */}
             <div className="flex gap-3 p-2.5 rounded-2xl border transition-colors bg-slate-950 border-slate-800 focus-within:border-brand-primary">
-              <input 
+              <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Type your question..."
                 className="flex-grow bg-transparent px-4 py-2 text-sm outline-none font-bold text-white placeholder:text-slate-600"
               />
-              <button 
+              <button
                 onClick={() => handleSend()}
                 disabled={!input.trim() || isLoading}
                 className="bg-brand-primary text-brand-base p-4 rounded-xl hover:scale-105 active:scale-90 transition-all disabled:opacity-30 disabled:hover:scale-100 shadow-lg shadow-brand-primary/20"
+                title="Send Message"
               >
                 <Send className="w-5 h-5" />
               </button>
@@ -257,17 +245,18 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
       )}
 
       {/* Toggle Button */}
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-20 h-20 bg-brand-primary text-brand-base rounded-[2.2rem] shadow-[0_15px_40px_-10px_rgba(0,255,157,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-500 group relative overflow-hidden"
+        title={isOpen ? "Close Chat" : "Open Chat"}
       >
         <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
         {isOpen ? (
           <X className="w-9 h-9" />
         ) : (
           <div className="relative">
-             <MessageSquare className="w-9 h-9" />
-             <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-brand-base rounded-full border-[3px] border-brand-primary animate-pulse" />
+            <MessageSquare className="w-9 h-9" />
+            <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-brand-base rounded-full border-[3px] border-brand-primary animate-pulse" />
           </div>
         )}
       </button>

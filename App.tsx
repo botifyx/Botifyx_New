@@ -17,6 +17,7 @@ import { Button } from './components/Button.tsx';
 import { Logo } from './components/Logo.tsx';
 import { Navbar } from './components/Navbar.tsx';
 import { Chatbot } from './components/Chatbot.tsx';
+import { Co2Meter } from './components/Co2Meter.tsx';
 import {
   ECOSYSTEM,
   ALL_SERVICES,
@@ -25,67 +26,48 @@ import {
   INSIGHTS_ARTICLES
 } from './constants.tsx';
 
-const NeuralBackground: React.FC = () => {
-  const nodes = useMemo(() => [...Array(12)].map((_, i) => ({
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    delay: `${Math.random() * 5}s`
-  })), []);
+const EcoBackground: React.FC = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div className="eco-glow top-[-10%] left-[-5%]" />
+    <div className="eco-glow bottom-[10%] right-[-5%] opacity-50" />
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-base to-brand-base" />
+  </div>
+);
 
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,157,0.03)_0%,transparent_70%)]" />
-      <div className="scanline" />
-      {nodes.map((node, i) => (
-        <div
-          key={i}
-          className="neural-node opacity-30"
-          style={{ left: node.left, top: node.top, animationDelay: node.delay }}
-        />
-      ))}
-      <div className="absolute inset-0 opacity-[0.015] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-    </div>
-  );
-};
-
-const EcoTelemetry: React.FC = () => {
-  return (
-    <div className="fixed bottom-8 left-8 z-50 hidden lg:block">
-      <div className="p-4 rounded-2xl bg-brand-base/90 backdrop-blur-md border border-brand-primary/20 flex flex-col gap-2 shadow-2xl">
-        <div className="flex items-center gap-2">
-          <Leaf className="w-4 h-4 text-brand-primary" />
-          <span className="mono-label text-slate-300 font-bold">Our Green Promise</span>
-        </div>
-        <p className="text-[10px] font-black text-slate-600 dark:text-slate-400 uppercase leading-relaxed max-w-[150px]">
-          Energy-efficient code for a better planet.
-        </p>
-        <div className="flex items-center gap-2 pt-2 border-t border-white/5">
-          <div className="w-2 h-2 rounded-full bg-brand-primary animate-pulse shadow-[0_0_8px_#00ff9d]" />
-          <span className="text-[9px] font-black uppercase text-brand-primary tracking-[0.2em]">A+ Efficiency</span>
-        </div>
-      </div>
-    </div>
-  );
-};
+const NeuralBackground: React.FC = () => <EcoBackground />;
 
 const PageHeader: React.FC<{ title: string; subtitle: string; label: string }> = ({ title, subtitle, label }) => (
-  <header className="relative pt-64 pb-32 overflow-hidden bg-brand-base">
-    <NeuralBackground />
+  <header className="relative pt-48 pb-24 overflow-hidden bg-brand-base">
+    <EcoBackground />
     <div className="container mx-auto px-6 relative z-10">
       <div className="max-w-4xl">
         <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-brand-primary/10 border border-brand-primary/20 mb-8">
           <Heart className="w-4 h-4 text-brand-primary" />
-          <span className="mono-label text-brand-primary font-black">{label}</span>
+          <span className="text-[10px] font-bold text-brand-primary uppercase tracking-[0.2em]">{label}</span>
         </div>
-        <h1 className="text-5xl lg:text-9xl font-black tracking-tight text-white mb-10 leading-[1.05] uppercase italic">
+        <h1 className="text-5xl lg:text-7xl font-black tracking-tight text-white mb-8 leading-[1.1] uppercase italic">
           {title}
         </h1>
-        <p className="text-xl lg:text-3xl text-slate-300 max-w-2xl font-bold leading-relaxed uppercase">
+        <p className="text-xl text-slate-400 max-w-2xl font-medium leading-relaxed">
           {subtitle}
         </p>
       </div>
     </div>
   </header>
+);
+
+const TrustBar: React.FC = () => (
+  <div className="py-12 border-y border-white/5 bg-white/[0.02]">
+    <div className="container mx-auto px-6">
+      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] text-center mb-8">Trusted by Global Innovators</p>
+      <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+        <div className="h-6 w-32 bg-slate-700 rounded animate-pulse" />
+        <div className="h-6 w-24 bg-slate-700 rounded animate-pulse" />
+        <div className="h-6 w-40 bg-slate-700 rounded animate-pulse" />
+        <div className="h-6 w-28 bg-slate-700 rounded animate-pulse" />
+      </div>
+    </div>
+  </div>
 );
 
 const App: React.FC = () => {
@@ -130,19 +112,19 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-brand-base text-slate-200 antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-brand-base text-slate-200 antialiased overflow-x-hidden selection:bg-brand-primary selection:text-brand-base">
       <Navbar activeRoute={activeHash} onNavigate={handleNavigate} />
       <main>
         {renderContent()}
       </main>
-      <EcoTelemetry />
+      <Co2Meter />
 
       <footer className="py-24 border-t border-white/5 bg-brand-base relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-20">
             <div className="space-y-8">
               <div
-                className="cursor-pointer h-16 lg:h-22"
+                className="cursor-pointer h-24 lg:h-32"
                 onClick={() => handleNavigate('#/')}
               >
                 <Logo className="h-full" />
@@ -233,71 +215,63 @@ const App: React.FC = () => {
 
 const HomeView: React.FC<{ onNavigate: (route: string) => void }> = ({ onNavigate }) => (
   <div className="animate-in fade-in duration-700">
-    <header className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-brand-base">
-      <NeuralBackground />
+    <header className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-brand-base">
+      <EcoBackground />
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl">
-          {/* Brand Header Group */}
-          <div className="mb-12 flex flex-col items-start gap-4">
-
-            <div className="flex flex-col gap-4 animate-in slide-in-from-bottom-6 duration-700">
-              <div className="mono-label text-[12px] lg:text-[14px] text-brand-primary font-black tracking-[0.3em] flex items-center gap-3 ml-1">
-                <div className="w-2 h-2 rounded-full bg-brand-primary shadow-[0_0_10px_#00ff9d]" />
-                AIFY. AUTOFY. AMPLIFY.
-              </div>
-
-              <div className="inline-flex items-center gap-5 px-8 py-5 rounded-[2.5rem] bg-brand-primary/10 border border-brand-primary/30 shadow-[0_10px_30px_-10px_rgba(0,255,157,0.15)] group hover:bg-brand-primary/20 transition-all cursor-default">
-                <Sparkles className="w-6 h-6 text-brand-primary animate-pulse" />
-                <span className="mono-label text-brand-primary font-black text-[13px] tracking-[0.2em]">Building Better Tools Together</span>
-              </div>
-            </div>
+        <div className="max-w-4xl">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 mb-10 animate-in slide-in-from-top-4 duration-1000">
+            <Sparkles className="w-4 h-4 text-brand-primary" />
+            <span className="text-[10px] font-bold text-brand-primary uppercase tracking-[0.2em]">Next-Gen Digital Frontier Engineering</span>
           </div>
 
-          <h1 className="text-6xl lg:text-[140px] font-black leading-[1.05] tracking-tight text-white mb-12 uppercase italic">
-            Technology <br />
-            <span className="inline-block relative">
-              <span className="gradient-text">For Humans.</span>
-            </span>
+          <h1 className="text-6xl lg:text-8xl font-black leading-[1.1] tracking-tight text-white mb-10 uppercase italic">
+            Embed Intelligence. <br />
+            <span className="gradient-text">Simplify Scale.</span>
           </h1>
-          <p className="text-2xl lg:text-4xl text-slate-300 font-bold leading-tight mb-16 max-w-3xl uppercase">
-            We build smart, high-performance tools that help your business grow while keeping things simple and eco-friendly.
+
+          <p className="text-xl lg:text-2xl text-slate-400 font-medium leading-relaxed mb-12 max-w-2xl">
+            We build secure, AI-native platforms that drive growth while maintaining an industry-leading <span className="text-brand-primary font-bold">low carbon footprint</span>.
           </p>
-          <div className="flex flex-col sm:flex-row items-center gap-8">
-            <Button size="lg" className="px-16 py-8 rounded-2xl w-full sm:w-auto text-sm uppercase tracking-[0.3em] font-black shadow-[0_15px_40px_-10px_rgba(0,255,157,0.4)]" onClick={() => onNavigate('#/contact')}>
-              Let's Talk
+
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <Button size="lg" className="px-10 py-6 rounded-xl w-full sm:w-auto text-xs uppercase tracking-[0.2em] font-black bg-brand-primary text-brand-base hover:scale-105 transition-all shadow-xl shadow-brand-primary/20" onClick={() => onNavigate('#/contact')}>
+              Start Scaling <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
-            <Button variant="outline" size="lg" className="px-16 py-8 rounded-2xl w-full sm:w-auto text-sm uppercase tracking-[0.3em] font-black border-white/20 text-white hover:border-brand-primary hover:shadow-[0_0_20px_rgba(0,255,157,0.2)]" onClick={() => onNavigate('#featured-services')}>
-              See Our Work
+            <Button variant="outline" size="lg" className="px-10 py-6 rounded-xl w-full sm:w-auto text-xs uppercase tracking-[0.2em] font-black border-white/10 text-white hover:bg-white/5 transition-all" onClick={() => onNavigate('#featured-services')}>
+              Explore Services
             </Button>
           </div>
         </div>
       </div>
     </header>
 
-    <section id="stats" className="py-32 border-y border-white/5 bg-brand-surface/30">
+    <TrustBar />
+
+    <section id="stats" className="py-24 bg-white/[0.01]">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
           {CASE_STUDIES.map((caseStudy, i) => (
-            <div key={i} className="flex flex-col gap-4 border-l border-brand-primary/20 pl-8">
-              <span className="text-5xl lg:text-7xl font-black text-brand-primary italic drop-shadow-[0_5px_15px_rgba(0,255,157,0.2)]">{caseStudy.stat}</span>
-              <span className="mono-label text-slate-400 text-[11px] font-black uppercase tracking-widest leading-relaxed">{caseStudy.context}</span>
+            <div key={i} className="flex flex-col gap-2">
+              <span className="text-4xl lg:text-5xl font-black text-white italic">{caseStudy.stat}</span>
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{caseStudy.context}</span>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="featured-services" className="py-40 bg-brand-base">
+    <section id="featured-services" className="py-32 relative">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-8 border-b border-white/5 pb-12">
+        <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
           <div className="max-w-2xl">
-            <div className="mono-label text-brand-primary mb-6 font-black tracking-[0.3em]">What We Offer</div>
-            <h2 className="text-6xl lg:text-9xl font-black text-white uppercase italic leading-[1.1]">Simple <br /> Solutions.</h2>
+            <p className="text-[10px] font-bold text-brand-primary mb-4 uppercase tracking-[0.3em]">Vertical Excellence</p>
+            <h2 className="text-5xl lg:text-6xl font-black text-white uppercase italic leading-tight">Structured <br /> Solutions.</h2>
           </div>
-          <Button variant="ghost" className="text-brand-primary font-black uppercase tracking-[0.2em] flex gap-4 items-center group text-sm" onClick={() => onNavigate('#/services')}>
-            VIEW ALL SERVICES <ArrowRight className="w-6 h-6 group-hover:translate-x-3 transition-transform" />
+          <Button variant="ghost" className="text-brand-primary font-bold uppercase tracking-[0.2em] flex gap-4 items-center group text-xs" onClick={() => onNavigate('#/services')}>
+            VIEW FULL CATALOG <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform" />
           </Button>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {ALL_SERVICES.slice(0, 4).map((service) => {
             const Icon = (LucideIcons as any)[service.icon] || Layout;
@@ -305,20 +279,49 @@ const HomeView: React.FC<{ onNavigate: (route: string) => void }> = ({ onNavigat
               <div
                 key={service.id}
                 onClick={() => onNavigate(`#/services/${service.id}`)}
-                className="p-12 rounded-[3.5rem] bg-brand-surface tech-border group cursor-pointer flex flex-col h-full hover:-translate-y-4 transition-all duration-500 border border-white/5 shadow-lg"
+                className="saas-card p-10 group cursor-pointer flex flex-col h-full"
               >
-                <div className="w-20 h-20 rounded-[1.8rem] bg-brand-base border border-white/5 flex items-center justify-center mb-10 group-hover:bg-brand-primary group-hover:text-brand-base transition-all shadow-xl">
-                  <Icon className="w-8 h-8 text-slate-300 group-hover:text-brand-base" />
+                <div className="w-14 h-14 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center mb-8 group-hover:bg-brand-primary group-hover:text-brand-base transition-all">
+                  <Icon className="w-6 h-6 text-brand-primary group-hover:text-brand-base" />
                 </div>
-                <h3 className="text-3xl font-black text-white mb-6 leading-none uppercase italic group-hover:text-brand-primary transition-colors">{service.title}</h3>
-                <p className="text-base text-slate-400 font-bold leading-relaxed mb-10 flex-grow uppercase tracking-tight">{service.shortDesc}</p>
-                <div className="pt-8 border-t border-white/10 flex items-center justify-between">
-                  <span className="mono-label text-brand-primary font-black opacity-0 group-hover:opacity-100 transition-opacity">Explore</span>
-                  <ArrowRight className="w-6 h-6 text-slate-700 group-hover:text-brand-primary transition-all" />
+                <h3 className="text-2xl font-black text-white mb-4 uppercase italic group-hover:text-brand-primary transition-colors">{service.title}</h3>
+                <p className="text-sm text-slate-400 font-medium leading-relaxed mb-8 flex-grow">{service.shortDesc}</p>
+                <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest">Detail View</span>
+                  <ArrowRight className="w-4 h-4 text-brand-primary" />
                 </div>
               </div>
             );
           })}
+        </div>
+      </div>
+    </section>
+
+    <section id="co2-care" className="py-32 bg-brand-primary/5 border-y border-brand-primary/10 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <Leaf className="w-12 h-12 text-brand-primary mx-auto mb-8 animate-bounce" />
+          <h2 className="text-4xl lg:text-5xl font-black text-white uppercase italic mb-8">Engineering with Carbon Care</h2>
+          <p className="text-xl text-slate-400 font-medium leading-relaxed mb-12">
+            Every line of code we write is optimized for performance and environmental impact. We use "Green-by-Design" principles to reduce data transfer, lower CPU usage, and offset digital footprints.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="p-6 rounded-2xl bg-brand-base/50 border border-white/5">
+              <Zap className="w-6 h-6 text-brand-primary mx-auto mb-4" />
+              <h4 className="text-sm font-bold text-white uppercase mb-2">Efficient Code</h4>
+              <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider italic">Less CPU, Faster Execution</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-brand-base/50 border border-white/5">
+              <Globe className="w-6 h-6 text-brand-primary mx-auto mb-4" />
+              <h4 className="text-sm font-bold text-white uppercase mb-2">Low Data Payload</h4>
+              <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider italic">Optimized Asset Delivery</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-brand-base/50 border border-white/5">
+              <Network className="w-6 h-6 text-brand-primary mx-auto mb-4" />
+              <h4 className="text-sm font-bold text-white uppercase mb-2">Sustainable Infrastructure</h4>
+              <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider italic">Eco-Friendly Edge Cloud</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
