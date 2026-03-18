@@ -585,19 +585,45 @@ const ContactView: React.FC<{ onNavigate: (route: string) => void }> = ({ onNavi
     setCaptcha({ n1, n2, sum: n1 + n2 });
   }, []);
 
+  const sanitizeInput = (str: string, maxLen: number = 500): string => {
+    return str
+      .replace(/<[^>]*>/g, '')           // Strip HTML tags
+      .replace(/[\x00-\x08\x0E-\x1F]/g, '') // Remove control characters
+      .replace(/javascript:/gi, '')       // Remove JS protocol
+      .replace(/on\w+\s*=/gi, '')         // Remove event handlers
+      .trim()
+      .slice(0, maxLen);
+  };
+
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email) && email.length <= 254;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (parseInt(formData.captchaInput) !== captcha.sum) return setErrors({ captchaInput: 'Verification failed.' });
+    const newErrors: Record<string, string> = {};
 
-    // Hardening: Basic pattern check for injection prevention
-    const injectionRegex = /[<>]/g;
-    if (injectionRegex.test(formData.businessName) || injectionRegex.test(formData.description)) {
-      alert("Invalid characters detected. Please remove any HTML symbols.");
+    if (parseInt(formData.captchaInput) !== captcha.sum) {
+      newErrors.captchaInput = 'Verification failed.';
+    }
+
+    if (!isValidEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
-    const body = `Inquiry: ${formData.description}\nFrom: ${formData.businessName} (${formData.email})`;
-    window.location.href = `mailto:info@botifyx.in?subject=Project Inquiry: ${formData.businessName}&body=${encodeURIComponent(body)}`;
+    // Sanitize all inputs before use
+    const safeName = sanitizeInput(formData.businessName, 200);
+    const safeEmail = sanitizeInput(formData.email, 254);
+    const safeDesc = sanitizeInput(formData.description, 2000);
+
+    const body = `Inquiry: ${safeDesc}\nFrom: ${safeName} (${safeEmail})`;
+    window.location.href = `mailto:info@botifyx.in?subject=${encodeURIComponent('Project Inquiry: ' + safeName)}&body=${encodeURIComponent(body)}`;
     setIsSent(true);
   };
 
@@ -616,16 +642,17 @@ const ContactView: React.FC<{ onNavigate: (route: string) => void }> = ({ onNavi
           ) : (
             <form className="space-y-12" onSubmit={handleSubmit}>
               <div className="space-y-6">
-                <label className="mono-label text-slate-500 font-black tracking-[0.3em]">Your Company Name</label>
-                <input required className="w-full bg-brand-base border-2 border-white/10 rounded-3xl p-8 text-xl text-white outline-none focus:border-brand-primary transition-all font-bold placeholder:text-slate-700 uppercase" placeholder="e.g. My Amazing Business" value={formData.businessName} onChange={e => setFormData({ ...formData, businessName: e.target.value })} />
+                <label htmlFor="contact-name" className="mono-label text-slate-500 font-black tracking-[0.3em]">Your Company Name</label>
+                <input id="contact-name" name="businessName" required maxLength={200} autoComplete="organization" className="w-full bg-brand-base border-2 border-white/10 rounded-3xl p-8 text-xl text-white outline-none focus:border-brand-primary transition-all font-bold placeholder:text-slate-700 uppercase" placeholder="e.g. My Amazing Business" value={formData.businessName} onChange={e => setFormData({ ...formData, businessName: e.target.value })} />
               </div>
               <div className="space-y-6">
-                <label className="mono-label text-slate-500 font-black tracking-[0.3em]">Business Email</label>
-                <input required type="email" className="w-full bg-brand-base border-2 border-white/10 rounded-3xl p-8 text-xl text-white outline-none focus:border-brand-primary transition-all font-bold placeholder:text-slate-700 uppercase" placeholder="hello@company.com" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
+                <label htmlFor="contact-email" className="mono-label text-slate-500 font-black tracking-[0.3em]">Business Email</label>
+                <input id="contact-email" name="email" required type="email" maxLength={254} autoComplete="email" className="w-full bg-brand-base border-2 border-white/10 rounded-3xl p-8 text-xl text-white outline-none focus:border-brand-primary transition-all font-bold placeholder:text-slate-700 uppercase" placeholder="hello@company.com" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
+                {errors.email && <p className="text-red-400 text-xs font-bold mt-2 uppercase tracking-wider">{errors.email}</p>}
               </div>
               <div className="space-y-6">
-                <label className="mono-label text-slate-500 font-black tracking-[0.3em]">Tell us about your project</label>
-                <textarea required rows={5} className="w-full bg-brand-base border-2 border-white/10 rounded-3xl p-8 text-xl text-white outline-none focus:border-brand-primary transition-all resize-none font-bold placeholder:text-slate-700 uppercase" placeholder="What can we build for you?" value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} />
+                <label htmlFor="contact-desc" className="mono-label text-slate-500 font-black tracking-[0.3em]">Tell us about your project</label>
+                <textarea id="contact-desc" name="description" required rows={5} maxLength={2000} autoComplete="off" className="w-full bg-brand-base border-2 border-white/10 rounded-3xl p-8 text-xl text-white outline-none focus:border-brand-primary transition-all resize-none font-bold placeholder:text-slate-700 uppercase" placeholder="What can we build for you?" value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} />
               </div>
 
               <div className="p-8 rounded-[3.5rem] bg-brand-base border-2 border-brand-primary/20 overflow-hidden">
@@ -637,9 +664,12 @@ const ContactView: React.FC<{ onNavigate: (route: string) => void }> = ({ onNavi
                   <div className="w-full md:w-auto">
                     <input
                       required
+                      inputMode="numeric"
+                      maxLength={3}
+                      autoComplete="off"
                       className="w-full md:w-32 bg-brand-surface border-2 border-white/10 rounded-[2rem] p-8 text-center text-4xl font-black text-white outline-none focus:border-brand-primary shadow-inner"
                       value={formData.captchaInput}
-                      onChange={e => setFormData({ ...formData, captchaInput: e.target.value })}
+                      onChange={e => setFormData({ ...formData, captchaInput: e.target.value.replace(/[^0-9]/g, '') })}
                       placeholder="?"
                     />
                   </div>

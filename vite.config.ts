@@ -18,6 +18,20 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
+      },
+      build: {
+        sourcemap: false,
+        target: 'es2020',
+        minify: 'esbuild',
+        cssMinify: true,
+        rollupOptions: {
+          output: {
+            manualChunks: {
+              'vendor-react': ['react', 'react-dom'],
+              'vendor-icons': ['lucide-react'],
+            }
+          }
+        }
       }
     };
 });

@@ -14,12 +14,41 @@ interface ChatbotProps {
 }
 
 const CHAT_HISTORY_KEY = 'botifyx_chat_history';
+const MAX_CHAT_HISTORY = 50;
+const RATE_LIMIT_MS = 2000;
+
+// Security: Sanitize message content to prevent XSS
+const sanitizeMessage = (str: string): string => {
+  return str
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '') // Remove script tags
+    .replace(/<[^>]*>/g, '')                           // Strip remaining HTML tags
+    .replace(/javascript:/gi, '')                      // Remove JS protocol
+    .replace(/on\w+\s*=/gi, '')                        // Remove event handlers
+    .replace(/[\x00-\x08\x0E-\x1F]/g, '')             // Remove control characters
+    .trim()
+    .slice(0, 5000); // Cap message length
+};
+
+// Validate chat history structure from localStorage
+const isValidChatHistory = (data: unknown): data is Message[] => {
+  if (!Array.isArray(data)) return false;
+  return data.every(
+    (item) =>
+      typeof item === 'object' &&
+      item !== null &&
+      ('role' in item) &&
+      ('text' in item) &&
+      (item.role === 'user' || item.role === 'model') &&
+      typeof item.text === 'string'
+  );
+};
 
 export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [lastSendTime, setLastSendTime] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const quickActions = [
@@ -33,12 +62,18 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
     if (savedHistory) {
       try {
         const parsedHistory = JSON.parse(savedHistory);
-        if (Array.isArray(parsedHistory) && parsedHistory.length > 0) {
-          setMessages(parsedHistory);
+        if (isValidChatHistory(parsedHistory) && parsedHistory.length > 0) {
+          // Sanitize loaded messages and cap history
+          const sanitized = parsedHistory.slice(-MAX_CHAT_HISTORY).map(m => ({
+            ...m,
+            text: sanitizeMessage(m.text)
+          }));
+          setMessages(sanitized);
           return;
         }
       } catch (e) {
         console.error('Failed to parse chat history', e);
+        localStorage.removeItem(CHAT_HISTORY_KEY);
       }
     }
     setMessages([
@@ -48,7 +83,9 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
 
   useEffect(() => {
     if (messages.length > 0) {
-      localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(messages));
+      // Cap stored history to prevent localStorage bloat
+      const capped = messages.slice(-MAX_CHAT_HISTORY);
+      localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(capped));
     }
     scrollToBottom();
   }, [messages, isLoading]);
@@ -69,7 +106,14 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
     const messageText = overrideText || input;
     if (!messageText.trim() || isLoading) return;
 
-    const userMessage = messageText.trim();
+    // Rate limiting: prevent rapid-fire API calls
+    const now = Date.now();
+    if (now - lastSendTime < RATE_LIMIT_MS) return;
+    setLastSendTime(now);
+
+    const userMessage = sanitizeMessage(messageText);
+    if (!userMessage) return; // Empty after sanitization
+
     setInput('');
     const newMessages: Message[] = [...messages, { role: 'user', text: userMessage }];
     setMessages(newMessages);
@@ -141,7 +185,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
           }, 2000);
         }
       } else {
-        const text = response.text || "I'm sorry, I hit a temporary lag in my neural network. Could you please rephrase that? I'm here to help!";
+        const text = sanitizeMessage(response.text || "I'm sorry, I hit a temporary lag in my neural network. Could you please rephrase that? I'm here to help!");
         setMessages(prev => [...prev, { role: 'model', text }]);
       }
     } catch (error) {
