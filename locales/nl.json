@@ -1,0 +1,261 @@
+{
+  "nav": {
+    "services": "Diensten",
+    "industries": "Sectoren",
+    "ecosystem": "Ecosysteem",
+    "insights": "Inzichten",
+    "letsTalk": "LATEN WE PRATEN",
+    "menuNav": "Menu Navigatie",
+    "getInTouch": "NEEM CONTACT OP"
+  },
+  "home": {
+    "label": "Next-Gen Digitale Frontier Engineering",
+    "title1": "Intelligentie Inbedden.",
+    "title2": "Schaal Vereenvoudigen.",
+    "subtitle": "Wij bouwen veilige, AI-native platforms die groei stimuleren met behoud van een toonaangevende <1>lage ecologische voetafdruk</1>.",
+    "startScaling": "Begin met Schalen",
+    "exploreServices": "Ontdek Diensten",
+    "trustedBy": "Vertrouwd door Wereldwijde Innovators",
+    "verticalExcellence": "Verticale Uitmuntendheid",
+    "structuredSolutions": "Gestructureerde Oplossingen.",
+    "viewCatalog": "BEKIJK VOLLEDIGE CATALOGUS",
+    "detailView": "Detailweergave",
+    "co2": {
+      "title": "Engineering met Zorg voor Klimaat",
+      "subtitle": "Elke regel code die we schrijven is geoptimaliseerd voor prestaties en milieu-impact. We gebruiken 'Green-by-Design' principes om gegevensoverdracht te verminderen, CPU-gebruik te verlagen en digitale voetafdrukken te compenseren.",
+      "efficientCode": "Efficiënte Code",
+      "efficientCodeDesc": "Minder CPU, Snellere Uitvoering",
+      "lowData": "Lage Data Payload",
+      "lowDataDesc": "Geoptimaliseerde Asset Levering",
+      "sustainableInfra": "Duurzame Infrastructuur",
+      "sustainableInfraDesc": "Milieuvriendelijke Edge Cloud"
+    },
+    "ai": {
+      "label": "Intelligentie op Schaal",
+      "title": "AI Assistenten & Kennissystemen.",
+      "subtitle": "Stop met zoeken en begin met weten. We bouwen contextbewuste AI-kennissystemen die binnen uw veilige infrastructuur leven. Met behulp van Retrieval-Augmented Generation (RAG) begrijpt uw aangepaste AI-assistent uw specifieke documenten, beleid en workflows—fungerend als een krachtig geheugen voor uw hele organisatie.",
+      "feature1": "Enterprise-Grade Beveiliging & Governance",
+      "feature2": "Contextbewuste RAG-Architectuur",
+      "exploreBtn": "ONTDEK AI ASSISTENTEN"
+    },
+    "cta": {
+      "title": "Klaar om te beginnen?",
+      "subtitle": "Vertel ons over uw project en we helpen u de beste weg vooruit te vinden.",
+      "btn": "Stuur een Bericht"
+    }
+  },
+  "footer": {
+    "mission": "Technologie eenvoudig, snel en nuttig maken. Gebouwd voor mensen en de planeet.",
+    "whatWeDo": "Wat We Doen",
+    "getToKnowUs": "Leer Ons Kennen",
+    "about": "Over",
+    "contact": "Contact",
+    "privacy": "Privacybeleid",
+    "ecoFriendly": "Milieuvriendelijke Technologie",
+    "ecoFriendlyDesc": "We optimaliseren code om op minder stroom te draaien, waardoor uw tools snel en groen worden.",
+    "backToTop": "TERUG NAAR BOVEN",
+    "copyright": "© {{year}} BOTIFYX. TECHNOLOGIE VOOR MENSEN."
+  },
+  "servicesView": {
+    "label": "Expertise",
+    "title": "Onze Diensten",
+    "subtitle": "We bouwen alles, van eenvoudige websites tot complexe slimme systemen, allemaal met een menselijke touch.",
+    "learnMore": "Meer weten"
+  },
+  "industriesView": {
+    "label": "Partnerschappen",
+    "title": "Wie We Helpen",
+    "subtitle": "We werken in veel verschillende velden om technologie voor iedereen beter te maken."
+  },
+  "ecosystemView": {
+    "label": "Ons Werk",
+    "title": "Ecosysteem",
+    "subtitle": "Live voorbeelden van hoe we slimme technologie gebruiken om nuttige dingen te bouwen.",
+    "builtWithHeart": "Gebouwd met een Hart."
+  },
+  "insightsView": {
+    "label": "Ideeën",
+    "title": "Inzichten",
+    "subtitle": "Eenvoudige uitleg van de nieuwste technologie en hoe deze u kan helpen.",
+    "all": "Alles",
+    "readStory": "Lees Verhaal"
+  },
+  "aboutView": {
+    "label": "Ons Team",
+    "title": "Wie We Zijn",
+    "subtitle": "We zijn een team van vriendelijke bouwers die graag technologie voor mensen laten werken.",
+    "heroTitle": "Technologie met een Hart.",
+    "heroSubtitle": "Technologie mag niet eng zijn. Bij BotifyX begrijpen we uw dromen en zetten ze om in realiteit. Wij geloven in eerlijk zijn, behulpzaam zijn en aardig zijn voor de planeet.",
+    "ourGoal": "Ons Doel",
+    "goalText": "U helpen verder te komen.",
+    "quality": "Kwaliteit",
+    "qualityText": "Tools die perfect werken.",
+    "eco": "Milieuvriendelijk",
+    "ecoText": "Slimme code die energie bespaart.",
+    "safe": "Veilig",
+    "safeText": "Privé en beveiligde gegevens.",
+    "partners": "Partners",
+    "partnersText": "We werken als uw team.",
+    "letsConnect": "Laten we Connecten.",
+    "basedIn": "Gevestigd in Bengaluru. Helpt de wereld.",
+    "ourOffice": "Ons Kantoor",
+    "officeAddress": "Upkar Springs Fields, Bengaluru, KA 562107, IN",
+    "emailUs": "E-mail Ons",
+    "whatsapp": "WhatsApp"
+  },
+  "contactView": {
+    "label": "Contact",
+    "title": "Begin met Bouwen",
+    "subtitle": "Stuur ons een bericht en we helpen u het beste pad voor uw project te vinden.",
+    "messageReady": "Bericht Klaar!",
+    "messageReadyDesc": "Uw e-mailclient zou nu moeten openen. Zo niet, klik dan hieronder.",
+    "sendAnother": "Stuur Nog Een",
+    "companyName": "Uw Bedrijfsnaam",
+    "companyPlaceholder": "bijv. Mijn Geweldige Bedrijf",
+    "businessEmail": "Zakelijk E-mailadres",
+    "emailPlaceholder": "hallo@bedrijf.com",
+    "projectDesc": "Vertel ons over uw project",
+    "projectPlaceholder": "Wat kunnen we voor u bouwen?",
+    "securityCheck": "Beveiligingscontrole",
+    "sendMessage": "Verstuur Bericht",
+    "errors": {
+      "verification": "Verificatie mislukt.",
+      "invalidEmail": "Voer een geldig e-mailadres in."
+    }
+  },
+  "serviceDetail": {
+    "back": "Terug naar Diensten",
+    "label": "Serviceoverzicht",
+    "howItHelps": "Hoe Het U Helpt",
+    "coreDeliverables": "Kernleveringen",
+    "unifiedEcosystem": "Verenigd Ecosysteem",
+    "ecosystemDesc": "BotifyX-diensten zijn ontworpen als modulaire 'slimme bouwstenen'. Hoewel ze op zichzelf al krachtig zijn, schitteren ze pas echt wanneer ze worden verbonden in een verenigd ecosysteem dat specifiek voor uw schaal is gebouwd.",
+    "synergy1": "Module Synergie 01",
+    "synergy1Title": "Intelligente Operaties",
+    "synergy1Desc": "Combineert <1>Platform Engineering</1> met <3>Enterprise AI Assistenten</3>. Een op maat gemaakt intern dashboard dat een door RAG aangedreven AI-assistent gebruikt om uw team te helpen navigeren door complexe workflows en bedrijfsgegevens in real-time.",
+    "synergy2": "Module Synergie 02",
+    "synergy2Title": "Vertrouwde Digitale Etalage",
+    "synergy2Desc": "Koppelt <1>Web Experience</1> aan <3>Beveiliging & Governance</3>. Een razendsnelle webervaring beschermd door hoogwaardige beveiligingsprotocollen en een governance-kader dat datacompliance garandeert bij elke klik.",
+    "betterTech": "Betere Technologie",
+    "aspect": "Aspect",
+    "basicTools": "Basisgereedschappen",
+    "botifyxBuild": "BotifyX Bouw",
+    "engineRoom": "De Machinekamer",
+    "governance": "Governance & Compliance",
+    "governanceDesc": "Enterprise schaal vereist enterprise beveiliging. Onze systemen zijn vanaf de grond opgebouwd met strikte protocollen voor gegevensprivacy, waardoor uw intellectuele eigendom uitsluitend van u blijft.",
+    "idealFor": "Ideaal Partnerprofiel",
+    "focusAreas": "Belangrijkste Aandachtsgebieden",
+    "readyToScale": "Klaar om te schalen?",
+    "launchCall": "START GESPREK"
+  },
+  "co2": {
+    "title": "Carbon Dashboard",
+    "saved": "Bespaarde CO2",
+    "savedDesc": "gram CO2 vs. gemiddelde site",
+    "load": "Paginalading",
+    "loadDesc": "overgedragen bytes",
+    "energy": "Energielabel",
+    "energyDesc": "A+ Ultra-efficiënt",
+    "close": "Sluit Dashboard"
+  },
+  "chatbot": {
+    "header": "BotifyX AI Assistent",
+    "status": "Online • Klaar om te helpen",
+    "placeholder": "Vraag alles over onze diensten...",
+    "disclaimer": "AI-gegenereerde antwoorden. Neem voor specifieke details contact met ons op.",
+    "fallback": "Ik ervaar momenteel een hoge belasting, maar ik wil nog steeds helpen! Kunt u ons team een e-mail sturen op info@botifyx.in?",
+    "knowledgeBaseMsg": "We bouwen aangepaste AI-assistenten, precies zoals deze, voor uw bedrijf. Het draait op een veilige RAG-architectuur die uw privégegevens van het bedrijf begrijpt zonder deze te delen op het openbare web. Zullen we bespreken hoe dit voor u kan werken?",
+    "yesPlease": "Ja, graag",
+    "noThanks": "Nee bedankt",
+    "thanksMsg": "Uitstekende keuze! Ik stuur u door naar ons Project Discovery-formulier. Het invullen duurt minder dan een minuut.",
+    "noWorries": "Geen probleem! Laat het me weten als u andere vragen heeft.",
+    "prompts": {
+      "hi": "Hallo! 👋 Ik ben de BotifyX Assistent. Wat kan ik u vandaag helpen bouwen?",
+      "services": "Vertel me over jullie diensten",
+      "pricing": "Hoeveel kost het?",
+      "contact": "Ik wil een project starten"
+    }
+  },
+  "constants": {
+    "caseStudies": {
+      "cs1_stat": "70%", "cs1_context": "Meer werk gedaan in minder tijd",
+      "cs2_stat": "2X", "cs2_context": "Snellere laadtijden van websites",
+      "cs3_stat": "Weken", "cs3_context": "Van een eenvoudig idee tot een werkende tool",
+      "cs4_stat": "Groen", "cs4_context": "Milieuvriendelijke, energiebesparende code"
+    },
+    "industries": {
+      "telecom_name": "Communicatie", "telecom_desc": "Mensen helpen wereldwijd verbonden te blijven.",
+      "entertainment_name": "Media & Plezier", "entertainment_desc": "Betere manieren creëren om te kijken, luisteren en spelen.",
+      "education_name": "Onderwijs", "education_desc": "Tools die onderwijs voor iedereen leuk en persoonlijk maken.",
+      "research_name": "Slim Zoeken", "research_desc": "Antwoorden vinden in seconden, niet uren.",
+      "legal_name": "Juridische Hulp", "legal_desc": "De wet voor iedereen makkelijker te begrijpen maken.",
+      "cyber_name": "Veiligheid", "cyber_desc": "Uw digitale leven veilig en gezond houden."
+    },
+    "ecosystem": {
+      "yobaexo_cat": "Plezier", "yobaexo_name": "YoBaeXo", "yobaexo_desc": "Een vriendelijke ruimte voor muziekliefhebbers en makers om hun werk te delen.",
+      "freeflix_cat": "Leren", "freeflix_name": "FreeFlix", "freeflix_desc": "Een digitale bibliotheek waar u eenvoudig klassieke films kunt ontdekken.",
+      "learn_cat": "Onderwijs", "learn_name": "LearnThroughAnalogy", "learn_desc": "Een eenvoudige manier om complexe dingen te leren met behulp van alledaagse verhalen."
+    },
+    "services": {
+      "aiWeb_title": "AI-Aangedreven Web & Mobiele Ervaringen",
+      "aiWeb_short": "Intelligente, razendsnelle digitale etalages die zich in real-time aan uw gebruikers aanpassen.",
+      "aiWeb_full": "Moderne websites en apps zijn geen statische brochures meer; het zijn intelligente systemen. We bouwen AI-aangedreven websites en mobiele applicaties die prioriteit geven aan prestatie-geoptimaliseerde digitale ervaringen. Door intelligentie aan de edge in te bedden, toont uw platform niet alleen informatie—het leert van gebruikersgedrag om hogere conversies en betrokkenheid te stimuleren.",
+      "aiWeb_detailed": "Onze aanpak gaat verder dan simpel coderen. We implementeren 'Adaptive UX'—interfaces die veranderen op basis van de behoeften van de gebruiker—en 'AI-gedreven inhoud' die de reis voor elke bezoeker personaliseert. Of u nu een Progressive Web App (PWA), een native iOS/Android-ervaring of een cross-platformoplossing nodig heeft, onze engineering zorgt voor maximale SEO-autoriteit, bijna directe laadsnelheden en schaalbaarheid op ondernemingsniveau.",
+      "aiWeb_what1": "AI-Gedreven E-commerce Platforms", "aiWeb_what2": "Adaptieve SaaS Dashboards", "aiWeb_what3": "Intelligente Mobiele Applicaties (iOS/Android)", "aiWeb_what4": "High-Performance PWAs", "aiWeb_what5": "Gepersonaliseerde Klantportalen",
+      "aiWeb_feat1_basic": "Vaste lay-outs voor alle gebruikers", "aiWeb_feat1_adv": "Adaptieve UX die evolueert per bezoeker", "aiWeb_feat1_name": "UX Logica",
+      "aiWeb_feat2_basic": "Trage, traditionele serverreacties", "aiWeb_feat2_adv": "Prestatie-geoptimaliseerde Edge levering", "aiWeb_feat2_name": "Prestaties",
+      "aiWeb_feat3_basic": "Statische tekst en afbeeldingen", "aiWeb_feat3_adv": "AI-gedreven real-time personalisatie", "aiWeb_feat3_name": "Inhoud",
+      "aiWeb_feat4_basic": "Standaard meta-tag beheer", "aiWeb_feat4_adv": "Technisch SEO geoptimaliseerd voor AI-crawlers", "aiWeb_feat4_name": "SEO",
+      
+      "aiKnow_title": "Enterprise AI Assistenten & Kennissystemen",
+      "aiKnow_short": "Slimme, veilige hulp voor uw team en klanten die uw bedrijf echt kent.",
+      "aiKnow_full": "Stel u een assistent voor die elk document in uw bedrijf heeft gelezen, elke klantinteractie onthoudt en uw regels perfect volgt. We bouwen 'RAG Chatbots'—geavanceerde kennisbeheer-AI die niet zomaar raadt, maar de exacte waarheid in uw privégegevens vindt.",
+      "aiKnow_detailed": "De meeste chatbots zijn als studenten die uit hun hoofd proberen te slagen voor een examen. Onze 'Enterprise AI Assistenten' zijn als studenten die het tekstboek open voor zich hebben. Met behulp van RAG (Retrieval-Augmented Generation) verbinden we krachtige AI aan uw specifieke bedrijfskennis. Dit resulteert in 'AI Copilots' die helpen met onderzoek, operaties en ondersteuning zonder uw geheimen ooit met de buitenwereld te delen.",
+      "aiKnow_what1": "Customer Support Copilots", "aiKnow_what2": "Interne Onderzoeksassistenten", "aiKnow_what3": "Operations Command Centers", "aiKnow_what4": "Tools voor Uitvoerende Besluitvorming", "aiKnow_what5": "Geautomatiseerde Kennisbibliotheken",
+      "aiKnow_feat1_basic": "Neigt tot verzinsels (Hallucinaties)", "aiKnow_feat1_adv": "Geverifieerd aan de hand van uw daadwerkelijke documenten", "aiKnow_feat1_name": "Nauwkeurigheid",
+      "aiKnow_feat2_basic": "Vergeet eerdere context gemakkelijk", "aiKnow_feat2_adv": "Diep, blijvend begrip van uw bedrijf", "aiKnow_feat2_name": "Geheugen",
+      "aiKnow_feat3_basic": "Gegevens lekken vaak naar openbare AI-modellen", "aiKnow_feat3_adv": "100% Privé; blijft binnen uw veilige kluis", "aiKnow_feat3_name": "Beveiliging",
+      "aiKnow_feat4_basic": "Voelt robotisch en repetitief aan", "aiKnow_feat4_adv": "Mensgericht, vriendelijk en afgestemd op het merk", "aiKnow_feat4_name": "Toon",
+
+      "plat_title": "Slimme Zakelijke Platforms",
+      "plat_short": "Het digitale thuis voor uw hele bedrijf, gebouwd om met u mee te groeien.",
+      "plat_full": "Wij bouwen de tools die uw bedrijf runnen. Van eenvoudig te gebruiken dashboards tot op maat gemaakte systemen die uw bestellingen en klanten afhandelen, we zorgen ervoor dat uw technologie aanvoelt als een natuurlijk onderdeel van uw team.",
+      "plat_what1": "Aangepaste Zakelijke Dashboards", "plat_what2": "Klantbeheersystemen", "plat_what3": "Interne Team Tools", "plat_what4": "Slimme Online Winkels",
+
+      "web_title": "Websites Die Voor U Werken",
+      "web_short": "Prachtige, razendsnelle websites die bezoekers veranderen in tevreden klanten.",
+      "web_full": "Uw website is uw digitale etalage. Wij creëren sites die niet alleen mooi zijn om naar te kijken—ze zijn slim, ongelooflijk snel en ontworpen om uw klanten precies te helpen vinden wat ze nodig hebben.",
+      "web_what1": "Moderne Bedrijfswebsites", "web_what2": "Professionele Portfolio's", "web_what3": "Snelle Online Apps", "web_what4": "Serviceportalen",
+
+      "mob_title": "Nuttige Mobiele Apps",
+      "mob_short": "Stop uw bedrijf in de zakken van uw klanten met een vriendelijke mobiele app.",
+      "mob_full": "Wij maken mobiele apps die mensen echt graag gebruiken. Of het nu voor uw klanten of voor uw eigen team is, we zorgen ervoor dat het perfect werkt op elke telefoon, zelfs wanneer het internet traag is.",
+      "mob_what1": "iPhone & Android Apps", "mob_what2": "Winkelapps", "mob_what3": "Zorgapps", "mob_what4": "Tools voor Teamcoördinatie"
+    },
+    "insights": {
+      "nn_title": "Hoe Computers Leren Zoals Wij Doen",
+      "nn_exc": "Een eenvoudige blik op hoe moderne technologie het menselijk brein nabootst om ons te helpen dagelijkse problemen sneller op te lossen.",
+      "nn_cat": "AI Leren", "nn_read": "7 min leestijd",
+      
+      "rag_title": "AI Slimmer Maken Met Uw Eigen Info",
+      "rag_exc": "Waarom de beste AI niet alleen slim is—het is gepersonaliseerd. Hoe we technologie helpen uw specifieke zakelijke behoeften te begrijpen.",
+      "rag_cat": "Slimme Tech", "rag_read": "9 min leestijd",
+
+      "hum_title": "Het Menselijke Element In AI-Gedreven SaaS",
+      "hum_exc": "Waarom succesvolle software niet alleen over algoritmen gaat, maar over empathie, gebruiksgemak en het oplossen van echte menselijke pijnpunten.",
+      "hum_cat": "Productontwerp", "hum_read": "8 min leestijd",
+
+      "lat_title": "Waarom Latentie De Nieuwe Digitale Valuta Is",
+      "lat_exc": "In een wereld van directe bevrediging kan een vertraging van één seconde miljoenen kosten. Hoe prestatie-engineering vertrouwen opbouwt.",
+      "lat_cat": "Engineering", "lat_read": "6 min leestijd",
+
+      "sec_title": "Beveiliging door Ontwerp: Voorbij de Firewall",
+      "sec_exc": "Veiligheid bouwen vanaf de eerste regel code. Waarom moderne privacy een fundamentele verschuiving in architectuur vereist.",
+      "sec_cat": "Cyberveiligheid", "sec_read": "10 min leestijd",
+
+      "evo_title": "De Evolutie van RAG: Context is Koning",
+      "evo_exc": "Van eenvoudig zoeken naar vectoren naar diepe contextuele intelligentie. Hoe RAG het beheer van bedrijfskennis transformeert.",
+      "evo_cat": "AI Strategie", "evo_read": "12 min leestijd"
+    }
+  }
+}

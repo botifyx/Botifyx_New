@@ -1,0 +1,261 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "industries": "Industrias",
+    "ecosystem": "Ecosistema",
+    "insights": "Perspectivas",
+    "letsTalk": "HABLEMOS",
+    "menuNav": "Menú de Navegación",
+    "getInTouch": "CONTACTAR"
+  },
+  "home": {
+    "label": "Ingeniería de Frontera Digital de Próxima Generación",
+    "title1": "Integrar Inteligencia.",
+    "title2": "Simplificar la Escala.",
+    "subtitle": "Construimos plataformas nativas de IA seguras que impulsan el crecimiento mientras mantenemos una <1>huella de carbono baja</1> líder en la industria.",
+    "startScaling": "Comenzar a Escalar",
+    "exploreServices": "Explorar Servicios",
+    "trustedBy": "Confiado por Innovadores Globales",
+    "verticalExcellence": "Excelencia Vertical",
+    "structuredSolutions": "Soluciones Estructuradas.",
+    "viewCatalog": "VER CATÁLOGO COMPLETO",
+    "detailView": "Vista Detallada",
+    "co2": {
+      "title": "Ingeniería con Cuidado del Carbono",
+      "subtitle": "Cada línea de código que escribimos está optimizada para el rendimiento y el impacto ambiental. Usamos principios de 'Diseño Ecológico' para reducir la transferencia de datos, disminuir el uso de CPU y compensar las huellas digitales.",
+      "efficientCode": "Código Eficiente",
+      "efficientCodeDesc": "Menos CPU, Ejecución Más Rápida",
+      "lowData": "Baja Carga de Datos",
+      "lowDataDesc": "Entrega de Activos Optimizada",
+      "sustainableInfra": "Infraestructura Sostenible",
+      "sustainableInfraDesc": "Nube Perimetral Ecológica"
+    },
+    "ai": {
+      "label": "Inteligencia a Escala",
+      "title": "Asistentes de IA y Sistemas de Conocimiento.",
+      "subtitle": "Deje de buscar y empiece a saber. Construimos sistemas de conocimiento de IA contextuales que viven dentro de su infraestructura segura. Utilizando la Generación Aumentada por Recuperación (RAG), su asistente de IA personalizado entiende sus documentos, políticas y flujos de trabajo específicos—actuando como una memoria de alto rendimiento para toda su organización.",
+      "feature1": "Seguridad y Gobernanza de Grado Empresarial",
+      "feature2": "Arquitectura RAG Consciente del Contexto",
+      "exploreBtn": "EXPLORAR ASISTENTES DE IA"
+    },
+    "cta": {
+      "title": "¿Listo para empezar?",
+      "subtitle": "Cuéntenos sobre su proyecto y le ayudaremos a encontrar el mejor camino a seguir.",
+      "btn": "Enviar un Mensaje"
+    }
+  },
+  "footer": {
+    "mission": "Haciendo la tecnología simple, rápida y útil. Construido para las personas y el planeta.",
+    "whatWeDo": "Qué Hacemos",
+    "getToKnowUs": "Conózcanos",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "privacy": "Política de Privacidad",
+    "ecoFriendly": "Tecnología Ecológica",
+    "ecoFriendlyDesc": "Optimizamos el código para funcionar con menos energía, haciendo sus herramientas rápidas y ecológicas.",
+    "backToTop": "VOLVER ARRIBA",
+    "copyright": "© {{year}} BOTIFYX. TECNOLOGÍA PARA HUMANOS."
+  },
+  "servicesView": {
+    "label": "Experiencia",
+    "title": "Nuestros Servicios",
+    "subtitle": "Construimos desde sitios web simples hasta sistemas inteligentes complejos, todo con un toque humano.",
+    "learnMore": "Saber más"
+  },
+  "industriesView": {
+    "label": "Asociaciones",
+    "title": "A Quién Ayudamos",
+    "subtitle": "Trabajamos en muchos campos diferentes para mejorar la tecnología para todos."
+  },
+  "ecosystemView": {
+    "label": "Nuestro Trabajo",
+    "title": "Ecosistema",
+    "subtitle": "Ejemplos en vivo de cómo usamos tecnología inteligente para construir cosas útiles.",
+    "builtWithHeart": "Construido con Corazón."
+  },
+  "insightsView": {
+    "label": "Ideas",
+    "title": "Perspectivas",
+    "subtitle": "Explicaciones simples de la tecnología más nueva y cómo puede ayudarle.",
+    "all": "Todos",
+    "readStory": "Leer Historia"
+  },
+  "aboutView": {
+    "label": "Nuestro Equipo",
+    "title": "Quiénes Somos",
+    "subtitle": "Somos un equipo de constructores amigables a quienes les encanta hacer que la tecnología funcione para las personas.",
+    "heroTitle": "Tecnología con Corazón.",
+    "heroSubtitle": "La tecnología no debería ser aterradora. En BotifyX, entendemos sus sueños y los hacemos realidad. Creemos en ser honestos, útiles y amables con el planeta.",
+    "ourGoal": "Nuestro Objetivo",
+    "goalText": "Ayudándole a llegar más lejos.",
+    "quality": "Calidad",
+    "qualityText": "Herramientas que funcionan perfectamente.",
+    "eco": "Ecológico",
+    "ecoText": "Código inteligente que ahorra energía.",
+    "safe": "Seguro",
+    "safeText": "Datos privados y seguros.",
+    "partners": "Socios",
+    "partnersText": "Trabajamos como su equipo.",
+    "letsConnect": "Conectémonos.",
+    "basedIn": "Con sede en Bengaluru. Ayudando al mundo.",
+    "ourOffice": "Nuestra Oficina",
+    "officeAddress": "Upkar Springs Fields, Bengaluru, KA 562107, IN",
+    "emailUs": "Envíenos un Correo",
+    "whatsapp": "WhatsApp"
+  },
+  "contactView": {
+    "label": "Contacto",
+    "title": "Comience a Construir",
+    "subtitle": "Envíenos un mensaje y le ayudaremos a encontrar el mejor camino para su proyecto.",
+    "messageReady": "¡Mensaje Listo!",
+    "messageReadyDesc": "Su cliente de correo debería abrirse ahora. Si no, haga clic abajo.",
+    "sendAnother": "Enviar Otro",
+    "companyName": "Nombre de su Empresa",
+    "companyPlaceholder": "ej. Mi Negocio Increíble",
+    "businessEmail": "Correo de la Empresa",
+    "emailPlaceholder": "hola@empresa.com",
+    "projectDesc": "Cuéntenos sobre su proyecto",
+    "projectPlaceholder": "¿Qué podemos construir para usted?",
+    "securityCheck": "Verificación de Seguridad",
+    "sendMessage": "Enviar Mensaje",
+    "errors": {
+      "verification": "Verificación fallida.",
+      "invalidEmail": "Por favor, introduzca una dirección de correo válida."
+    }
+  },
+  "serviceDetail": {
+    "back": "Volver a Servicios",
+    "label": "Descripción del Servicio",
+    "howItHelps": "Cómo le Ayuda",
+    "coreDeliverables": "Entregables Principales",
+    "unifiedEcosystem": "Ecosistema Unificado",
+    "ecosystemDesc": "Los servicios de BotifyX están diseñados como 'ladrillos inteligentes' modulares. Aunque son poderosos por sí solos, realmente brillan cuando se conectan en un ecosistema unificado construido específicamente para su escala.",
+    "synergy1": "Sinergia de Módulo 01",
+    "synergy1Title": "Operaciones Inteligentes",
+    "synergy1Desc": "Combina <1>Ingeniería de Plataforma</1> con <3>Asistentes de IA Empresariales</3>. Un panel interno personalizado que usa un asistente de IA impulsado por RAG para ayudar a su equipo a navegar flujos de trabajo complejos y datos de la empresa en tiempo real.",
+    "synergy2": "Sinergia de Módulo 02",
+    "synergy2Title": "Escaparate Digital Confiable",
+    "synergy2Desc": "Combina <1>Experiencia Web</1> con <3>Seguridad y Gobernanza</3>. Una experiencia web ultrarrápida protegida por protocolos de seguridad de grado empresarial y un marco de gobernanza que garantiza el cumplimiento de los datos en cada clic.",
+    "betterTech": "Mejor Tecnología",
+    "aspect": "Aspecto",
+    "basicTools": "Herramientas Básicas",
+    "botifyxBuild": "Construcción de BotifyX",
+    "engineRoom": "La Sala de Máquinas",
+    "governance": "Gobernanza y Cumplimiento",
+    "governanceDesc": "La escala empresarial requiere seguridad empresarial. Nuestros sistemas se construyen desde cero con estrictos protocolos de privacidad de datos, asegurando que su propiedad intelectual siga siendo exclusivamente suya.",
+    "idealFor": "Perfil del Socio Ideal",
+    "focusAreas": "Áreas Clave de Enfoque",
+    "readyToScale": "¿Listo para escalar?",
+    "launchCall": "INICIAR LLAMADA"
+  },
+  "co2": {
+    "title": "Panel de Carbono",
+    "saved": "Carbono Ahorrado",
+    "savedDesc": "gramos de CO2 vs. sitio promedio",
+    "load": "Carga de Página",
+    "loadDesc": "bytes transferidos",
+    "energy": "Calificación Energética",
+    "energyDesc": "A+ Ultra-eficiente",
+    "close": "Cerrar Panel"
+  },
+  "chatbot": {
+    "header": "Asistente de IA de BotifyX",
+    "status": "En línea • Listo para ayudar",
+    "placeholder": "Pregunte cualquier cosa sobre nuestros servicios...",
+    "disclaimer": "Respuestas generadas por IA. Para detalles específicos, por favor contáctenos.",
+    "fallback": "Estoy experimentando una alta carga en este momento, ¡pero aún quiero ayudar! ¿Podría enviar un correo a nuestro equipo a info@botifyx.in?",
+    "knowledgeBaseMsg": "Construimos asistentes de IA personalizados exactamente como este para su negocio. Funciona en una arquitectura RAG segura que entiende los datos privados de su empresa sin compartirlos en la web pública. ¿Hablamos de cómo esto puede funcionar para usted?",
+    "yesPlease": "Sí, por favor",
+    "noThanks": "No, gracias",
+    "thanksMsg": "¡Excelente elección! Le estoy transfiriendo a nuestro formulario de Descubrimiento de Proyectos. Tarda menos de un minuto en completarse.",
+    "noWorries": "¡No hay problema! Déjeme saber si tiene alguna otra pregunta.",
+    "prompts": {
+      "hi": "¡Hola! 👋 Soy el Asistente de BotifyX. ¿Qué le puedo ayudar a construir hoy?",
+      "services": "Cuénteme sobre sus servicios",
+      "pricing": "¿Cuánto cuesta?",
+      "contact": "Quiero empezar un proyecto"
+    }
+  },
+  "constants": {
+    "caseStudies": {
+      "cs1_stat": "70%", "cs1_context": "Más trabajo hecho en menos tiempo",
+      "cs2_stat": "2X", "cs2_context": "Velocidades de carga de sitios web más rápidas",
+      "cs3_stat": "Semanas", "cs3_context": "De una simple idea a una herramienta funcional",
+      "cs4_stat": "Ecológico", "cs4_context": "Código amigable con el medio ambiente, que ahorra energía"
+    },
+    "industries": {
+      "telecom_name": "Comunicación", "telecom_desc": "Ayudando a las personas a mantenerse conectadas en todo el mundo.",
+      "entertainment_name": "Medios y Diversión", "entertainment_desc": "Creando mejores formas de ver, escuchar y jugar.",
+      "education_name": "Aprendizaje", "education_desc": "Herramientas que hacen la educación divertida y personal para todos.",
+      "research_name": "Búsqueda Inteligente", "research_desc": "Encontrando respuestas en segundos, no horas.",
+      "legal_name": "Ayuda Legal", "legal_desc": "Haciendo la ley más fácil de entender para todos.",
+      "cyber_name": "Seguridad", "cyber_desc": "Manteniendo su vida digital segura y protegida."
+    },
+    "ecosystem": {
+      "yobaexo_cat": "Diversión", "yobaexo_name": "YoBaeXo", "yobaexo_desc": "Un espacio amigable para los amantes de la música y los creadores para compartir su trabajo.",
+      "freeflix_cat": "Aprendizaje", "freeflix_name": "FreeFlix", "freeflix_desc": "Una biblioteca digital donde puedes descubrir películas clásicas fácilmente.",
+      "learn_cat": "Educación", "learn_name": "LearnThroughAnalogy", "learn_desc": "Una manera simple de aprender cosas complejas usando historias cotidianas."
+    },
+    "services": {
+      "aiWeb_title": "Experiencias Web y Móviles Habilitadas por IA",
+      "aiWeb_short": "Escaparates digitales inteligentes y ultrarrápidos que se adaptan a sus usuarios en tiempo real.",
+      "aiWeb_full": "Los sitios web modernos y las aplicaciones ya no son folletos estáticos; son sistemas inteligentes. Construimos sitios web y aplicaciones móviles impulsados por IA que priorizan las experiencias digitales optimizadas para el rendimiento. Al integrar inteligencia en el borde, su plataforma no solo muestra información—aprende del comportamiento del usuario para impulsar una mayor conversión y participación.",
+      "aiWeb_detailed": "Nuestro enfoque va más allá de la codificación simple. Implementamos 'UX Adaptativa'—interfaces que cambian en función de las necesidades del usuario—y 'contenido impulsado por IA' que personaliza el viaje para cada visitante. Ya sea que necesite una Aplicación Web Progresiva (PWA), una experiencia nativa iOS/Android o una solución multiplataforma, nuestra ingeniería garantiza la máxima autoridad SEO, velocidades de carga casi instantáneas y escalabilidad de grado empresarial.",
+      "aiWeb_what1": "Plataformas de Comercio Electrónico impulsadas por IA", "aiWeb_what2": "Paneles SaaS Adaptativos", "aiWeb_what3": "Aplicaciones Móviles Inteligentes (iOS/Android)", "aiWeb_what4": "PWAs de Alto Rendimiento", "aiWeb_what5": "Portales de Clientes Personalizados",
+      "aiWeb_feat1_basic": "Diseños fijos para todos los usuarios", "aiWeb_feat1_adv": "UX adaptativa que evoluciona por visitante", "aiWeb_feat1_name": "Lógica UX",
+      "aiWeb_feat2_basic": "Respuestas lentas del servidor tradicional", "aiWeb_feat2_adv": "Entrega perimetral optimizada para rendimiento", "aiWeb_feat2_name": "Rendimiento",
+      "aiWeb_feat3_basic": "Texto estático e imágenes", "aiWeb_feat3_adv": "Personalización en tiempo real impulsada por IA", "aiWeb_feat3_name": "Contenido",
+      "aiWeb_feat4_basic": "Gestión estándar de etiquetas meta", "aiWeb_feat4_adv": "SEO técnico optimizado para rastreadores de IA", "aiWeb_feat4_name": "SEO",
+      
+      "aiKnow_title": "Asistentes Empresariales de IA y Sistemas de Conocimiento",
+      "aiKnow_short": "Ayuda inteligente y segura para su equipo y clientes que realmente conoce su negocio.",
+      "aiKnow_full": "Imagine un asistente que ha leído todos los documentos de su empresa, recuerda cada interacción con el cliente y sigue sus reglas perfectamente. Construimos 'RAG Chatbots'—IA avanzada de gestión de conocimientos que no solo adivina, sino que encuentra la verdad exacta en sus datos privados.",
+      "aiKnow_detailed": "La mayoría de los chatbots son como estudiantes tratando de aprobar un examen de memoria. Nuestros 'Asistentes de IA Empresariales' son como estudiantes que tienen el libro de texto abierto frente a ellos. Usando RAG (Generación Aumentada por Recuperación), conectamos la IA potente a su conocimiento específico de la empresa. Esto da como resultado 'Copilotos de IA' que ayudan con la investigación, operaciones y soporte sin compartir nunca sus secretos con el mundo exterior.",
+      "aiKnow_what1": "Copilotos de Atención al Cliente", "aiKnow_what2": "Asistentes de Investigación Interna", "aiKnow_what3": "Centros de Comando de Operaciones", "aiKnow_what4": "Herramientas de Apoyo a Decisiones Ejecutivas", "aiKnow_what5": "Bibliotecas de Conocimiento Automatizadas",
+      "aiKnow_feat1_basic": "Propenso a inventar cosas (Alucinaciones)", "aiKnow_feat1_adv": "Verificado contra sus documentos reales", "aiKnow_feat1_name": "Exactitud",
+      "aiKnow_feat2_basic": "Olvida fácilmente el contexto previo", "aiKnow_feat2_adv": "Comprensión profunda y persistente de su negocio", "aiKnow_feat2_name": "Memoria",
+      "aiKnow_feat3_basic": "A menudo se filtran datos a modelos de IA públicos", "aiKnow_feat3_adv": "100% Privado; se mantiene dentro de su bóveda segura", "aiKnow_feat3_name": "Seguridad",
+      "aiKnow_feat4_basic": "Se siente robótico y repetitivo", "aiKnow_feat4_adv": "Centrado en lo humano, amigable y alineado con la marca", "aiKnow_feat4_name": "Tono",
+
+      "plat_title": "Plataformas de Negocios Inteligentes",
+      "plat_short": "El hogar digital de toda su empresa, construido para crecer con usted.",
+      "plat_full": "Construimos las herramientas que administran su negocio. Desde paneles fáciles de usar hasta sistemas personalizados que manejan sus pedidos y clientes, nos aseguramos de que su tecnología se sienta como una parte natural de su equipo.",
+      "plat_what1": "Paneles de Negocios Personalizados", "plat_what2": "Sistemas de Gestión de Clientes", "plat_what3": "Herramientas de Equipos Internos", "plat_what4": "Tiendas en Línea Inteligentes",
+
+      "web_title": "Sitios Web Que Trabajan Para Usted",
+      "web_short": "Sitios web hermosos y ultrarrápidos que convierten a los visitantes en clientes felices.",
+      "web_full": "Su sitio web es su escaparate digital. Creamos sitios que no solo son bonitos a la vista—son inteligentes, increíblemente rápidos y están diseñados para ayudar a sus clientes a encontrar exactamente lo que necesitan.",
+      "web_what1": "Sitios Web Modernos de Negocios", "web_what2": "Portafolios Profesionales", "web_what3": "Aplicaciones en Línea Rápidas", "web_what4": "Portales de Servicios",
+
+      "mob_title": "Aplicaciones Móviles Útiles",
+      "mob_short": "Ponga su negocio en el bolsillo de sus clientes con una aplicación móvil amigable.",
+      "mob_full": "Creamos aplicaciones móviles que la gente realmente disfruta usar. Ya sea para sus clientes o para su propio equipo, nos aseguramos de que funcione perfectamente en cada teléfono, incluso cuando el Internet es lento.",
+      "mob_what1": "Aplicaciones para iPhone y Android", "mob_what2": "Aplicaciones de Compras", "mob_what3": "Aplicaciones de Salud", "mob_what4": "Herramientas de Coordinación de Equipos"
+    },
+    "insights": {
+      "nn_title": "Cómo las Computadoras Aprenden Como Nosotros",
+      "nn_exc": "Una mirada simple a cómo la tecnología moderna imita el cerebro humano para ayudarnos a resolver problemas cotidianos más rápido.",
+      "nn_cat": "Aprendizaje de IA", "nn_read": "Lectura de 7 min",
+      
+      "rag_title": "Haciendo la IA Más Inteligente con Su Propia Información",
+      "rag_exc": "Por qué la mejor IA no es solo inteligente—es personalizada. Cómo ayudamos a la tecnología a entender sus necesidades empresariales específicas.",
+      "rag_cat": "Tecnología Inteligente", "rag_read": "Lectura de 9 min",
+
+      "hum_title": "El Elemento Humano en SaaS Impulsado por IA",
+      "hum_exc": "Por qué el software exitoso no se trata solo de algoritmos, sino de empatía, facilidad de uso y la solución de problemas humanos reales.",
+      "hum_cat": "Diseño de Producto", "hum_read": "Lectura de 8 min",
+
+      "lat_title": "Por qué la Latencia es la Nueva Moneda Digital",
+      "lat_exc": "En un mundo de gratificación instantánea, un retraso de un segundo puede costar millones. Cómo la ingeniería de rendimiento construye confianza.",
+      "lat_cat": "Ingeniería", "lat_read": "Lectura de 6 min",
+
+      "sec_title": "Seguridad por Diseño: Más Allá del Firewall",
+      "sec_exc": "Ingeniería de seguridad desde la primera línea de código. Por qué la privacidad moderna requiere un cambio arquitectónico fundamental.",
+      "sec_cat": "Ciberseguridad", "sec_read": "Lectura de 10 min",
+
+      "evo_title": "La Evolución del RAG: El Contexto es Rey",
+      "evo_exc": "Pasando de la simple búsqueda vectorial a la inteligencia contextual profunda. Cómo el RAG está transformando la gestión del conocimiento empresarial.",
+      "evo_cat": "Estrategia de IA", "evo_read": "Lectura de 12 min"
+    }
+  }
+}

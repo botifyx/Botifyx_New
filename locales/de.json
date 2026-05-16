@@ -1,0 +1,261 @@
+{
+  "nav": {
+    "services": "Dienstleistungen",
+    "industries": "Branchen",
+    "ecosystem": "Ökosystem",
+    "insights": "Einblicke",
+    "letsTalk": "LASSEN SIE UNS REDEN",
+    "menuNav": "Menü-Navigation",
+    "getInTouch": "KONTAKT AUFNEHMEN"
+  },
+  "home": {
+    "label": "Next-Gen Digital Frontier Engineering",
+    "title1": "Intelligenz Integrieren.",
+    "title2": "Skalierung Vereinfachen.",
+    "subtitle": "Wir entwickeln sichere, KI-native Plattformen, die Wachstum fördern und gleichzeitig eine branchenführende <1>niedrige CO2-Bilanz</1> aufrechterhalten.",
+    "startScaling": "Mit Skalierung Beginnen",
+    "exploreServices": "Dienstleistungen Entdecken",
+    "trustedBy": "Vertraut von Globalen Innovatoren",
+    "verticalExcellence": "Vertikale Exzellenz",
+    "structuredSolutions": "Strukturierte Lösungen.",
+    "viewCatalog": "GESAMTEN KATALOG ANSEHEN",
+    "detailView": "Detailansicht",
+    "co2": {
+      "title": "Entwicklung mit Klimabewusstsein",
+      "subtitle": "Jede Codezeile, die wir schreiben, ist auf Leistung und Umweltauswirkungen optimiert. Wir nutzen 'Green-by-Design'-Prinzipien, um Datenübertragungen zu reduzieren, CPU-Nutzung zu senken und digitale Fußabdrücke auszugleichen.",
+      "efficientCode": "Effizienter Code",
+      "efficientCodeDesc": "Weniger CPU, Schnellerer Ablauf",
+      "lowData": "Geringe Datenlast",
+      "lowDataDesc": "Optimierte Asset-Bereitstellung",
+      "sustainableInfra": "Nachhaltige Infrastruktur",
+      "sustainableInfraDesc": "Umweltfreundliche Edge Cloud"
+    },
+    "ai": {
+      "label": "Intelligenz Skalieren",
+      "title": "KI-Assistenten & Wissenssysteme.",
+      "subtitle": "Hören Sie auf zu suchen und fangen Sie an zu wissen. Wir bauen kontextsensitive KI-Wissenssysteme, die innerhalb Ihrer sicheren Infrastruktur leben. Mit Retrieval-Augmented Generation (RAG) versteht Ihr individueller KI-Assistent Ihre spezifischen Dokumente, Richtlinien und Workflows – und agiert als Hochleistungsgedächtnis für Ihr gesamtes Unternehmen.",
+      "feature1": "Enterprise-Class Sicherheit & Governance",
+      "feature2": "Kontextsensitive RAG-Architektur",
+      "exploreBtn": "KI-ASSISTENTEN ENTDECKEN"
+    },
+    "cta": {
+      "title": "Bereit zum Start?",
+      "subtitle": "Erzählen Sie uns von Ihrem Projekt und wir helfen Ihnen, den besten Weg nach vorne zu finden.",
+      "btn": "Eine Nachricht Senden"
+    }
+  },
+  "footer": {
+    "mission": "Technologie einfach, schnell und hilfreich machen. Gebaut für Menschen und den Planeten.",
+    "whatWeDo": "Was Wir Tun",
+    "getToKnowUs": "Lernen Sie Uns Kennen",
+    "about": "Über Uns",
+    "contact": "Kontakt",
+    "privacy": "Datenschutzerklärung",
+    "ecoFriendly": "Umweltfreundliche Technologie",
+    "ecoFriendlyDesc": "Wir optimieren Code, um mit weniger Strom zu laufen, wodurch Ihre Tools schnell und grün werden.",
+    "backToTop": "ZURÜCK NACH OBEN",
+    "copyright": "© {{year}} BOTIFYX. TECHNOLOGIE FÜR MENSCHEN."
+  },
+  "servicesView": {
+    "label": "Expertise",
+    "title": "Unsere Dienstleistungen",
+    "subtitle": "Wir bauen alles, von einfachen Websites bis hin zu komplexen intelligenten Systemen, alles mit einer menschlichen Note.",
+    "learnMore": "Mehr erfahren"
+  },
+  "industriesView": {
+    "label": "Partnerschaften",
+    "title": "Wem Wir Helfen",
+    "subtitle": "Wir arbeiten in vielen verschiedenen Bereichen, um Technologie für alle besser zu machen."
+  },
+  "ecosystemView": {
+    "label": "Unsere Arbeit",
+    "title": "Ökosystem",
+    "subtitle": "Live-Beispiele dafür, wie wir intelligente Technologie einsetzen, um nützliche Dinge zu bauen.",
+    "builtWithHeart": "Mit Herz Gebaut."
+  },
+  "insightsView": {
+    "label": "Ideen",
+    "title": "Einblicke",
+    "subtitle": "Einfache Erklärungen der neuesten Technologie und wie sie Ihnen helfen kann.",
+    "all": "Alle",
+    "readStory": "Geschichte Lesen"
+  },
+  "aboutView": {
+    "label": "Unser Team",
+    "title": "Wer Wir Sind",
+    "subtitle": "Wir sind ein Team freundlicher Entwickler, die es lieben, Technologie für Menschen nutzbar zu machen.",
+    "heroTitle": "Technologie mit Herz.",
+    "heroSubtitle": "Technologie sollte nicht beängstigend sein. Bei BotifyX verstehen wir Ihre Träume und machen sie zur Realität. Wir glauben daran, ehrlich, hilfreich und gut zum Planeten zu sein.",
+    "ourGoal": "Unser Ziel",
+    "goalText": "Ihnen helfen, weiter zu kommen.",
+    "quality": "Qualität",
+    "qualityText": "Werkzeuge, die perfekt funktionieren.",
+    "eco": "Umweltfreundlich",
+    "ecoText": "Intelligenter Code, der Energie spart.",
+    "safe": "Sicher",
+    "safeText": "Private und sichere Daten.",
+    "partners": "Partner",
+    "partnersText": "Wir arbeiten als Ihr Team.",
+    "letsConnect": "Lassen Sie uns verbinden.",
+    "basedIn": "Mit Sitz in Bengaluru. Der Welt helfend.",
+    "ourOffice": "Unser Büro",
+    "officeAddress": "Upkar Springs Fields, Bengaluru, KA 562107, IN",
+    "emailUs": "Schreiben Sie uns",
+    "whatsapp": "WhatsApp"
+  },
+  "contactView": {
+    "label": "Kontakt",
+    "title": "Mit dem Bauen Beginnen",
+    "subtitle": "Senden Sie uns eine Nachricht und wir helfen Ihnen, den besten Weg für Ihr Projekt zu finden.",
+    "messageReady": "Nachricht Bereit!",
+    "messageReadyDesc": "Ihr E-Mail-Programm sollte sich jetzt öffnen. Wenn nicht, klicken Sie unten.",
+    "sendAnother": "Eine Weitere Senden",
+    "companyName": "Ihr Firmenname",
+    "companyPlaceholder": "z. B. Mein Großartiges Unternehmen",
+    "businessEmail": "Geschäftliche E-Mail",
+    "emailPlaceholder": "hallo@unternehmen.com",
+    "projectDesc": "Erzählen Sie uns von Ihrem Projekt",
+    "projectPlaceholder": "Was können wir für Sie bauen?",
+    "securityCheck": "Sicherheitsprüfung",
+    "sendMessage": "Nachricht Senden",
+    "errors": {
+      "verification": "Überprüfung fehlgeschlagen.",
+      "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+    }
+  },
+  "serviceDetail": {
+    "back": "Zurück zu Dienstleistungen",
+    "label": "Serviceübersicht",
+    "howItHelps": "Wie Es Ihnen Hilft",
+    "coreDeliverables": "Kernergebnisse",
+    "unifiedEcosystem": "Vereinheitlichtes Ökosystem",
+    "ecosystemDesc": "BotifyX-Dienste sind als modulare 'smarte Bausteine' konzipiert. Obwohl sie für sich allein schon mächtig sind, glänzen sie erst richtig, wenn sie zu einem vereinten Ökosystem verbunden werden, das speziell für Ihre Skalierung gebaut wurde.",
+    "synergy1": "Modul-Synergie 01",
+    "synergy1Title": "Intelligente Operationen",
+    "synergy1Desc": "Kombiniert <1>Plattform-Engineering</1> mit <3>Enterprise KI-Assistenten</3>. Ein maßgeschneidertes internes Dashboard, das einen RAG-gestützten KI-Assistenten verwendet, um Ihrem Team zu helfen, komplexe Workflows und Unternehmensdaten in Echtzeit zu navigieren.",
+    "synergy2": "Modul-Synergie 02",
+    "synergy2Title": "Vertrauenswürdige Digitale Schaufenster",
+    "synergy2Desc": "Kombiniert <1>Web Experience</1> mit <3>Sicherheit & Governance</3>. Ein blitzschnelles Web-Erlebnis, geschützt durch Enterprise-Sicherheitsprotokolle und ein Governance-Framework, das Datenkonformität bei jedem Klick gewährleistet.",
+    "betterTech": "Bessere Technologie",
+    "aspect": "Aspekt",
+    "basicTools": "Basiswerkzeuge",
+    "botifyxBuild": "BotifyX Build",
+    "engineRoom": "Der Maschinenraum",
+    "governance": "Governance & Compliance",
+    "governanceDesc": "Enterprise-Skalierung erfordert Enterprise-Sicherheit. Unsere Systeme werden von Grund auf mit strengen Datenschutzprotokollen aufgebaut, um sicherzustellen, dass Ihr geistiges Eigentum exklusiv Ihnen gehört.",
+    "idealFor": "Ideales Partnerprofil",
+    "focusAreas": "Hauptfokusbereiche",
+    "readyToScale": "Bereit zur Skalierung?",
+    "launchCall": "ANRUF STARTEN"
+  },
+  "co2": {
+    "title": "Carbon Dashboard",
+    "saved": "Eingespartes CO2",
+    "savedDesc": "Gramm CO2 im Vgl. zu durchschnittlicher Website",
+    "load": "Seitenladezeit",
+    "loadDesc": "übertragene Bytes",
+    "energy": "Energiebewertung",
+    "energyDesc": "A+ Ultra-effizient",
+    "close": "Dashboard Schließen"
+  },
+  "chatbot": {
+    "header": "BotifyX KI-Assistent",
+    "status": "Online • Bereit zu helfen",
+    "placeholder": "Fragen Sie alles über unsere Dienstleistungen...",
+    "disclaimer": "KI-generierte Antworten. Für spezifische Details kontaktieren Sie uns bitte.",
+    "fallback": "Ich erlebe gerade eine hohe Auslastung, aber ich möchte immer noch helfen! Könnten Sie unserem Team unter info@botifyx.in eine E-Mail schicken?",
+    "knowledgeBaseMsg": "Wir bauen maßgeschneiderte KI-Assistenten genau wie diesen für Ihr Unternehmen. Er läuft auf einer sicheren RAG-Architektur, die Ihre privaten Unternehmensdaten versteht, ohne sie an das öffentliche Web weiterzugeben. Sollen wir besprechen, wie dies für Sie funktionieren kann?",
+    "yesPlease": "Ja, bitte",
+    "noThanks": "Nein danke",
+    "thanksMsg": "Ausgezeichnete Wahl! Ich leite Sie zu unserem Projektfindungsformular weiter. Das Ausfüllen dauert weniger als eine Minute.",
+    "noWorries": "Kein Problem! Lassen Sie mich wissen, wenn Sie weitere Fragen haben.",
+    "prompts": {
+      "hi": "Hallo! 👋 Ich bin der BotifyX-Assistent. Was kann ich Ihnen heute beim Bauen helfen?",
+      "services": "Erzählen Sie mir von Ihren Dienstleistungen",
+      "pricing": "Wie viel kostet es?",
+      "contact": "Ich möchte ein Projekt starten"
+    }
+  },
+  "constants": {
+    "caseStudies": {
+      "cs1_stat": "70%", "cs1_context": "Mehr Arbeit in kürzerer Zeit erledigt",
+      "cs2_stat": "2X", "cs2_context": "Schnellere Ladezeiten der Website",
+      "cs3_stat": "Wochen", "cs3_context": "Von einer einfachen Idee zu einem funktionierenden Tool",
+      "cs4_stat": "Grün", "cs4_context": "Umweltfreundlicher, energiesparender Code"
+    },
+    "industries": {
+      "telecom_name": "Kommunikation", "telecom_desc": "Menschen dabei helfen, weltweit in Verbindung zu bleiben.",
+      "entertainment_name": "Medien & Spaß", "entertainment_desc": "Bessere Wege schaffen, um zu schauen, zu hören und zu spielen.",
+      "education_name": "Lernen", "education_desc": "Werkzeuge, die Bildung für alle spaßig und persönlich machen.",
+      "research_name": "Smarte Suche", "research_desc": "Antworten in Sekunden finden, nicht in Stunden.",
+      "legal_name": "Rechtshilfe", "legal_desc": "Das Gesetz für jeden leichter verständlich machen.",
+      "cyber_name": "Sicherheit", "cyber_desc": "Ihr digitales Leben sicher und geschützt halten."
+    },
+    "ecosystem": {
+      "yobaexo_cat": "Spaß", "yobaexo_name": "YoBaeXo", "yobaexo_desc": "Ein freundlicher Raum für Musikliebhaber und Schöpfer, um ihre Arbeit zu teilen.",
+      "freeflix_cat": "Lernen", "freeflix_name": "FreeFlix", "freeflix_desc": "Eine digitale Bibliothek, in der Sie klassische Filme einfach entdecken können.",
+      "learn_cat": "Bildung", "learn_name": "LearnThroughAnalogy", "learn_desc": "Eine einfache Möglichkeit, komplexe Dinge anhand alltäglicher Geschichten zu lernen."
+    },
+    "services": {
+      "aiWeb_title": "KI-Gesteuerte Web- & Mobile-Erlebnisse",
+      "aiWeb_short": "Intelligente, blitzschnelle digitale Schaufenster, die sich in Echtzeit an Ihre Nutzer anpassen.",
+      "aiWeb_full": "Moderne Websites und Apps sind keine statischen Broschüren mehr; sie sind intelligente Systeme. Wir bauen KI-gesteuerte Websites und mobile Anwendungen, die leistungsoptimierte digitale Erlebnisse priorisieren. Durch die Einbettung von Intelligenz am Rande zeigt Ihre Plattform nicht nur Informationen an—sie lernt aus dem Nutzerverhalten, um höhere Konversionen und Interaktionen zu fördern.",
+      "aiWeb_detailed": "Unser Ansatz geht über einfache Programmierung hinaus. Wir implementieren 'Adaptive UX'—Schnittstellen, die sich basierend auf Nutzerbedürfnissen ändern—und 'KI-gesteuerte Inhalte', die die Reise für jeden Besucher personalisieren. Egal, ob Sie eine Progressive Web App (PWA), ein natives iOS/Android-Erlebnis oder eine plattformübergreifende Lösung benötigen, unsere Ingenieurskunst gewährleistet maximale SEO-Autorität, nahezu sofortige Ladezeiten und Skalierbarkeit für Unternehmen.",
+      "aiWeb_what1": "KI-Gesteuerte E-Commerce-Plattformen", "aiWeb_what2": "Adaptive SaaS-Dashboards", "aiWeb_what3": "Intelligente Mobile Anwendungen (iOS/Android)", "aiWeb_what4": "Hochleistungs-PWAs", "aiWeb_what5": "Personalisierte Kundenportale",
+      "aiWeb_feat1_basic": "Feste Layouts für alle Nutzer", "aiWeb_feat1_adv": "Adaptive UX, die sich pro Besucher entwickelt", "aiWeb_feat1_name": "UX Logik",
+      "aiWeb_feat2_basic": "Langsame, traditionelle Serverantworten", "aiWeb_feat2_adv": "Leistungsoptimierte Edge-Bereitstellung", "aiWeb_feat2_name": "Leistung",
+      "aiWeb_feat3_basic": "Statischer Text und Bilder", "aiWeb_feat3_adv": "KI-gesteuerte Echtzeit-Personalisierung", "aiWeb_feat3_name": "Inhalt",
+      "aiWeb_feat4_basic": "Standard-Meta-Tag-Management", "aiWeb_feat4_adv": "Technisches SEO optimiert für KI-Crawler", "aiWeb_feat4_name": "SEO",
+      
+      "aiKnow_title": "Enterprise KI-Assistenten & Wissenssysteme",
+      "aiKnow_short": "Smarte, sichere Hilfe für Ihr Team und Kunden, die Ihr Unternehmen wirklich kennt.",
+      "aiKnow_full": "Stellen Sie sich einen Assistenten vor, der jedes Dokument in Ihrem Unternehmen gelesen hat, jede Kundeninteraktion erinnert und Ihre Regeln perfekt befolgt. Wir bauen 'RAG Chatbots'—fortschrittliche Wissensmanagement-KI, die nicht nur rät, sondern die genaue Wahrheit in Ihren privaten Daten findet.",
+      "aiKnow_detailed": "Die meisten Chatbots sind wie Schüler, die versuchen, eine Prüfung aus dem Gedächtnis zu bestehen. Unsere 'Enterprise KI-Assistenten' sind wie Schüler, die das Lehrbuch vor sich offen haben. Mit RAG (Retrieval-Augmented Generation) verbinden wir leistungsstarke KI mit Ihrem spezifischen Unternehmenswissen. Das führt zu 'KI-Copiloten', die bei Recherchen, Abläufen und im Support helfen, ohne jemals Ihre Geheimnisse mit der Außenwelt zu teilen.",
+      "aiKnow_what1": "Customer Support Copiloten", "aiKnow_what2": "Interne Recherche-Assistenten", "aiKnow_what3": "Operations Command Center", "aiKnow_what4": "Executive Decision Support Tools", "aiKnow_what5": "Automatisierte Wissensbibliotheken",
+      "aiKnow_feat1_basic": "Neigt dazu, Dinge zu erfinden (Halluzinationen)", "aiKnow_feat1_adv": "Gegen Ihre tatsächlichen Dokumente verifiziert", "aiKnow_feat1_name": "Genauigkeit",
+      "aiKnow_feat2_basic": "Vergisst früheren Kontext leicht", "aiKnow_feat2_adv": "Tiefes, beständiges Verständnis Ihres Unternehmens", "aiKnow_feat2_name": "Gedächtnis",
+      "aiKnow_feat3_basic": "Daten gelangen oft an öffentliche KI-Modelle", "aiKnow_feat3_adv": "100% Privat; bleibt innerhalb Ihres sicheren Tresors", "aiKnow_feat3_name": "Sicherheit",
+      "aiKnow_feat4_basic": "Fühlt sich roboterhaft und repetitiv an", "aiKnow_feat4_adv": "Menschzentriert, freundlich und markenkonform", "aiKnow_feat4_name": "Ton",
+
+      "plat_title": "Smarte Geschäftsplattformen",
+      "plat_short": "Die digitale Heimat für Ihr gesamtes Unternehmen, gebaut, um mit Ihnen zu wachsen.",
+      "plat_full": "Wir bauen die Werkzeuge, die Ihr Unternehmen am Laufen halten. Von einfach zu bedienenden Dashboards bis hin zu maßgeschneiderten Systemen, die Ihre Bestellungen und Kunden verwalten, stellen wir sicher, dass sich Ihre Technologie wie ein natürlicher Teil Ihres Teams anfühlt.",
+      "plat_what1": "Maßgeschneiderte Business-Dashboards", "plat_what2": "Kundenmanagementsysteme", "plat_what3": "Interne Team-Tools", "plat_what4": "Smarte Online-Shops",
+
+      "web_title": "Websites, Die Für Sie Arbeiten",
+      "web_short": "Wunderschöne, blitzschnelle Websites, die Besucher in glückliche Kunden verwandeln.",
+      "web_full": "Ihre Website ist Ihr digitales Schaufenster. Wir erstellen Seiten, die nicht nur schön anzusehen sind—sie sind smart, unglaublich schnell und so konzipiert, dass Ihre Kunden genau das finden, was sie brauchen.",
+      "web_what1": "Moderne Business-Websites", "web_what2": "Professionelle Portfolios", "web_what3": "Schnelle Online-Apps", "web_what4": "Serviceportale",
+
+      "mob_title": "Hilfreiche Mobile Apps",
+      "mob_short": "Bringen Sie Ihr Unternehmen mit einer freundlichen App in die Taschen Ihrer Kunden.",
+      "mob_full": "Wir erstellen mobile Apps, die die Leute tatsächlich gerne nutzen. Egal ob für Ihre Kunden oder für Ihr eigenes Team, wir stellen sicher, dass es auf jedem Telefon perfekt funktioniert, selbst wenn das Internet langsam ist.",
+      "mob_what1": "iPhone & Android Apps", "mob_what2": "Shopping-Apps", "mob_what3": "Gesundheits-Apps", "mob_what4": "Teamkoordinations-Tools"
+    },
+    "insights": {
+      "nn_title": "Wie Computer Lernen Wie Wir",
+      "nn_exc": "Ein einfacher Blick darauf, wie moderne Technologie das menschliche Gehirn nachahmt, um uns zu helfen, alltägliche Probleme schneller zu lösen.",
+      "nn_cat": "KI Lernen", "nn_read": "7 Min. Lesezeit",
+      
+      "rag_title": "KI Smarter Machen Mit Ihren Eigenen Infos",
+      "rag_exc": "Warum die beste KI nicht nur schlau ist—sie ist personalisiert. Wie wir der Technologie helfen, Ihre spezifischen Geschäftsbedürfnisse zu verstehen.",
+      "rag_cat": "Smarte Technologie", "rag_read": "9 Min. Lesezeit",
+
+      "hum_title": "Das Menschliche Element In KI-Gesteuertem SaaS",
+      "hum_exc": "Warum erfolgreiche Software nicht nur aus Algorithmen besteht, sondern aus Empathie, Benutzerfreundlichkeit und der Lösung realer menschlicher Probleme.",
+      "hum_cat": "Produktdesign", "hum_read": "8 Min. Lesezeit",
+
+      "lat_title": "Warum Latenz Die Neue Digitale Währung Ist",
+      "lat_exc": "In einer Welt der sofortigen Befriedigung kann eine Sekunde Verzögerung Millionen kosten. Wie Performance Engineering Vertrauen aufbaut.",
+      "lat_cat": "Engineering", "lat_read": "6 Min. Lesezeit",
+
+      "sec_title": "Sicherheit Durch Design: Jenseits Der Firewall",
+      "sec_exc": "Sicherheit ab der ersten Codezeile entwickeln. Warum moderne Privatsphäre einen grundlegenden Architekturwechsel erfordert.",
+      "sec_cat": "Cybersicherheit", "sec_read": "10 Min. Lesezeit",
+
+      "evo_title": "Die Evolution von RAG: Kontext Ist König",
+      "evo_exc": "Von der einfachen Vektorsuche zur tiefen kontextuellen Intelligenz. Wie RAG das Enterprise-Wissensmanagement transformiert.",
+      "evo_cat": "KI Strategie", "evo_read": "12 Min. Lesezeit"
+    }
+  }
+}

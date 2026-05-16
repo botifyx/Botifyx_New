@@ -10,12 +10,17 @@ export interface Industry {
   description: string;
   icon: string;
   id?: string;
+  nameKey?: string;
+  descKey?: string;
 }
 
 export interface EcosystemPlatform {
   category: string;
   name: string;
   description: string;
+  catKey?: string;
+  nameKey?: string;
+  descKey?: string;
 }
 
 export interface Step {
@@ -27,6 +32,8 @@ export interface Step {
 export interface CaseStudy {
   stat: string;
   context: string;
+  statKey?: string;
+  contextKey?: string;
 }
 
 export interface ServiceDetail {
@@ -37,7 +44,11 @@ export interface ServiceDetail {
   shortDesc: string;
   fullDesc: string;
   icon: string;
+  titleKey?: string;
+  shortDescKey?: string;
+  fullDescKey?: string;
   whatWeBuild: string[];
+  whatWeBuildKeys?: string[];
   aiEmbeddedIn?: string[];
   problemsSolved?: string[];
   whyDifferent?: { title: string; description: string }[];
@@ -47,7 +58,8 @@ export interface ServiceDetail {
   standards?: string[];
   // Fix: Added missing optional properties used in ServiceDetailView in App.tsx
   detailedContent?: string;
-  keyComparisons?: { feature: string; basic: string; advanced: string }[];
+  detailedContentKey?: string;
+  keyComparisons?: { feature: string; basic: string; advanced: string; featureKey?: string; basicKey?: string; advancedKey?: string }[];
   useCaseScenarios?: { title: string; desc: string }[];
   governanceFramework?: string[];
 }

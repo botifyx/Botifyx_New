@@ -1,0 +1,261 @@
+{
+  "nav": {
+    "services": "Services",
+    "industries": "Industries",
+    "ecosystem": "Ecosystem",
+    "insights": "Insights",
+    "letsTalk": "LET'S TALK",
+    "menuNav": "Menu Navigation",
+    "getInTouch": "GET IN TOUCH"
+  },
+  "home": {
+    "label": "Next-Gen Digital Frontier Engineering",
+    "title1": "Embed Intelligence.",
+    "title2": "Simplify Scale.",
+    "subtitle": "We build secure, AI-native platforms that drive growth while maintaining an industry-leading <1>low carbon footprint</1>.",
+    "startScaling": "Start Scaling",
+    "exploreServices": "Explore Services",
+    "trustedBy": "Trusted by Global Innovators",
+    "verticalExcellence": "Vertical Excellence",
+    "structuredSolutions": "Structured Solutions.",
+    "viewCatalog": "VIEW FULL CATALOG",
+    "detailView": "Detail View",
+    "co2": {
+      "title": "Engineering with Carbon Care",
+      "subtitle": "Every line of code we write is optimized for performance and environmental impact. We use 'Green-by-Design' principles to reduce data transfer, lower CPU usage, and offset digital footprints.",
+      "efficientCode": "Efficient Code",
+      "efficientCodeDesc": "Less CPU, Faster Execution",
+      "lowData": "Low Data Payload",
+      "lowDataDesc": "Optimized Asset Delivery",
+      "sustainableInfra": "Sustainable Infrastructure",
+      "sustainableInfraDesc": "Eco-Friendly Edge Cloud"
+    },
+    "ai": {
+      "label": "Intelligence at Scale",
+      "title": "AI Assistants & Knowledge Systems.",
+      "subtitle": "Stop searching and start knowing. We build context-aware AI knowledge systems that live within your secure infrastructure. Using Retrieval-Augmented Generation (RAG), your custom AI assistant understands your specific documents, policies, and workflows—acting as a high-performance memory for your entire organization.",
+      "feature1": "Enterprise-Grade Security & Governance",
+      "feature2": "Context-Aware RAG Architecture",
+      "exploreBtn": "EXPLORE AI ASSISTANTS"
+    },
+    "cta": {
+      "title": "Ready to start?",
+      "subtitle": "Tell us about your project and we'll help you find the best way forward.",
+      "btn": "Send a Message"
+    }
+  },
+  "footer": {
+    "mission": "Making technology simple, fast, and helpful. Built for people and the planet.",
+    "whatWeDo": "What We Do",
+    "getToKnowUs": "Get to Know Us",
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "ecoFriendly": "Eco-Friendly Tech",
+    "ecoFriendlyDesc": "We optimize code to run on less power, making your tools fast and green.",
+    "backToTop": "BACK TO TOP",
+    "copyright": "© {{year}} BOTIFYX. TECHNOLOGY FOR HUMANS."
+  },
+  "servicesView": {
+    "label": "Expertise",
+    "title": "Our Services",
+    "subtitle": "We build everything from simple websites to complex smart systems, all with a human touch.",
+    "learnMore": "Learn more"
+  },
+  "industriesView": {
+    "label": "Partnerships",
+    "title": "Who We Help",
+    "subtitle": "We work across many different fields to make technology better for everyone."
+  },
+  "ecosystemView": {
+    "label": "Our Work",
+    "title": "Ecosystem",
+    "subtitle": "Live examples of how we use smart technology to build helpful things.",
+    "builtWithHeart": "Built with Heart."
+  },
+  "insightsView": {
+    "label": "Ideas",
+    "title": "Insights",
+    "subtitle": "Simple explanations of the newest technology and how it can help you.",
+    "all": "All",
+    "readStory": "Read Story"
+  },
+  "aboutView": {
+    "label": "Our Team",
+    "title": "Who We Are",
+    "subtitle": "We're a team of friendly builders who love making technology work for people.",
+    "heroTitle": "Technology With a Heart.",
+    "heroSubtitle": "Technology shouldn't be scary. At BotifyX, we understand your dreams and turn them into reality. We believe in being honest, helpful, and kind to the planet.",
+    "ourGoal": "Our Goal",
+    "goalText": "Helping you reach further.",
+    "quality": "Quality",
+    "qualityText": "Tools that work perfectly.",
+    "eco": "Eco-Friendly",
+    "ecoText": "Smart code that saves energy.",
+    "safe": "Safe",
+    "safeText": "Private and secure data.",
+    "partners": "Partners",
+    "partnersText": "We work as your team.",
+    "letsConnect": "Let's Connect.",
+    "basedIn": "Based in Bengaluru. Helping the world.",
+    "ourOffice": "Our Office",
+    "officeAddress": "Upkar Springs Fields, Bengaluru, KA 562107, IN",
+    "emailUs": "Email Us",
+    "whatsapp": "WhatsApp"
+  },
+  "contactView": {
+    "label": "Contact",
+    "title": "Start Building",
+    "subtitle": "Send us a message and we'll help you find the best path for your project.",
+    "messageReady": "Message Ready!",
+    "messageReadyDesc": "Your email client should open now. If not, click below.",
+    "sendAnother": "Send Another",
+    "companyName": "Your Company Name",
+    "companyPlaceholder": "e.g. My Amazing Business",
+    "businessEmail": "Business Email",
+    "emailPlaceholder": "hello@company.com",
+    "projectDesc": "Tell us about your project",
+    "projectPlaceholder": "What can we build for you?",
+    "securityCheck": "Security Check",
+    "sendMessage": "Send Message",
+    "errors": {
+      "verification": "Verification failed.",
+      "invalidEmail": "Please enter a valid email address."
+    }
+  },
+  "serviceDetail": {
+    "back": "Back to Services",
+    "label": "Service Overview",
+    "howItHelps": "How It Helps You",
+    "coreDeliverables": "Core Deliverables",
+    "unifiedEcosystem": "Unified Ecosystem",
+    "ecosystemDesc": "BotifyX services are designed as modular 'smart bricks'. While powerful on their own, they truly shine when connected into a unified ecosystem built specifically for your scale.",
+    "synergy1": "Module Synergy 01",
+    "synergy1Title": "Intelligent Operations",
+    "synergy1Desc": "Combines <1>Platform Engineering</1> with <3>Enterprise AI Assistants</3>. A custom internal dashboard that uses a RAG-powered AI assistant to help your team navigate complex workflows and company data in real-time.",
+    "synergy2": "Module Synergy 02",
+    "synergy2Title": "Trusted Digital Storefront",
+    "synergy2Desc": "Pairs <1>Web Experience</1> with <3>Security & Governance</3>. A lightning-fast web experience protected by enterprise-grade security protocols and a governance framework that ensures data compliance at every click.",
+    "betterTech": "Better Technology",
+    "aspect": "Aspect",
+    "basicTools": "Basic Tools",
+    "botifyxBuild": "BotifyX Build",
+    "engineRoom": "The Engine Room",
+    "governance": "Governance & Compliance",
+    "governanceDesc": "Enterprise scale requires enterprise security. Our systems are built from the ground up with strict data privacy protocols, ensuring your intellectual property remains exclusively yours.",
+    "idealFor": "Ideal Partner Profile",
+    "focusAreas": "Key Focus Areas",
+    "readyToScale": "Ready to scale?",
+    "launchCall": "LAUNCH CALL"
+  },
+  "co2": {
+    "title": "Carbon Dashboard",
+    "saved": "Carbon Saved",
+    "savedDesc": "grams of CO2 vs. average site",
+    "load": "Page Load",
+    "loadDesc": "bytes transferred",
+    "energy": "Energy Rating",
+    "energyDesc": "A+ Ultra-efficient",
+    "close": "Close Dashboard"
+  },
+  "chatbot": {
+    "header": "BotifyX AI Assistant",
+    "status": "Online • Ready to help",
+    "placeholder": "Ask anything about our services...",
+    "disclaimer": "AI-generated responses. For specific details, please contact us.",
+    "fallback": "I'm experiencing a high load right now, but I still want to help! Could you email our team at info@botifyx.in?",
+    "knowledgeBaseMsg": "We build custom AI assistants exactly like this one for your business. It runs on a secure RAG architecture that understands your private company data without sharing it to the public web. Shall we discuss how this can work for you?",
+    "yesPlease": "Yes, please",
+    "noThanks": "No, thanks",
+    "thanksMsg": "Excellent choice! I'm moving you over to our Project Discovery form. It takes less than a minute to fill out.",
+    "noWorries": "No worries! Let me know if you have any other questions.",
+    "prompts": {
+      "hi": "Hi there! 👋 I'm the BotifyX Assistant. What can I help you build today?",
+      "services": "Tell me about your services",
+      "pricing": "How much does it cost?",
+      "contact": "I want to start a project"
+    }
+  },
+  "constants": {
+    "caseStudies": {
+      "cs1_stat": "70%", "cs1_context": "More work done in less time",
+      "cs2_stat": "2X", "cs2_context": "Faster website loading speeds",
+      "cs3_stat": "Weeks", "cs3_context": "From a simple idea to a working tool",
+      "cs4_stat": "Green", "cs4_context": "Eco-friendly, energy-saving code"
+    },
+    "industries": {
+      "telecom_name": "Communication", "telecom_desc": "Helping people stay connected across the globe.",
+      "entertainment_name": "Media & Fun", "entertainment_desc": "Creating better ways to watch, listen, and play.",
+      "education_name": "Learning", "education_desc": "Tools that make education fun and personal for everyone.",
+      "research_name": "Smart Search", "research_desc": "Finding answers in seconds, not hours.",
+      "legal_name": "Legal Help", "legal_desc": "Making law easier for everyone to understand.",
+      "cyber_name": "Safety", "cyber_desc": "Keeping your digital life safe and sound."
+    },
+    "ecosystem": {
+      "yobaexo_cat": "Fun", "yobaexo_name": "YoBaeXo", "yobaexo_desc": "A friendly space for music lovers and creators to share their work.",
+      "freeflix_cat": "Learning", "freeflix_name": "FreeFlix", "freeflix_desc": "A digital library where you can discover classic movies easily.",
+      "learn_cat": "Education", "learn_name": "LearnThroughAnalogy", "learn_desc": "A simple way to learn complex things using everyday stories."
+    },
+    "services": {
+      "aiWeb_title": "AI-Enabled Web & Mobile Experiences",
+      "aiWeb_short": "Intelligent, lightning-fast digital storefronts that adapt to your users in real-time.",
+      "aiWeb_full": "Modern websites and apps are no longer static brochures; they are intelligent systems. We build AI-powered websites and mobile applications that prioritize performance-optimized digital experiences. By embedding intelligence at the edge, your platform doesn't just display information—it learns from user behavior to drive higher conversion and engagement.",
+      "aiWeb_detailed": "Our approach goes beyond simple coding. We implement 'Adaptive UX'—interfaces that change based on user needs—and 'AI-driven content' that personalizes the journey for every visitor. Whether you need a Progressive Web App (PWA), a native iOS/Android experience, or a cross-platform solution, our engineering ensures maximum SEO authority, near-instant load speeds, and enterprise-grade scalability.",
+      "aiWeb_what1": "AI-Driven E-commerce Platforms", "aiWeb_what2": "Adaptive SaaS Dashboards", "aiWeb_what3": "Intelligent Mobile Applications (iOS/Android)", "aiWeb_what4": "High-Performance PWAs", "aiWeb_what5": "Personalized Customer Portals",
+      "aiWeb_feat1_basic": "Fixed layouts for all users", "aiWeb_feat1_adv": "Adaptive UX that evolves per visitor", "aiWeb_feat1_name": "UX Logic",
+      "aiWeb_feat2_basic": "Slow, traditional server responses", "aiWeb_feat2_adv": "Performance-optimized Edge delivery", "aiWeb_feat2_name": "Performance",
+      "aiWeb_feat3_basic": "Static text and images", "aiWeb_feat3_adv": "AI-driven real-time personalization", "aiWeb_feat3_name": "Content",
+      "aiWeb_feat4_basic": "Standard meta-tag management", "aiWeb_feat4_adv": "Technical SEO optimized for AI crawlers", "aiWeb_feat4_name": "SEO",
+      
+      "aiKnow_title": "Enterprise AI Assistants & Knowledge Systems",
+      "aiKnow_short": "Smart, secure help for your team and customers that actually knows your business.",
+      "aiKnow_full": "Imagine an assistant that has read every document in your company, remembers every customer interaction, and follows your rules perfectly. We build 'RAG Chatbots'—advanced knowledge management AI that doesn't just guess, but finds the exact truth in your private data.",
+      "aiKnow_detailed": "Most chatbots are like students trying to pass an exam from memory. Our 'Enterprise AI Assistants' are like students who have the textbook open in front of them. Using RAG (Retrieval-Augmented Generation), we connect powerful AI to your specific company knowledge. This results in 'AI Copilots' that help with research, operations, and support without ever sharing your secrets with the outside world.",
+      "aiKnow_what1": "Customer Support Copilots", "aiKnow_what2": "Internal Research Assistants", "aiKnow_what3": "Operations Command Centers", "aiKnow_what4": "Executive Decision Support Tools", "aiKnow_what5": "Automated Knowledge Libraries",
+      "aiKnow_feat1_basic": "Prone to making things up (Hallucinations)", "aiKnow_feat1_adv": "Verified against your actual documents", "aiKnow_feat1_name": "Accuracy",
+      "aiKnow_feat2_basic": "Forgets previous context easily", "aiKnow_feat2_adv": "Deep, persistent understanding of your business", "aiKnow_feat2_name": "Memory",
+      "aiKnow_feat3_basic": "Data often leaks to public AI models", "aiKnow_feat3_adv": "100% Private; stays within your secure vault", "aiKnow_feat3_name": "Security",
+      "aiKnow_feat4_basic": "Feels robotic and repetitive", "aiKnow_feat4_adv": "Human-centric, friendly, and brand-aligned", "aiKnow_feat4_name": "Tone",
+
+      "plat_title": "Smart Business Platforms",
+      "plat_short": "The digital home for your entire company, built to grow with you.",
+      "plat_full": "We build the tools that run your business. From easy-to-use dashboards to custom systems that handle your orders and customers, we make sure your technology feels like a natural part of your team.",
+      "plat_what1": "Custom Business Dashboards", "plat_what2": "Customer Management Systems", "plat_what3": "Internal Team Tools", "plat_what4": "Smart Online Stores",
+
+      "web_title": "Websites That Work For You",
+      "web_short": "Beautiful, lightning-fast websites that turn visitors into happy customers.",
+      "web_full": "Your website is your digital storefront. We create sites that aren't just pretty to look at—they're smart, incredibly fast, and designed to help your customers find exactly what they need.",
+      "web_what1": "Modern Business Websites", "web_what2": "Professional Portfolios", "web_what3": "Fast Online Apps", "web_what4": "Service Portals",
+
+      "mob_title": "Helpful Mobile Apps",
+      "mob_short": "Put your business in your customers' pockets with a friendly mobile app.",
+      "mob_full": "We create mobile apps that people actually enjoy using. Whether it's for your customers or your own team, we make sure it works perfectly on every phone, even when the internet is slow.",
+      "mob_what1": "iPhone & Android Apps", "mob_what2": "Shopping Apps", "mob_what3": "Healthcare Apps", "mob_what4": "Team Coordination Tools"
+    },
+    "insights": {
+      "nn_title": "How Computers Learn Like We Do",
+      "nn_exc": "A simple look at how modern technology mimics the human brain to help us solve everyday problems faster.",
+      "nn_cat": "Learning AI", "nn_read": "7 min read",
+      
+      "rag_title": "Making AI Smarter with Your Own Info",
+      "rag_exc": "Why the best AI isn't just smart—it's personalized. How we help technology understand your specific business needs.",
+      "rag_cat": "Smart Tech", "rag_read": "9 min read",
+
+      "hum_title": "The Human Element in AI-Driven SaaS",
+      "hum_exc": "Why successful software isn't just about algorithms, but about empathy, ease of use, and solving real human pain points.",
+      "hum_cat": "Product Design", "hum_read": "8 min read",
+
+      "lat_title": "Why Latency is the New Digital Currency",
+      "lat_exc": "In a world of instant gratification, a one-second delay can cost millions. How performance engineering builds trust.",
+      "lat_cat": "Engineering", "lat_read": "6 min read",
+
+      "sec_title": "Security by Design: Beyond the Firewall",
+      "sec_exc": "Engineering safety from the first line of code. Why modern privacy requires a fundamental architectural shift.",
+      "sec_cat": "Cybersecurity", "sec_read": "10 min read",
+
+      "evo_title": "The Evolution of RAG: Context is King",
+      "evo_exc": "Moving from simple vector search to deep contextual intelligence. How RAG is transforming enterprise knowledge management.",
+      "evo_cat": "AI Strategy", "evo_read": "12 min read"
+    }
+  }
+}

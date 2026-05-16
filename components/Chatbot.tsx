@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Bot, User, ArrowRight, Loader2, Trash2, Sparkles, Handshake, HelpCircle, Lightbulb } from 'lucide-react';
 import { GoogleGenAI, Type } from '@google/genai';
 import { ALL_SERVICES, ECOSYSTEM, INDUSTRIES } from '../constants.tsx';
+import { useTranslation } from 'react-i18next';
 
 interface Message {
   role: 'user' | 'model';
@@ -44,6 +45,7 @@ const isValidChatHistory = (data: unknown): data is Message[] => {
 };
 
 export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -52,9 +54,9 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const quickActions = [
-    { label: "What can you build for me?", icon: <Lightbulb size={14} /> },
-    { label: "Tell me about RAG Chatbots", icon: <HelpCircle size={14} /> },
-    { label: "I'd like to start a project", icon: <Handshake size={14} /> },
+    { label: t('chatbot.quick1', "What can you build for me?"), icon: <Lightbulb size={14} /> },
+    { label: t('chatbot.quick2', "Tell me about RAG Chatbots"), icon: <HelpCircle size={14} /> },
+    { label: t('chatbot.quick3', "I'd like to start a project"), icon: <Handshake size={14} /> },
   ];
 
   useEffect(() => {
@@ -77,9 +79,9 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
       }
     }
     setMessages([
-      { role: 'model', text: 'Hi! I’m the BotifyX Assistant. I’m here to help you understand how we can make technology work better for your business. What can I help you find today?' }
+      { role: 'model', text: t('chatbot.initial', 'Hi! I’m the BotifyX Assistant. I’m here to help you understand how we can make technology work better for your business. What can I help you find today?') }
     ]);
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -96,7 +98,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
 
   const clearHistory = () => {
     const defaultMsg: Message[] = [
-      { role: 'model', text: 'History cleared. How can I help you today?' }
+      { role: 'model', text: t('chatbot.cleared', 'History cleared. How can I help you today?') }
     ];
     setMessages(defaultMsg);
     localStorage.removeItem(CHAT_HISTORY_KEY);
@@ -177,20 +179,20 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
         if (call.name === 'navigate_to_contact') {
           setMessages(prev => [...prev, {
             role: 'model',
-            text: "Excellent choice! I'm moving you over to our **Project Discovery** form. It takes less than a minute to fill out, and our engineering leads will review it personally."
+            text: t('chatbot.redirectContact', "Excellent choice! I'm moving you over to our **Project Discovery** form. It takes less than a minute to fill out, and our engineering leads will review it personally.")
           }]);
           setTimeout(() => {
-            onNavigate('#/contact');
+            onNavigate('/contact');
             setIsOpen(false);
           }, 2000);
         }
       } else {
-        const text = sanitizeMessage(response.text || "I'm sorry, I hit a temporary lag in my neural network. Could you please rephrase that? I'm here to help!");
+        const text = sanitizeMessage(response.text || t('chatbot.errorGlag', "I'm sorry, I hit a temporary lag in my neural network. Could you please rephrase that? I'm here to help!"));
         setMessages(prev => [...prev, { role: 'model', text }]);
       }
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages(prev => [...prev, { role: 'model', text: "I'm experiencing a brief connectivity glitch. Please try again in a moment, or use our contact form if you'd like to get in touch right now!" }]);
+      setMessages(prev => [...prev, { role: 'model', text: t('chatbot.errorNetwork', "I'm experiencing a brief connectivity glitch. Please try again in a moment, or use our contact form if you'd like to get in touch right now!") }]);
     } finally {
       setIsLoading(false);
     }
@@ -207,10 +209,10 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
                 <Sparkles className="w-6 h-6 text-brand-primary animate-pulse" />
               </div>
               <div>
-                <h4 className="font-black text-sm uppercase tracking-widest leading-none mb-1 text-brand-base">BotifyX Assistant</h4>
+                <h4 className="font-black text-sm uppercase tracking-widest leading-none mb-1 text-brand-base">{t('chatbot.title', 'BotifyX Assistant')}</h4>
                 <div className="flex items-center gap-1.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-brand-base animate-ping" />
-                  <span className="text-[9px] font-black uppercase tracking-tighter opacity-70 italic text-brand-base">Online & Helpful</span>
+                  <span className="text-[9px] font-black uppercase tracking-tighter opacity-70 italic text-brand-base">{t('chatbot.status', 'Online & Helpful')}</span>
                 </div>
               </div>
             </div>
@@ -218,11 +220,11 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
               <button
                 onClick={clearHistory}
                 className="hover:bg-brand-base/10 p-2.5 rounded-xl transition-all"
-                title="Clear Chat"
+                title={t('chatbot.clearChat', 'Clear Chat')}
               >
                 <Trash2 className="w-4 h-4 text-brand-base" />
               </button>
-              <button onClick={() => setIsOpen(false)} className="hover:bg-brand-base/10 p-2.5 rounded-xl transition-all" title="Close Assistant">
+              <button onClick={() => setIsOpen(false)} className="hover:bg-brand-base/10 p-2.5 rounded-xl transition-all" title={t('chatbot.closeAssist', 'Close Assistant')}>
                 <X className="w-5 h-5 text-brand-base" />
               </button>
             </div>
@@ -272,14 +274,14 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Type your question..."
+                placeholder={t('chatbot.typeQuestion', "Type your question...")}
                 className="flex-grow bg-transparent px-4 py-2 text-sm outline-none font-bold text-white placeholder:text-slate-600"
               />
               <button
                 onClick={() => handleSend()}
                 disabled={!input.trim() || isLoading}
                 className="bg-brand-primary text-brand-base p-4 rounded-xl hover:scale-105 active:scale-90 transition-all disabled:opacity-30 disabled:hover:scale-100 shadow-lg shadow-brand-primary/20"
-                title="Send Message"
+                title={t('chatbot.sendMsg', "Send Message")}
               >
                 <Send className="w-5 h-5" />
               </button>
@@ -292,7 +294,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate }) => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-20 h-20 bg-brand-primary text-brand-base rounded-[2.2rem] shadow-[0_15px_40px_-10px_rgba(0,255,157,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-500 group relative overflow-hidden"
-        title={isOpen ? "Close Chat" : "Open Chat"}
+        title={isOpen ? t('chatbot.closeChat', "Close Chat") : t('chatbot.openChat', "Open Chat")}
       >
         <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
         {isOpen ? (

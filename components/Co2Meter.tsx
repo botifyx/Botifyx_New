@@ -2,7 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { Leaf, Info, Zap } from 'lucide-react';
 
+import { useTranslation, Trans } from 'react-i18next';
+
 export const Co2Meter: React.FC = () => {
+    const { t } = useTranslation();
     const [co2Emitted, setCo2Emitted] = useState(0);
     const [isEfficient, setIsEfficient] = useState(true);
 
@@ -24,14 +27,14 @@ export const Co2Meter: React.FC = () => {
                 <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-2">
                         <div className={`w-2 h-2 rounded-full ${isEfficient ? 'bg-brand-primary animate-pulse' : 'bg-yellow-500'}`} />
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">CO2 Impact</span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{t('co2.impact', 'CO2 Impact')}</span>
                     </div>
                     <Info className="w-3 h-3 text-slate-500 cursor-help" />
                 </div>
 
                 <div className="flex items-end gap-1">
                     <span className="text-2xl font-black text-white leading-none">{co2Emitted.toFixed(3)}</span>
-                    <span className="text-[10px] font-bold text-slate-500 uppercase pb-1">g CO2 / View</span>
+                    <span className="text-[10px] font-bold text-slate-500 uppercase pb-1">{t('co2.unit', 'g CO2 / View')}</span>
                 </div>
 
                 <div className="flex flex-col gap-1">
@@ -42,14 +45,14 @@ export const Co2Meter: React.FC = () => {
                         />
                     </div>
                     <div className="flex justify-between text-[8px] font-black uppercase tracking-tighter">
-                        <span className="text-brand-primary">Clean</span>
-                        <span className="text-slate-600">Standard (0.5g)</span>
+                        <span className="text-brand-primary">{t('co2.clean', 'Clean')}</span>
+                        <span className="text-slate-600">{t('co2.standard', 'Standard (0.5g)')}</span>
                     </div>
                 </div>
 
                 <div className="hidden group-hover:block animate-in fade-in slide-in-from-bottom-2 duration-300 pt-2 border-t border-white/5">
                     <p className="text-[9px] font-medium text-slate-400 leading-tight">
-                        This page is <span className="text-brand-primary font-bold">76% cleaner</span> than the web average.
+                        <Trans i18nKey="co2.desc" defaults="This page is <1>76% cleaner</1> than the web average." components={{ 1: <span className="text-brand-primary font-bold" /> }} />
                     </p>
                 </div>
             </div>
