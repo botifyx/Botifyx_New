@@ -128,6 +128,42 @@ export const FAQ_DATA: FAQItem[] = [
 
 export const ALL_SERVICES: ServiceDetail[] = [
   {
+    id: "growth-labs",
+    title: "BotifyX Growth Labs",
+    titleKey: "growth_title",
+    seoTitle: "BotifyX Growth Labs | Digital Growth, AI Automation & Real Results",
+    metaDescription: "BotifyX Growth Labs builds digital growth engines — websites that perform, campaigns that convert, automation that scales, and growth that lasts.",
+    shortDesc: "We build digital growth engines. Faster growth. Smarter automation. Stronger business.",
+    shortDescKey: "growth_short",
+    fullDesc: "BotifyX Growth Labs is your full-stack digital growth partner — combining Growth Marketing, AI Solutions, Web & App Development, Business Automation, and Analytics & Reporting into one unified engine. Websites that perform. Campaigns that convert. Automation that scales. Growth that lasts.",
+    fullDescKey: "growth_full",
+    detailedContent: "We attract the right audience, engage them with meaningful experiences, convert visitors into leads and sales, automate processes to drive growth, and optimize performance continuously. From strategy and SEO to AI chatbots and Power BI dashboards — Growth Labs is your end-to-end partner for building a faster, smarter, and stronger business.",
+    detailedContentKey: "growth_detailed",
+    icon: "TrendingUp",
+    whatWeBuild: [
+      "Growth Marketing (Strategy, SEO, Ads, Content, LinkedIn, Lead Generation)",
+      "AI Solutions (AI Chatbots, AI Agents, Copilot, RAG Solutions, Automation)",
+      "Web & App Development (High-Performance Websites, Web Apps, Mobile Apps, eCommerce)",
+      "Business Automation (Microsoft 365, Power Platform, Workflows, Process Automation)",
+      "Analytics & Reporting (Power BI, Dashboards, Insights, Performance Tracking)"
+    ],
+    whatWeBuildKeys: ["growth_what1", "growth_what2", "growth_what3", "growth_what4", "growth_what5"],
+    keyComparisons: [
+      { feature: "Growth Approach", basic: "Fragmented tools with no unified strategy", advanced: "End-to-end digital growth engine built for results", featureKey: "growth_feat1_name", basicKey: "growth_feat1_basic", advancedKey: "growth_feat1_adv" },
+      { feature: "Automation", basic: "Manual workflows slowing your team down", advanced: "AI-powered automation across all business processes", featureKey: "growth_feat2_name", basicKey: "growth_feat2_basic", advancedKey: "growth_feat2_adv" },
+      { feature: "Analytics", basic: "Guesswork and generic reports", advanced: "Power BI dashboards with real-time insights & tracking", featureKey: "growth_feat3_name", basicKey: "growth_feat3_basic", advancedKey: "growth_feat3_adv" },
+      { feature: "Security", basic: "Basic setups with data exposure risks", advanced: "Enterprise-grade security, scalable & data secure", featureKey: "growth_feat4_name", basicKey: "growth_feat4_basic", advancedKey: "growth_feat4_adv" }
+    ],
+    useCaseScenarios: [
+      { title: "Attract & Convert", desc: "SEO-driven content and targeted ad campaigns that bring the right visitors and turn them into qualified leads." },
+      { title: "Automate & Scale", desc: "Microsoft 365 and Power Platform workflows that eliminate repetitive tasks and let your team focus on what matters." },
+      { title: "Measure & Optimize", desc: "Power BI dashboards that surface real-time performance data so every decision is backed by measurable business outcomes." }
+    ],
+    technologies: ["Microsoft 365", "Power Platform", "Power BI", "Google Ads", "LinkedIn Ads", "OpenAI", "RAG Pipelines", "Next.js", "React Native"],
+    idealFor: ["Growing SMBs", "D2C & eCommerce Brands", "Service Businesses", "Enterprises Scaling Fast"],
+    focusAreas: ["Digital Growth", "AI Automation", "Performance Marketing", "Business Intelligence"]
+  },
+  {
     id: "ai-web-mobile",
     title: "AI-Enabled Web & Mobile Experiences",
     titleKey: "aiWeb_title",

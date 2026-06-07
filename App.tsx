@@ -57,17 +57,38 @@ const PageHeader: React.FC<{ title: string; subtitle: string; label: string }> =
   </header>
 );
 
+const TRUST_PARTNERS = [
+  { name: "Microsoft 365", icon: "Grid" },
+  { name: "Power Platform", icon: "Zap" },
+  { name: "OpenAI", icon: "BrainCircuit" },
+  { name: "Google Ads", icon: "TrendingUp" },
+  { name: "LinkedIn Ads", icon: "Linkedin" },
+  { name: "Power BI", icon: "BarChart3" },
+  { name: "React & Next.js", icon: "Code" },
+  { name: "RAG Pipelines", icon: "Network" },
+];
+
 const TrustBar: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <div className="py-12 border-y border-white/5 bg-white/[0.02]">
+    <div className="py-14 border-y border-white/5 bg-white/[0.02] overflow-hidden">
       <div className="container mx-auto px-6">
-        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] text-center mb-8">{t('home.trustedBy')}</p>
-        <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-          <div className="h-6 w-32 bg-slate-700 rounded animate-pulse" />
-          <div className="h-6 w-24 bg-slate-700 rounded animate-pulse" />
-          <div className="h-6 w-40 bg-slate-700 rounded animate-pulse" />
-          <div className="h-6 w-28 bg-slate-700 rounded animate-pulse" />
+        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] text-center mb-10">{t('home.trustedBy')}</p>
+        <div className="flex flex-wrap justify-center items-center gap-6 lg:gap-10">
+          {TRUST_PARTNERS.map((partner) => {
+            const Icon = (LucideIcons as any)[partner.icon] || Zap;
+            return (
+              <div
+                key={partner.name}
+                className="flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-white/8 bg-white/[0.03] hover:border-brand-primary/40 hover:bg-brand-primary/5 transition-all duration-300 group cursor-default"
+              >
+                <Icon className="w-4 h-4 text-slate-500 group-hover:text-brand-primary transition-colors shrink-0" />
+                <span className="text-[11px] font-black text-slate-500 group-hover:text-slate-200 uppercase tracking-[0.15em] whitespace-nowrap transition-colors">
+                  {partner.name}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -220,6 +241,178 @@ const App: React.FC = () => {
   );
 };
 
+const NodeBadge: React.FC<{
+  NodeIcon: React.ElementType;
+  label: string;
+  sublabel: string;
+  animDelay?: string;
+}> = ({ NodeIcon, label, sublabel, animDelay = '0s' }) => (
+  <div
+    className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-brand-surface/90 border border-brand-primary/25 shadow-[0_0_24px_rgba(0,255,157,0.12)] backdrop-blur-sm animate-in fade-in duration-700"
+    style={{ animationDelay: animDelay }}
+  >
+    <div className="w-8 h-8 rounded-xl bg-brand-primary/15 flex items-center justify-center shrink-0">
+      <NodeIcon className="w-4 h-4 text-brand-primary" />
+    </div>
+    <div>
+      <div className="text-[11px] font-black text-white uppercase tracking-widest leading-none mb-1">{label}</div>
+      <div className="text-[9px] font-bold text-slate-500 uppercase tracking-wider leading-none">{sublabel}</div>
+    </div>
+  </div>
+);
+
+const HeroAnimation: React.FC = () => {
+  const cx = 240, cy = 240;
+  const animNodes = [
+    {
+      svgX: 240, svgY: 44,
+      cssLeft: '50%', cssTop: '9.2%',
+      NodeIcon: Shield, label: 'Secure', sublabel: 'Enterprise-grade',
+      animDelay: '0.2s', pathDur: '2.2s', pathBegin: '0s',
+    },
+    {
+      svgX: 404, svgY: 158,
+      cssLeft: '84.2%', cssTop: '32.9%',
+      NodeIcon: BrainCircuit, label: 'AI-Native', sublabel: 'Intelligent core',
+      animDelay: '0.5s', pathDur: '2.8s', pathBegin: '0.7s',
+    },
+    {
+      svgX: 372, svgY: 388,
+      cssLeft: '77.5%', cssTop: '80.8%',
+      NodeIcon: TrendingUp, label: 'Drive Growth', sublabel: '+2.4x growth',
+      animDelay: '0.8s', pathDur: '2.5s', pathBegin: '1.4s',
+    },
+    {
+      svgX: 72, svgY: 332,
+      cssLeft: '15%', cssTop: '69.2%',
+      NodeIcon: Leaf, label: 'Low Carbon', sublabel: '0.12g CO₂/view',
+      animDelay: '1.1s', pathDur: '3s', pathBegin: '2.1s',
+    },
+  ];
+
+  return (
+    <div className="relative w-full aspect-square max-w-[480px] mx-auto lg:mx-0">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-72 h-72 rounded-full bg-brand-primary/6 blur-3xl" />
+      </div>
+
+      {/* SVG layer — rings, lines, packets, sparkline */}
+      <svg viewBox="0 0 480 480" className="absolute inset-0 w-full h-full" style={{ overflow: 'visible' }}>
+        <defs>
+          <filter id="hero-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+          <radialGradient id="hubGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="rgba(0,255,157,0.12)" />
+            <stop offset="100%" stopColor="rgba(0,255,157,0.02)" />
+          </radialGradient>
+        </defs>
+
+        {/* Outer decorative rings */}
+        <circle cx={cx} cy={cy} r="218" fill="none" stroke="rgba(0,255,157,0.04)" strokeWidth="1" strokeDasharray="2 10" />
+        <circle cx={cx} cy={cy} r="176" fill="none" stroke="rgba(0,255,157,0.05)" strokeWidth="1" strokeDasharray="4 6" />
+
+        {/* Slowly spinning dashed ring */}
+        <circle cx={cx} cy={cy} r="130" fill="none" stroke="rgba(0,255,157,0.08)" strokeWidth="1" strokeDasharray="3 7">
+          <animateTransform attributeName="transform" type="rotate"
+            values={`0 ${cx} ${cy};360 ${cx} ${cy}`} dur="28s" repeatCount="indefinite" />
+        </circle>
+        {/* Counter-spinning ring */}
+        <circle cx={cx} cy={cy} r="96" fill="none" stroke="rgba(0,255,157,0.06)" strokeWidth="0.75" strokeDasharray="2 8">
+          <animateTransform attributeName="transform" type="rotate"
+            values={`0 ${cx} ${cy};-360 ${cx} ${cy}`} dur="18s" repeatCount="indefinite" />
+        </circle>
+
+        {/* Background grid dots */}
+        {[80, 160, 240, 320, 400].map(gx =>
+          [80, 160, 240, 320, 400].map(gy => (
+            <circle key={`${gx}-${gy}`} cx={gx} cy={gy} r="1.5" fill="rgba(0,255,157,0.09)" />
+          ))
+        )}
+
+        {/* Connection lines + animated data packets */}
+        {animNodes.map((node, i) => {
+          const pathStr = `M${cx},${cy} L${node.svgX},${node.svgY}`;
+          return (
+            <g key={i}>
+              <path d={pathStr} fill="none" stroke="rgba(0,255,157,0.15)" strokeWidth="1" strokeDasharray="5 5" />
+              {/* Outbound packet */}
+              <circle r="3.5" fill="#00ff9d" filter="url(#hero-glow)">
+                <animateMotion dur={node.pathDur} repeatCount="indefinite" begin={node.pathBegin} path={pathStr} />
+              </circle>
+              {/* Return packet (smaller, subtler) */}
+              <circle r="2" fill="rgba(0,255,157,0.5)">
+                <animateMotion dur={node.pathDur} repeatCount="indefinite"
+                  begin={`${parseFloat(node.pathBegin) + parseFloat(node.pathDur) / 2}s`}
+                  path={`M${node.svgX},${node.svgY} L${cx},${cy}`} />
+              </circle>
+            </g>
+          );
+        })}
+
+        {/* Pulse rings from central hub */}
+        <circle cx={cx} cy={cy} r="66" fill="none" stroke="rgba(0,255,157,0.5)" strokeWidth="1.5">
+          <animate attributeName="r" values="66;94;66" dur="3.5s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.5;0;0.5" dur="3.5s" repeatCount="indefinite" />
+        </circle>
+        <circle cx={cx} cy={cy} r="66" fill="none" stroke="rgba(0,255,157,0.22)" strokeWidth="1">
+          <animate attributeName="r" values="66;114;66" dur="3.5s" begin="1.75s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.22;0;0.22" dur="3.5s" begin="1.75s" repeatCount="indefinite" />
+        </circle>
+
+        {/* Central hub circles */}
+        <circle cx={cx} cy={cy} r="66" fill="url(#hubGrad)" stroke="rgba(0,255,157,0.22)" strokeWidth="1.5" />
+        <circle cx={cx} cy={cy} r="50" fill="rgba(0,255,157,0.07)" stroke="rgba(0,255,157,0.12)" strokeWidth="1" />
+
+        {/* Growth sparkline along the bottom */}
+        <polyline
+          points="90,438 124,416 160,424 196,398 232,388 268,362 304,370 340,340 376,318 410,292"
+          fill="none" stroke="rgba(0,255,157,0.35)" strokeWidth="2"
+          strokeLinecap="round" strokeLinejoin="round"
+        />
+        {/* Area fill under sparkline */}
+        <polygon
+          points="90,438 124,416 160,424 196,398 232,388 268,362 304,370 340,340 376,318 410,292 410,460 90,460"
+          fill="rgba(0,255,157,0.04)"
+        />
+        {/* Live dot at sparkline end */}
+        <circle cx="410" cy="292" r="4.5" fill="#00ff9d" filter="url(#hero-glow)">
+          <animate attributeName="r" values="4.5;7;4.5" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+        </circle>
+        {/* Sparkline label */}
+        <text x="415" y="288" fill="rgba(0,255,157,0.7)" fontSize="9" fontWeight="900" fontFamily="monospace" letterSpacing="1">GROWTH</text>
+      </svg>
+
+      {/* Central Platform Hub */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+        <div className="w-[120px] h-[120px] rounded-[2.4rem] bg-brand-surface border border-brand-primary/30 flex flex-col items-center justify-center gap-2 shadow-[0_0_50px_rgba(0,255,157,0.2),inset_0_1px_0_rgba(255,255,255,0.05)]">
+          <Globe className="w-10 h-10 text-brand-primary drop-shadow-[0_0_12px_rgba(0,255,157,0.75)]" />
+          <span className="text-[9px] font-black text-brand-primary uppercase tracking-[0.25em] leading-none">Platform</span>
+        </div>
+      </div>
+
+      {/* Satellite node badges */}
+      {animNodes.map((node, i) => (
+        <div
+          key={i}
+          className="absolute z-20"
+          style={{ left: node.cssLeft, top: node.cssTop, transform: 'translate(-50%, -50%)' }}
+        >
+          <NodeBadge
+            NodeIcon={node.NodeIcon}
+            label={node.label}
+            sublabel={node.sublabel}
+            animDelay={node.animDelay}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const HomeView: React.FC<{ onNavigate: (route: string) => void }> = ({ onNavigate }) => {
   const { t } = useTranslation();
   return (
@@ -227,29 +420,39 @@ const HomeView: React.FC<{ onNavigate: (route: string) => void }> = ({ onNavigat
     <header className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-brand-base">
       <EcoBackground />
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 mb-10 animate-in slide-in-from-top-4 duration-1000">
-            <Sparkles className="w-4 h-4 text-brand-primary" />
-            <span className="text-[10px] font-bold text-brand-primary uppercase tracking-[0.2em]">{t('home.label')}</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-16 items-center">
+
+          {/* Left — copy */}
+          <div>
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 mb-10 animate-in slide-in-from-top-4 duration-1000">
+              <Sparkles className="w-4 h-4 text-brand-primary" />
+              <span className="text-[10px] font-bold text-brand-primary uppercase tracking-[0.2em]">{t('home.label')}</span>
+            </div>
+
+            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.1] tracking-tight text-white mb-10 uppercase italic">
+              {t('home.title1')} <br />
+              <span className="gradient-text">{t('home.title2')}</span>
+            </h1>
+
+            <p className="text-lg lg:text-xl text-slate-400 font-medium leading-relaxed mb-12">
+              <Trans i18nKey="home.subtitle" components={{ 1: <span className="text-brand-primary font-bold" /> }} />
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <Button size="lg" className="px-10 py-6 rounded-xl w-full sm:w-auto text-xs uppercase tracking-[0.2em] font-black bg-brand-primary text-brand-base hover:scale-105 transition-all shadow-xl shadow-brand-primary/20" onClick={() => onNavigate('/contact')}>
+                {t('home.startScaling')} <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+              <Button variant="outline" size="lg" className="px-10 py-6 rounded-xl w-full sm:w-auto text-xs uppercase tracking-[0.2em] font-black border-white/10 text-white hover:bg-white/5 transition-all" onClick={() => onNavigate('#featured-services')}>
+                {t('home.exploreServices')}
+              </Button>
+            </div>
           </div>
 
-          <h1 className="text-6xl lg:text-8xl font-black leading-[1.1] tracking-tight text-white mb-10 uppercase italic">
-            {t('home.title1')} <br />
-            <span className="gradient-text">{t('home.title2')}</span>
-          </h1>
-
-          <p className="text-xl lg:text-2xl text-slate-400 font-medium leading-relaxed mb-12 max-w-2xl">
-            <Trans i18nKey="home.subtitle" components={{ 1: <span className="text-brand-primary font-bold" /> }} />
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <Button size="lg" className="px-10 py-6 rounded-xl w-full sm:w-auto text-xs uppercase tracking-[0.2em] font-black bg-brand-primary text-brand-base hover:scale-105 transition-all shadow-xl shadow-brand-primary/20" onClick={() => onNavigate('/contact')}>
-              {t('home.startScaling')} <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-            <Button variant="outline" size="lg" className="px-10 py-6 rounded-xl w-full sm:w-auto text-xs uppercase tracking-[0.2em] font-black border-white/10 text-white hover:bg-white/5 transition-all" onClick={() => onNavigate('#featured-services')}>
-              {t('home.exploreServices')}
-            </Button>
+          {/* Right — animated platform visualization */}
+          <div className="hidden lg:flex justify-center xl:justify-end">
+            <HeroAnimation />
           </div>
+
         </div>
       </div>
     </header>
