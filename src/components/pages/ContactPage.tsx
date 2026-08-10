@@ -9,12 +9,14 @@ import {
   Linkedin,
   CalendarCheck,
   Clock,
+  Send,
+  ExternalLink,
 } from 'lucide-react';
 import Seo from '@/components/Seo';
 import { PageHero } from '@/components/Cards';
 import { Reveal, GlowCard, MagneticButton } from '@/components/ui-kit';
-import { db } from '@/lib/db';
 import { CONTACT } from '@/lib/site';
+import { sendProjectEnquiry, generateMailtoFallback } from '@/lib/mailer';
 
 const PROJECT_TYPES = [
   'AI / ML engineering',
@@ -54,12 +56,27 @@ const ContactPage: React.FC = () => {
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [error, setError] = useState('');
+  const [fallbackLink, setFallbackLink] = useState('');
 
   const set = (key: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setForm((f) => ({ ...f, [key]: e.target.value }));
     if (status === 'error') setStatus('idle');
+  };
+
+  const resetForm = () => {
+    setForm({
+      name: '',
+      company: '',
+      email: '',
+      projectType: PROJECT_TYPES[0],
+      budget: BUDGETS[1],
+      message: '',
+    });
+    setStatus('idle');
+    setError('');
+    setFallbackLink('');
   };
 
   const submit = async (e: React.FormEvent) => {
@@ -74,47 +91,40 @@ const ContactPage: React.FC = () => {
 
     setStatus('loading');
     setError('');
+    setFallbackLink('');
+
     try {
-      const { error: rpcError } = await db.rpc('crm_submit_contact', {
-        p_email: form.email.trim(),
-        p_name: form.name.trim(),
-        p_phone: null,
-        p_sms_opt_in: false,
-        p_source: 'contact-page',
-        p_metadata: {
-          company: form.company.trim(),
-          project_type: form.projectType,
-          budget_range: form.budget,
-          message: form.message.trim(),
-          page: '/contact',
-        },
-      });
-      if (rpcError) throw rpcError;
-
-      setStatus('done');
-      window.supercool?.track('form_submit', {
-        form: 'contact-page',
-        project_type: form.projectType,
+      const result = await sendProjectEnquiry({
+        name: form.name,
+        company: form.company,
+        email: form.email,
+        projectType: form.projectType,
         budget: form.budget,
+        message: form.message,
+        source: 'contact-page',
+        page: '/contact',
       });
 
-      // Notification email is best-effort: never blocks the success state.
-      void db.functions
-        .invoke('enquiry-notify', {
-          body: {
-            ...form,
-            enquiryId: `${form.email.trim()}-${form.projectType}`,
-            page: '/contact',
-          },
-        })
-        .catch(() => undefined);
+      if (result.success) {
+        setStatus('done');
+        window.supercool?.track('form_submit', {
+          form: 'contact-page',
+          project_type: form.projectType,
+          budget: form.budget,
+        });
+      } else {
+        setStatus('error');
+        setError(result.error || 'Failed to deliver enquiry to info@botifyx.in.');
+        setFallbackLink(result.fallbackMailto || generateMailtoFallback(form));
+      }
     } catch (err) {
       setStatus('error');
       setError(
         err instanceof Error
-          ? `We could not save that: ${err.message}`
-          : 'Something went wrong. Please email info@botifyx.in.'
+          ? `Delivery issue: ${err.message}`
+          : 'Something went wrong while delivering your enquiry. Please use direct email.'
       );
+      setFallbackLink(generateMailtoFallback(form));
     }
   };
 
@@ -145,19 +155,35 @@ const ContactPage: React.FC = () => {
                 {status === 'done' ? (
                   <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
                     <span
-                      className="flex h-16 w-16 items-center justify-center rounded-full"
+                      className="flex h-16 w-16 items-center justify-center rounded-full shadow-[0_0_30px_rgba(0,255,157,0.3)]"
                       style={{ background: 'linear-gradient(135deg,#00ff9d,#00e5ff)' }}
                     >
                       <Check className="h-8 w-8 text-[#04140f]" aria-hidden="true" />
                     </span>
-                    <p className="eyebrow mt-6 justify-center">// enquiry received</p>
+                    <p className="eyebrow mt-6 justify-center">// enquiry delivered to info@botifyx.in</p>
                     <h2 className="mt-4 text-[26px] font-bold text-ink sm:text-[32px]">
-                      Thanks — it&apos;s with us.
+                      Thanks — it&apos;s on our desk.
                     </h2>
                     <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-muted">
-                      An engineer will reply within one business day with first questions and, if
-                      it fits, a proposed discovery sprint outline.
+                      Your brief has been formatted and emailed to our engineering team at{' '}
+                      <span className="font-semibold text-mint-ink">info@botifyx.in</span>. We will reply within one
+                      business day with first questions and a discovery plan.
                     </p>
+
+                    <div className="mt-6 w-full max-w-md rounded-xl border border-hairline bg-surface/60 p-4 text-left font-mono text-[12px] text-ink-muted">
+                      <div className="flex justify-between border-b border-hairline pb-2">
+                        <span className="text-ink-faint">Sender:</span>
+                        <span className="text-ink font-semibold">{form.name} ({form.email})</span>
+                      </div>
+                      <div className="flex justify-between border-b border-hairline py-2">
+                        <span className="text-ink-faint">Type / Budget:</span>
+                        <span className="text-mint-ink">{form.projectType} · {form.budget}</span>
+                      </div>
+                      <div className="pt-2 text-ink-faint">
+                        <span>Destination: info@botifyx.in</span>
+                      </div>
+                    </div>
+
                     <div className="mt-8 flex flex-wrap justify-center gap-3">
                       <MagneticButton
                         href={CONTACT.whatsapp}
@@ -166,6 +192,14 @@ const ContactPage: React.FC = () => {
                       >
                         <MessageCircle className="h-4 w-4" aria-hidden="true" />
                         Continue on WhatsApp
+                      </MagneticButton>
+                      <MagneticButton
+                        onClick={resetForm}
+                        variant="ghost"
+                        ariaLabel="Send another enquiry"
+                      >
+                        <Send className="h-4 w-4" aria-hidden="true" />
+                        Send another enquiry
                       </MagneticButton>
                       <MagneticButton to="/work" variant="ghost" ariaLabel="Read case studies while you wait">
                         Read case studies
@@ -273,9 +307,26 @@ const ContactPage: React.FC = () => {
                     </div>
 
                     {status === 'error' ? (
-                      <p role="alert" className="mt-5 font-mono text-[12px] leading-relaxed text-red-400">
-                        {error}
-                      </p>
+                      <div className="mt-5 rounded-xl border border-red-500/20 bg-red-500/10 p-4">
+                        <p role="alert" className="font-mono text-[12px] leading-relaxed text-red-300">
+                          {error}
+                        </p>
+                        {fallbackLink ? (
+                          <div className="mt-3 flex items-center gap-2">
+                            <a
+                              href={fallbackLink}
+                              className="inline-flex items-center gap-2 rounded-lg bg-mint px-3.5 py-1.5 font-mono text-[11.5px] font-semibold text-[#04140f] transition-transform hover:scale-[1.02]"
+                            >
+                              <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                              Send directly to info@botifyx.in
+                              <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                            </a>
+                            <span className="font-mono text-[10.5px] text-ink-faint">
+                              (Pre-fills your mail client)
+                            </span>
+                          </div>
+                        ) : null}
+                      </div>
                     ) : null}
 
                     <div className="mt-8 flex flex-wrap items-center gap-4">

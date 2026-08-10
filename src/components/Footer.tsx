@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin, MessageCircle, Twitter, Mail, Phone, Leaf, Loader2, Check } from 'lucide-react';
-import { db } from '@/lib/db';
 import { CONTACT, SERVICES } from '@/lib/site';
 import { ARTICLES } from '@/lib/articles';
+import { sendNewsletterSubscription } from '@/lib/mailer';
 import BotifyXLogo from '@/components/BotifyXLogo';
 
 const COMPANY_LINKS = [
@@ -39,20 +39,23 @@ const Footer: React.FC = () => {
       return;
     }
     setState('loading');
+    setMessage('');
     try {
-      const { error } = await db.rpc('crm_submit_contact', {
-        p_email: clean,
-        p_name: null,
-        p_phone: null,
-        p_sms_opt_in: false,
-        p_source: 'footer-newsletter',
-        p_metadata: { page: window.location.pathname },
+      const result = await sendNewsletterSubscription({
+        email: clean,
+        source: 'footer-newsletter',
+        page: window.location.pathname,
       });
-      if (error) throw error;
-      setState('done');
-      setMessage('You are on the list. Expect signal, not noise.');
-      setEmail('');
-      window.supercool?.track('form_submit', { form: 'footer-newsletter' });
+
+      if (result.success) {
+        setState('done');
+        setMessage(result.message || 'You are on the list. Expect signal, not noise.');
+        setEmail('');
+        window.supercool?.track('form_submit', { form: 'footer-newsletter' });
+      } else {
+        setState('error');
+        setMessage(result.error || 'Subscription failed. Please try again.');
+      }
     } catch (err) {
       setState('error');
       setMessage(err instanceof Error ? err.message : 'Subscription failed. Please try again.');
