@@ -301,3 +301,85 @@ export const CASE_STUDIES: CaseStudy[] = [
   { stat: "Weeks", statKey: "cs3_stat", context: "From a simple idea to a working tool", contextKey: "cs3_context" },
   { stat: "Green", statKey: "cs4_stat", context: "Eco-friendly, energy-saving code", contextKey: "cs4_context" }
 ];
+
+export interface ClientProject {
+  id: string;
+  name: string;
+  tagline: string;
+  description: string;
+  url: string;
+  category: string;
+  tags: string[];
+  icon: string;
+  accentColor: string;
+}
+
+export const CLIENT_PROJECTS: ClientProject[] = [
+  {
+    id: "megam-live",
+    name: "Megam Live",
+    tagline: "AI-Native Microsoft 365 Workflow Automation",
+    description: "Engineering precision M365 solutions for regulated industries — SAP sync, artwork labeling, and enterprise-grade workflow automation.",
+    url: "https://megam.live/",
+    category: "Enterprise Automation",
+    tags: ["Microsoft 365", "SAP Integration", "Power Platform", "AI Workflows"],
+    icon: "Zap",
+    accentColor: "#3b82f6",
+  },
+  {
+    id: "artwork-today",
+    name: "Artwork Today",
+    tagline: "Labeling & Packaging Artwork Management",
+    description: "A labeling and packaging artwork management system built natively inside Microsoft 365 — streamlining workflows, automating approvals, and ensuring 21 CFR Part 11 compliance.",
+    url: "https://www.artwork.today/",
+    category: "Compliance & Operations",
+    tags: ["Microsoft 365", "21 CFR Part 11", "Pharma", "Artwork Proofing"],
+    icon: "FileText",
+    accentColor: "#8b5cf6",
+  },
+  {
+    id: "ag-cube",
+    name: "AG Cube",
+    tagline: "Strategy Meets Execution Intelligence",
+    description: "Bridging CX, AI, and Supply Chain advisory with scalable tech solutions — where executive strategy is operationalized through intelligent, data-driven execution.",
+    url: "https://www.ag-cube.com/",
+    category: "Strategy & Advisory",
+    tags: ["CX Intelligence", "Supply Chain", "AI Advisory", "Business Strategy"],
+    icon: "BarChart3",
+    accentColor: "#10b981",
+  },
+  {
+    id: "aurum-elite-bullion",
+    name: "Aurum Elite Bullion",
+    tagline: "Sovereign-Grade Precious Metals Infrastructure",
+    description: "A global precious metals infrastructure platform dedicated to architecting trust and efficiency — connecting responsible gold sourcing with institutional capital markets.",
+    url: "https://www.aurumelitebullion.com/",
+    category: "FinTech & Commodities",
+    tags: ["Gold Markets", "LBMA Standards", "Institutional Finance", "Bullion Tracking"],
+    icon: "Shield",
+    accentColor: "#f59e0b",
+  },
+  {
+    id: "aurochain",
+    name: "AuroChain",
+    tagline: "Verified Gold Supply Chain Infrastructure",
+    description: "End-to-end verified gold supply chain infrastructure — bringing transparency, traceability, and trust to every gram from ethical corridor to market.",
+    url: "https://www.aurochain.io/",
+    category: "Blockchain & Supply Chain",
+    tags: ["Gold Traceability", "Supply Chain", "Verified Sourcing", "Web3 Ready"],
+    icon: "GitBranch",
+    accentColor: "#f97316",
+  },
+  {
+    id: "research-gemini",
+    name: "ResearchGemini",
+    tagline: "Your Scholar's Mentor & Research Companion",
+    description: "An AI-powered research mentor guiding PhD and Masters scholars from first idea to final defence — with warmth, wisdom, and academic integrity at every step.",
+    url: "https://www.researchgemini.com/",
+    category: "EdTech & AI",
+    tags: ["AI Mentor", "PhD Research", "Academic Integrity", "Scholar Support"],
+    icon: "BookOpen",
+    accentColor: "#2D6A4F",
+  },
+];
+

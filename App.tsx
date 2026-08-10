@@ -24,7 +24,8 @@ import {
   ALL_SERVICES,
   INDUSTRIES,
   CASE_STUDIES,
-  INSIGHTS_ARTICLES
+  INSIGHTS_ARTICLES,
+  CLIENT_PROJECTS
 } from './constants.tsx';
 
 const EcoBackground: React.FC = () => (
@@ -669,7 +670,7 @@ const EcosystemView: React.FC<{ onNavigate: (route: string) => void }> = ({ onNa
   return (
     <section className="bg-brand-base animate-in fade-in duration-500 min-h-screen">
       <PageHeader label={t('ecosystemView.label')} title={t('ecosystemView.title')} subtitle={t('ecosystemView.subtitle')} />
-      <div className="container mx-auto px-6 pb-40">
+      <div className="container mx-auto px-6 pb-40 space-y-32">
         <div className="space-y-20">
           {Object.entries(groupedEcosystem).map(([category, platforms]) => (
             <div key={category} className="p-16 rounded-[5rem] bg-brand-surface border border-white/5 flex flex-col lg:flex-row gap-20 shadow-2xl">
@@ -688,6 +689,83 @@ const EcosystemView: React.FC<{ onNavigate: (route: string) => void }> = ({ onNa
               </div>
             </div>
           ))}
+        </div>
+        <div>
+          <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
+            <div>
+              <p className="text-[10px] font-bold text-brand-primary mb-4 uppercase tracking-[0.3em]">Client Portfolio</p>
+              <h2 className="text-5xl lg:text-6xl font-black text-white uppercase italic leading-tight">
+                Delivered &amp; <span className="gradient-text">Live.</span>
+              </h2>
+              <p className="text-lg text-slate-400 font-medium mt-4 max-w-xl">
+                Real products, real clients, successfully hosted and running in production.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 shrink-0">
+              <div className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
+              <span className="text-[11px] font-black text-brand-primary uppercase tracking-[0.2em]">{CLIENT_PROJECTS.length} Projects Live</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {CLIENT_PROJECTS.map((project) => {
+              const Icon = (LucideIcons as any)[project.icon] || ExternalLink;
+              return (
+                <a
+                  key={project.id}
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-8 rounded-[3rem] bg-brand-surface border border-white/8 hover:border-white/20 transition-all duration-500 hover:-translate-y-3 shadow-xl flex flex-col gap-6 overflow-hidden"
+                >
+                  <div
+                    className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-500 blur-2xl"
+                    style={{ background: project.accentColor }}
+                  />
+                  <div className="flex items-start justify-between gap-4">
+                    <div
+                      className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110"
+                      style={{ background: `${project.accentColor}22`, border: `1px solid ${project.accentColor}44` }}
+                    >
+                      <Icon className="w-5 h-5" style={{ color: project.accentColor }} />
+                    </div>
+                    <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <ExternalLink className="w-4 h-4 text-slate-400" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-black text-white uppercase italic leading-tight mb-1.5 group-hover:text-white transition-colors"
+                      style={{ ['--hover-color' as any]: project.accentColor }}>
+                      {project.name}
+                    </h3>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.15em]" style={{ color: project.accentColor }}>
+                      {project.tagline}
+                    </p>
+                  </div>
+                  <p className="text-sm text-slate-400 font-medium leading-relaxed flex-grow">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest"
+                        style={{ background: `${project.accentColor}15`, color: `${project.accentColor}cc`, border: `1px solid ${project.accentColor}25` }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between pt-4 border-t border-white/6">
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{project.category}</span>
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse" />
+                      <span className="text-[10px] font-black text-brand-primary uppercase tracking-widest">Live</span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
