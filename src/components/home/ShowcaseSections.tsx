@@ -14,7 +14,6 @@ import {
   GlowCard,
   Marquee,
   MagneticButton,
-  InitialsAvatar,
   useReducedMotion,
 } from '@/components/ui-kit';
 import { CaseCard, ArticleCard } from '@/components/Cards';
@@ -145,43 +144,33 @@ export const Testimonials: React.FC = () => {
         />
 
         <div className="relative mx-auto mt-12 max-w-3xl">
-          <div className="relative min-h-[380px] sm:min-h-[300px] lg:min-h-[260px]">
+          <div className="relative min-h-[240px] sm:min-h-[180px]">
             {TESTIMONIALS.map((t, i) => (
               <figure
-                key={t.name}
+                key={i}
                 aria-hidden={i !== active}
                 className={cn(
-                  'glass absolute inset-0 m-0 p-6 transition-all duration-700 sm:p-9',
+                  'glass absolute inset-0 m-0 flex flex-col justify-center p-6 transition-all duration-700 sm:p-9',
                   i === active
                     ? 'pointer-events-auto translate-y-0 opacity-100'
                     : 'pointer-events-none translate-y-3 opacity-0'
                 )}
               >
-                <Quote className="h-6 w-6 text-mint-ink" aria-hidden="true" />
-                <blockquote className="mt-4 text-[16px] leading-relaxed text-ink sm:text-[18px]">
+                <Quote className="h-6 w-6 text-mint-ink shrink-0" aria-hidden="true" />
+                <blockquote className="mt-4 text-[16px] leading-relaxed text-ink sm:text-[18px] font-normal italic">
                   “{t.quote}”
                 </blockquote>
-                <figcaption className="mt-6 flex items-center gap-3 border-t border-hairline pt-5">
-                  <InitialsAvatar name={t.name} />
-                  <div>
-                    <p className="text-[14px] font-semibold text-ink">{t.name}</p>
-                    <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-faint">
-                      {t.role} · {t.company}
-                    </p>
-                  </div>
-                </figcaption>
               </figure>
-
             ))}
           </div>
 
           <div className="mt-6 flex items-center justify-center gap-2">
-            {TESTIMONIALS.map((t, i) => (
+            {TESTIMONIALS.map((_, i) => (
               <button
-                key={t.name}
+                key={i}
                 type="button"
                 onClick={() => setActive(i)}
-                aria-label={`Show testimonial from ${t.name}`}
+                aria-label={`Show testimonial ${i + 1}`}
                 aria-current={i === active}
                 className="group/dot h-2.5 rounded-full transition-all"
                 style={{
