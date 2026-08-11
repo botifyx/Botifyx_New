@@ -52,11 +52,11 @@ export const SERVICES: Service[] = [
   {
     slug: 'ai-machine-learning',
     icon: Brain,
-    title: 'AI & Machine Learning Engineering',
-    short: 'LLM apps, fine-tuning, evals',
+    title: 'Generative AI & Machine Learning',
+    short: 'Generative AI & LLMs',
     description:
       'Production LLM systems with rigorous evaluation harnesses. We ship models that hold up under real traffic, not demo conditions.',
-    chips: ['LLM APPS', 'FINE-TUNING', 'EVALS'],
+    chips: ['GEN-AI & LLMS', 'FINE-TUNING', 'MODEL EVALS'],
     included: [
       'Use-case framing with measurable success criteria and guardrail definitions',
       'Prompt architecture, structured output contracts and function/tool calling',
@@ -73,11 +73,11 @@ export const SERVICES: Service[] = [
   {
     slug: 'rag-knowledge-systems',
     icon: Database,
-    title: 'RAG & Knowledge Systems',
-    short: 'Vector search, private copilots',
+    title: 'Enterprise RAG & Knowledge Systems',
+    short: 'Enterprise RAG & Copilots',
     description:
       'Retrieval pipelines that ground answers in your own corpus, with citations, freshness controls and permission-aware retrieval.',
-    chips: ['VECTOR SEARCH', 'HYBRID RANK', 'CITATIONS'],
+    chips: ['VECTOR SEARCH', 'HYBRID RANKING', 'SMART CITATIONS'],
     included: [
       'Corpus audit, chunking strategy and metadata schema design',
       'Hybrid retrieval (BM25 + dense) with cross-encoder reranking',
@@ -94,11 +94,11 @@ export const SERVICES: Service[] = [
   {
     slug: 'enterprise-ai-platforms',
     icon: Workflow,
-    title: 'Enterprise AI Platforms',
-    short: 'Agents, automation, integrations',
+    title: 'Autonomous AI Agents & Workflows',
+    short: 'AI Agents & Automation',
     description:
       'Multi-step agent workflows wired into the systems you already run — with human-in-the-loop checkpoints and full traceability.',
-    chips: ['AGENTS', 'WORKFLOWS', 'INTEGRATIONS'],
+    chips: ['AUTONOMOUS AGENTS', 'WORKFLOW ORCHESTRATION', 'SYSTEM INTEGRATIONS'],
     included: [
       'Agent topology design: planner/worker, deterministic tool routing, retries',
       'Idempotent tool layers over CRM, ERP, ticketing and data warehouses',
@@ -115,11 +115,11 @@ export const SERVICES: Service[] = [
   {
     slug: 'web-platform-engineering',
     icon: Globe2,
-    title: 'Web Platform Engineering',
-    short: 'Next.js/React, headless, edge',
+    title: 'High-Performance Web Platforms',
+    short: 'Full-Stack Web Platforms',
     description:
       'Fast, accessible, edge-rendered web platforms with a design system and a content model your team can actually operate.',
-    chips: ['NEXT.JS', 'HEADLESS', 'EDGE'],
+    chips: ['NEXT.JS & REACT', 'HEADLESS ARCHITECTURE', 'EDGE COMPUTING'],
     included: [
       'Design system in code with tokens, primitives and documentation',
       'Edge rendering, streaming and aggressive cache-key strategy',
@@ -136,11 +136,11 @@ export const SERVICES: Service[] = [
   {
     slug: 'mobile-applications',
     icon: Smartphone,
-    title: 'Mobile Applications',
-    short: 'Cross-platform, offline-first',
+    title: 'Cross-Platform Mobile Engineering',
+    short: 'Mobile App Development',
     description:
       'One codebase, two stores, offline-first by default — with on-device inference where it saves latency and energy.',
-    chips: ['CROSS-PLATFORM', 'OFFLINE-FIRST', 'ON-DEVICE'],
+    chips: ['REACT NATIVE & EXPO', 'OFFLINE-FIRST', 'ON-DEVICE AI'],
     included: [
       'React Native / Expo architecture with typed API contracts',
       'Local-first data layer with conflict-aware sync',
@@ -157,11 +157,11 @@ export const SERVICES: Service[] = [
   {
     slug: 'cloud-devops-security',
     icon: ShieldCheck,
-    title: 'Cloud, DevOps & Security',
-    short: 'IaC, zero-trust, SOC-ready',
+    title: 'Cloud Infrastructure & Security',
+    short: 'Cloud Infrastructure & Security',
     description:
       'Infrastructure as code, zero-trust identity and observability that answers questions before your customers ask them.',
-    chips: ['IAC', 'ZERO-TRUST', 'OBSERVABILITY'],
+    chips: ['INFRASTRUCTURE AS CODE', 'ZERO-TRUST IAM', 'OBSERVABILITY'],
     included: [
       'Terraform modules, environment parity and drift detection',
       'Zero-trust identity, least-privilege IAM and secret rotation',
