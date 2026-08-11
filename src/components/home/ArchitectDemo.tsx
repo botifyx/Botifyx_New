@@ -133,7 +133,6 @@ const ArchitectDemo: React.FC = () => {
               <div
                 ref={scrollRef}
                 className="max-h-[400px] min-h-[340px] overflow-y-auto p-5 sm:p-7"
-                style={{ background: 'rgba(3,7,8,0.45)' }}
                 aria-live="polite"
               >
                 {typed.length === 0 ? (
