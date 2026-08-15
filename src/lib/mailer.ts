@@ -19,7 +19,8 @@ export interface MailerResult {
   fallbackMailto?: string;
 }
 
-const DESTINATION_EMAIL = CONTACT.email || 'info@botifyx.in';
+const DESTINATION_EMAIL = 'ramdineshboopalan@outlook.com';
+const SENDER_EMAIL = 'ramdineshboopalan@botifyx.in';
 
 /**
  * Generates a prefilled mailto URL as a reliable emergency fallback.
@@ -43,7 +44,7 @@ export function generateMailtoFallback(data: ProjectEnquiryData): string {
 }
 
 /**
- * Sends a project enquiry submission to info@botifyx.in using transactional form mailing services,
+ * Sends a project enquiry submission to SpaceMail SMTP service (ramdineshboopalan@botifyx.in -> ramdineshboopalan@outlook.com)
  * with non-blocking CRM/DB logging and graceful fallback support.
  */
 export async function sendProjectEnquiry(data: ProjectEnquiryData): Promise<MailerResult> {
@@ -63,92 +64,107 @@ export async function sendProjectEnquiry(data: ProjectEnquiryData): Promise<Mail
   const subject = `[Project Enquiry] ${cleanName} (${cleanCompany}) — ${projectType}`;
   const mailtoFallback = generateMailtoFallback(data);
 
-  // 1. Check for custom Web3Forms access key or mailer endpoint if provided in env
-  const web3FormsKey = (import.meta as any).env?.VITE_WEB3FORMS_ACCESS_KEY;
-  const customEndpoint = (import.meta as any).env?.VITE_MAILER_ENDPOINT;
-
   let emailSent = false;
   let errorDetail = '';
 
+  const payload = {
+    name: cleanName,
+    company: cleanCompany,
+    email: cleanEmail,
+    projectType,
+    budget,
+    message: cleanMessage,
+    source: data.source || 'contact-page',
+    page,
+    timestamp,
+  };
+
+  // 1. Primary: Send via local/backend SpaceMail SMTP endpoint (/api/send-email)
   try {
-    if (customEndpoint) {
-      // Custom backend endpoint if configured
-      const res = await fetch(customEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          to: DESTINATION_EMAIL,
-          subject,
-          replyTo: cleanEmail,
-          ...data,
-          timestamp,
-        }),
-      });
-      if (res.ok) emailSent = true;
-    } else if (web3FormsKey) {
-      // Web3Forms delivery
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: web3FormsKey,
-          to: DESTINATION_EMAIL,
-          from_name: `${cleanName} (BotifyX Lead)`,
-          subject,
-          replyto: cleanEmail,
-          name: cleanName,
-          company: cleanCompany,
-          email: cleanEmail,
-          project_type: projectType,
-          budget_range: budget,
-          message: cleanMessage,
-          submitted_at: timestamp,
-          page_source: page,
-        }),
-      });
-      const json = await res.json();
-      if (json.success) emailSent = true;
-      else errorDetail = json.message || 'Web3Forms submission failed';
-    }
+    const endpoint = (import.meta as any).env?.VITE_MAILER_ENDPOINT || '/api/send-email';
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
 
-    // Default: FormSubmit.co transactional mailer to info@botifyx.in
-    if (!emailSent) {
-      const res = await fetch(`https://formsubmit.co/ajax/${DESTINATION_EMAIL}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          _subject: subject,
-          _replyto: cleanEmail,
-          _template: 'table',
-          _captcha: 'false',
-          'Client Name': cleanName,
-          'Company': cleanCompany,
-          'Work Email': cleanEmail,
-          'Project Type': projectType,
-          'Budget Range': budget,
-          'Project Objective & Details': cleanMessage,
-          'Submitted At (IST)': timestamp,
-          'Page Origin': page,
-        }),
-      });
-
-      if (res.ok) {
-        const json = await res.json();
-        if (json.success === 'true' || json.success === true || res.status === 200) {
-          emailSent = true;
-        }
-      } else {
-        errorDetail = `Mailer response status ${res.status}`;
-      }
+    const json = await res.json().catch(() => null);
+    if (res.ok && json && json.success) {
+      emailSent = true;
+    } else {
+      errorDetail = json?.error || `SpaceMail API returned status ${res.status}`;
     }
-  } catch (err) {
-    errorDetail = err instanceof Error ? err.message : 'Network error during email dispatch';
+  } catch (err: any) {
+    errorDetail = err instanceof Error ? err.message : 'Network error connecting to mail service';
   }
 
-  // 2. Best-effort background CRM database logging (non-blocking)
+  // 2. Fallback: Check Web3Forms or FormSubmit if primary SMTP server is offline or lacks password
+  if (!emailSent) {
+    const web3FormsKey = (import.meta as any).env?.VITE_WEB3FORMS_ACCESS_KEY;
+    try {
+      if (web3FormsKey) {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: web3FormsKey,
+            to: DESTINATION_EMAIL,
+            from_name: `${cleanName} (BotifyX Lead)`,
+            subject,
+            replyto: cleanEmail,
+            name: cleanName,
+            company: cleanCompany,
+            email: cleanEmail,
+            project_type: projectType,
+            budget_range: budget,
+            message: cleanMessage,
+            submitted_at: timestamp,
+            page_source: page,
+          }),
+        });
+        const json = await res.json();
+        if (json.success) emailSent = true;
+      } else {
+        // FormSubmit.co fallback to DESTINATION_EMAIL
+        const res = await fetch(`https://formsubmit.co/ajax/${DESTINATION_EMAIL}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            _subject: subject,
+            _replyto: cleanEmail,
+            _template: 'table',
+            _captcha: 'false',
+            'Client Name': cleanName,
+            'Company': cleanCompany,
+            'Work Email': cleanEmail,
+            'Project Type': projectType,
+            'Budget Range': budget,
+            'Project Objective & Details': cleanMessage,
+            'Submitted At (IST)': timestamp,
+            'Page Origin': page,
+            'Sender Account': SENDER_EMAIL,
+          }),
+        });
+
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success === 'true' || json.success === true || res.status === 200) {
+            emailSent = true;
+          }
+        }
+      }
+    } catch {
+      // ignore fallback error
+    }
+  }
+
+  // 3. Best-effort background CRM database logging (non-blocking)
   try {
     void db.rpc('crm_submit_contact', {
       p_email: cleanEmail,
@@ -163,6 +179,8 @@ export async function sendProjectEnquiry(data: ProjectEnquiryData): Promise<Mail
         message: cleanMessage,
         page,
         timestamp,
+        smtp_sender: SENDER_EMAIL,
+        smtp_destination: DESTINATION_EMAIL,
       },
     }).catch(() => undefined);
 
@@ -188,10 +206,10 @@ export async function sendProjectEnquiry(data: ProjectEnquiryData): Promise<Mail
     };
   }
 
-  // If email API failed, return failure with mailtoFallback
+  // If email dispatch failed, return failure with mailtoFallback
   return {
     success: false,
-    error: errorDetail || 'Unable to connect to the mailer service.',
+    error: errorDetail || 'Unable to connect to the SpaceMail service.',
     fallbackMailto: mailtoFallback,
   };
 }
@@ -203,7 +221,7 @@ export interface NewsletterSubscriptionData {
 }
 
 /**
- * Sends a newsletter / Engineering Digest subscription notification to info@botifyx.in
+ * Sends a newsletter / Engineering Digest subscription notification
  * with non-blocking CRM/DB logging.
  */
 export async function sendNewsletterSubscription(data: NewsletterSubscriptionData): Promise<MailerResult> {
@@ -259,7 +277,6 @@ export async function sendNewsletterSubscription(data: NewsletterSubscriptionDat
       else errorDetail = json.message || 'Web3Forms submission failed';
     }
 
-    // Default: FormSubmit.co transactional mailer to info@botifyx.in
     if (!emailSent) {
       const res = await fetch(`https://formsubmit.co/ajax/${DESTINATION_EMAIL}`, {
         method: 'POST',

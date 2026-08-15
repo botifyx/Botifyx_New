@@ -160,13 +160,12 @@ const ContactPage: React.FC = () => {
                     >
                       <Check className="h-8 w-8 text-[#04140f]" aria-hidden="true" />
                     </span>
-                    <p className="eyebrow mt-6 justify-center">// enquiry delivered to info@botifyx.in</p>
+                    <p className="eyebrow mt-6 justify-center">// enquiry delivered to engineering team</p>
                     <h2 className="mt-4 text-[26px] font-bold text-ink sm:text-[32px]">
                       Thanks — it&apos;s on our desk.
                     </h2>
                     <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-muted">
-                      Your brief has been formatted and emailed to our engineering team at{' '}
-                      <span className="font-semibold text-mint-ink">info@botifyx.in</span>. We will reply within one
+                      Your brief has been formatted and delivered directly to our team. We will reply within one
                       business day with first questions and a discovery plan.
                     </p>
 
@@ -179,8 +178,9 @@ const ContactPage: React.FC = () => {
                         <span className="text-ink-faint">Type / Budget:</span>
                         <span className="text-mint-ink">{form.projectType} · {form.budget}</span>
                       </div>
-                      <div className="pt-2 text-ink-faint">
-                        <span>Destination: info@botifyx.in</span>
+                      <div className="pt-2 text-ink-faint flex justify-between">
+                        <span>Delivery:</span>
+                        <span className="text-mint-ink">ramdineshboopalan@outlook.com</span>
                       </div>
                     </div>
 
@@ -318,7 +318,7 @@ const ContactPage: React.FC = () => {
                               className="inline-flex items-center gap-2 rounded-lg bg-mint px-3.5 py-1.5 font-mono text-[11.5px] font-semibold text-[#04140f] transition-transform hover:scale-[1.02]"
                             >
                               <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-                              Send directly to info@botifyx.in
+                              Send directly via email
                               <ExternalLink className="h-3 w-3" aria-hidden="true" />
                             </a>
                             <span className="font-mono text-[10.5px] text-ink-faint">
