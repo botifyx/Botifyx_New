@@ -11,11 +11,12 @@ import {
   Clock,
   Send,
   ExternalLink,
+  MapPin,
 } from 'lucide-react';
 import Seo from '@/components/Seo';
 import { PageHero } from '@/components/Cards';
 import { Reveal, GlowCard, MagneticButton } from '@/components/ui-kit';
-import { CONTACT } from '@/lib/site';
+import { CONTACT, LOCATIONS } from '@/lib/site';
 import { sendProjectEnquiry, generateMailtoFallback } from '@/lib/mailer';
 
 const PROJECT_TYPES = [
@@ -410,6 +411,36 @@ const ContactPage: React.FC = () => {
                       </a>
                     </li>
                   </ul>
+                  <div className="mt-6 border-t border-hairline pt-5">
+                    <p className="mono-label mb-3 text-[11px] text-ink-muted">// locations & direct lines</p>
+                    <div className="space-y-3">
+                      {LOCATIONS.map((loc) => (
+                        <div
+                          key={loc.region}
+                          className="rounded-xl border border-hairline/70 bg-surface/50 p-3.5 transition-colors hover:border-mint-ink/30"
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="font-mono text-[12px] font-semibold uppercase tracking-wider text-mint-ink">
+                              {loc.region}
+                            </span>
+                            <a
+                              href={loc.phoneHref}
+                              className="inline-flex items-center gap-1.5 font-mono text-[12px] text-ink transition-colors hover:text-mint-ink"
+                            >
+                              <Phone className="h-3 w-3 text-mint-ink" aria-hidden="true" />
+                              <span className="text-ink-muted">Mobile:</span>
+                              <span>{loc.phone}</span>
+                            </a>
+                          </div>
+                          <div className="mt-1.5 flex items-start gap-2 text-[13px] leading-snug text-ink-muted">
+                            <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-mint-ink/70" aria-hidden="true" />
+                            <span>{loc.address}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                   <p className="mt-6 border-t border-hairline pt-4 font-mono text-[10.5px] uppercase leading-relaxed tracking-[0.14em] text-ink-faint">
                     Mon–Fri · 09:00–19:00 IST · replies within one business day
                   </p>

@@ -28,6 +28,34 @@ export const CONTACT = {
     'We build secure, AI-native platforms that drive growth while maintaining an industry-leading low-carbon footprint.',
 };
 
+export interface OfficeLocation {
+  region: string;
+  address: string;
+  phone: string;
+  phoneHref: string;
+}
+
+export const LOCATIONS: OfficeLocation[] = [
+  {
+    region: 'Tamil Nadu',
+    address: 'Radiance Jade Garden, Padappai, Tamil Nadu',
+    phone: '+91-9566443876',
+    phoneHref: 'tel:+919566443876',
+  },
+  {
+    region: 'Karnataka',
+    address: 'KHB Colony, Surya Nagar, Anekal, Bangalore',
+    phone: '+91-7305018448',
+    phoneHref: 'tel:+917305018448',
+  },
+  {
+    region: 'US',
+    address: 'Phoenix, Arizona, USA',
+    phone: '+1-3107744375',
+    phoneHref: 'tel:+13107744375',
+  },
+];
+
 export const NAV_LINKS = [
   { label: 'Services', to: '/services' },
   { label: 'Work', to: '/work' },
