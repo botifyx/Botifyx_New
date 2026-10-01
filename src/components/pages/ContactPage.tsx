@@ -11,6 +11,7 @@ import {
   Clock,
   Send,
   ExternalLink,
+  ArrowDown,
 } from 'lucide-react';
 import Seo from '@/components/Seo';
 import { PageHero } from '@/components/Cards';
@@ -411,9 +412,53 @@ const ContactPage: React.FC = () => {
                       </a>
                     </li>
                   </ul>
-                  <LocationsGlobe />
+                  {/* Global Network preview & jump to dedicated section */}
+                  <div className="mt-6 border-t border-hairline pt-5">
+                    <div className="flex items-center justify-between">
+                      <span className="mono-label text-[11px] text-ink-muted">// global network</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-mint-ink/20 bg-mint-ink/10 px-2.5 py-0.5 font-mono text-[9px] font-semibold text-mint-ink">
+                        <span className="h-1.5 w-1.5 rounded-full bg-mint shadow-[0_0_6px_#00ff9d] animate-pulse" />
+                        4 HUBS ONLINE
+                      </span>
+                    </div>
 
-                  <p className="mt-6 border-t border-hairline pt-4 font-mono text-[10.5px] uppercase leading-relaxed tracking-[0.14em] text-ink-faint">
+                    <div className="mt-3 grid grid-cols-2 gap-2 font-mono text-[11px]">
+                      <div className="rounded-xl border border-hairline/60 bg-surface/40 p-2.5 transition-colors hover:border-mint-ink/30">
+                        <div className="flex items-center gap-1 text-ink font-semibold">
+                          <span>🇮🇳</span> Chennai
+                        </div>
+                        <div className="text-[10px] text-mint-ink mt-0.5">HQ · Direct Desk</div>
+                      </div>
+                      <div className="rounded-xl border border-hairline/60 bg-surface/40 p-2.5 transition-colors hover:border-mint-ink/30">
+                        <div className="flex items-center gap-1 text-ink font-semibold">
+                          <span>🇮🇳</span> Bangalore
+                        </div>
+                        <div className="text-[10px] text-mint-ink mt-0.5">R&amp;D · Applied AI</div>
+                      </div>
+                      <div className="rounded-xl border border-hairline/60 bg-surface/40 p-2.5 transition-colors hover:border-mint-ink/30">
+                        <div className="flex items-center gap-1 text-ink font-semibold">
+                          <span>🇺🇸</span> Phoenix
+                        </div>
+                        <div className="text-[10px] text-mint-ink mt-0.5">US · Client Ops</div>
+                      </div>
+                      <div className="rounded-xl border border-hairline/60 bg-surface/40 p-2.5 transition-colors hover:border-mint-ink/30">
+                        <div className="flex items-center gap-1 text-ink font-semibold">
+                          <span>🇰🇪</span> Nairobi
+                        </div>
+                        <div className="text-[10px] text-mint-ink mt-0.5">EMEA · Direct Line</div>
+                      </div>
+                    </div>
+
+                    <a
+                      href="#locations-direct-lines"
+                      className="mt-3.5 flex items-center justify-between rounded-xl border border-mint-ink/30 bg-mint-ink/5 px-3.5 py-2.5 font-mono text-[11px] font-semibold text-mint-ink transition-all hover:bg-mint-ink/10 hover:border-mint-ink/50"
+                    >
+                      <span>Explore Radar &amp; Direct Lines</span>
+                      <ArrowDown className="h-3.5 w-3.5 text-mint-ink animate-bounce" />
+                    </a>
+                  </div>
+
+                  <p className="mt-5 border-t border-hairline pt-4 font-mono text-[10.5px] uppercase leading-relaxed tracking-[0.14em] text-ink-faint">
                     Mon–Fri · 09:00–19:00 IST · replies within one business day
                   </p>
                 </GlowCard>
@@ -470,6 +515,18 @@ const ContactPage: React.FC = () => {
               </Reveal>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─── Global Locations & Direct Lines Showcase Section ───── */}
+      <section
+        id="locations-direct-lines"
+        className="relative border-t border-hairline bg-surface/30 py-20 lg:py-28"
+      >
+        <div className="container-x">
+          <Reveal>
+            <LocationsGlobe />
+          </Reveal>
         </div>
       </section>
     </>
