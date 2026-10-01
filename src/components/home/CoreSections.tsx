@@ -44,7 +44,7 @@ export const ServicesGrid: React.FC = () => (
           eyebrow="// engineering disciplines"
           title={
             <>
-              Six disciplines,
+              Seven disciplines,
               <br className="hidden sm:block" /> one <span className="grad-text">production standard</span>.
             </>
           }

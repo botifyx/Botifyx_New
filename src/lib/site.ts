@@ -5,6 +5,7 @@ import {
   Globe2,
   Smartphone,
   ShieldCheck,
+  Sparkles,
   Leaf,
   Gauge,
   Cpu,
@@ -30,29 +31,56 @@ export const CONTACT = {
 
 export interface OfficeLocation {
   region: string;
+  city: string;
   address: string;
   phone: string;
   phoneHref: string;
+  countryFlag: string;
+  /** Approximate lat/lng used only for the decorative globe visual */
+  lat: number;
+  lng: number;
 }
 
 export const LOCATIONS: OfficeLocation[] = [
   {
-    region: 'Tamil Nadu',
+    region: 'India',
+    city: 'Chennai',
     address: 'Radiance Jade Garden, Padappai, Tamil Nadu',
     phone: '+91-9566443876',
     phoneHref: 'tel:+919566443876',
+    countryFlag: '🇮🇳',
+    lat: 12.84,
+    lng: 80.03,
   },
   {
-    region: 'Karnataka',
+    region: 'India',
+    city: 'Bangalore',
     address: 'KHB Colony, Surya Nagar, Anekal, Bangalore',
     phone: '+91-7305018448',
     phoneHref: 'tel:+917305018448',
+    countryFlag: '🇮🇳',
+    lat: 12.71,
+    lng: 77.69,
   },
   {
-    region: 'US',
-    address: 'Phoenix, Arizona, USA',
+    region: 'USA',
+    city: 'Phoenix',
+    address: 'Phoenix, Arizona',
     phone: '+1-3107744375',
     phoneHref: 'tel:+13107744375',
+    countryFlag: '🇺🇸',
+    lat: 33.45,
+    lng: -112.07,
+  },
+  {
+    region: 'Kenya',
+    city: 'Nairobi',
+    address: 'Valley View Office Park, Parklands, Nairobi',
+    phone: '+254 114 753800',
+    phoneHref: 'tel:+254114753800',
+    countryFlag: '🇰🇪',
+    lat: -1.27,
+    lng: 36.81,
   },
 ];
 
@@ -201,6 +229,28 @@ export const SERVICES: Service[] = [
       'Environment rebuild from code in under an hour',
       'Mean time to detection measured in minutes',
       'Audit evidence generated continuously, not scrambled for',
+    ],
+  },
+  {
+    slug: 'ai-websites-digital-transformation',
+    icon: Sparkles,
+    title: 'AI-Powered Websites & Digital Experience Transformation',
+    short: 'AI Websites & Digital Experiences',
+    description:
+      'Your website should do more than introduce your business. We create modern, technology-enabled websites and transform existing sites into engaging digital experiences — combining contemporary design, AI-powered interactions and connected business tools.',
+    chips: ['AI CHATBOTS', 'DESIGN SYSTEMS', 'CRM INTEGRATION', 'LEAD CAPTURE'],
+    included: [
+      'Modern design that reflects your brand: fresh layouts, intuitive navigation, purposeful animations and responsive experiences across every device',
+      'AI-powered customer assistance: intelligent chatbots, guided service discovery and automated FAQs that help visitors find relevant answers',
+      'Features that turn interest into action: WhatsApp integration, appointment booking, enquiry forms, product demos and streamlined lead capture',
+      'Connected business workflows: integrations with CRM, email, payments and automation tools to simplify follow-up and service delivery',
+      'A stronger digital foundation: performance improvements, search-friendly content, accessibility and analytics to guide ongoing improvements',
+    ],
+    tooling: ['Next.js', 'React', 'TypeScript', 'OpenAI', 'Vercel', 'HubSpot', 'Stripe', 'Framer Motion'],
+    outcomes: [
+      'Visitor-to-lead conversion measurably increased',
+      'Customer enquiries streamlined end-to-end',
+      'Website becomes a growth platform, not just a brochure',
     ],
   },
 ];

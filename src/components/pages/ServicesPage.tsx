@@ -29,7 +29,7 @@ const ServicesPage: React.FC = () => {
     <>
       <Seo
         title="Services — AI, Platform & Cloud Engineering"
-        description="Six engineering disciplines: AI/ML engineering, RAG and knowledge systems, enterprise AI platforms, web platform engineering, mobile applications, and cloud, DevOps and security."
+        description="Seven engineering disciplines: AI/ML engineering, RAG and knowledge systems, autonomous AI agents, web platform engineering, mobile applications, cloud infrastructure and security, and AI-powered websites and digital transformation."
         path="/services"
       />
 

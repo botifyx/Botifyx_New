@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme-provider";
 import Layout from "@/components/Layout";
+import BootLoader from "@/components/BootLoader";
 import Index from "./pages/Index";
 import ServicesPage from "@/components/pages/ServicesPage";
 import WorkPage from "@/components/pages/WorkPage";
@@ -18,31 +20,62 @@ import NotFoundPage from "@/components/pages/NotFoundPage";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <ThemeProvider defaultTheme="dark">
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/work" element={<WorkPage />} />
-              <Route path="/work/:slug" element={<CaseStudyPage />} />
-              <Route path="/carbon" element={<CarbonPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/insights" element={<InsightsPage />} />
-              <Route path="/insights/:slug" element={<ArticlePage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </ThemeProvider>
-);
+/** Show boot loader only once per browser session */
+const hasSeenLoader = () => {
+  try {
+    return sessionStorage.getItem('bx-boot') === '1';
+  } catch {
+    return false;
+  }
+};
+
+const markLoaderSeen = () => {
+  try {
+    sessionStorage.setItem('bx-boot', '1');
+  } catch {
+    // storage unavailable — silently continue
+  }
+};
+
+const App = () => {
+  const [showLoader, setShowLoader] = useState(!hasSeenLoader());
+
+  const handleLoaderFinish = () => {
+    markLoaderSeen();
+    // Remove the static HTML loader if still in the DOM
+    const staticEl = document.getElementById('static-boot-loader');
+    if (staticEl) staticEl.remove();
+    setShowLoader(false);
+  };
+
+  return (
+    <ThemeProvider defaultTheme="dark">
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          {showLoader && <BootLoader onFinish={handleLoaderFinish} />}
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Index />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/work" element={<WorkPage />} />
+                <Route path="/work/:slug" element={<CaseStudyPage />} />
+                <Route path="/carbon" element={<CarbonPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/insights" element={<InsightsPage />} />
+                <Route path="/insights/:slug" element={<ArticlePage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
+  );
+};
 
 export default App;
+
