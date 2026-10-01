@@ -9,6 +9,7 @@ import {
   Eyebrow,
 } from '@/components/ui-kit';
 import { SERVICES, TRUST_MICRO } from '@/lib/site';
+import BotifyXLogo from '@/components/BotifyXLogo';
 
 /* ─── service constellation (right side) ─────────────────── */
 
@@ -132,34 +133,23 @@ const ServiceConstellation: React.FC = () => {
               animation: 'hero-pulse 3s ease-in-out infinite 0.5s',
             }}
           />
-          {/* Inner content */}
+          {/* Inner content - BotifyX Logo */}
           <div
-            className="relative flex flex-col items-center justify-center rounded-full border border-hairline"
+            className="relative flex flex-col items-center justify-center rounded-full border border-mint-ink/20 transition-all duration-300 hover:scale-105"
             style={{
-              width: 80,
-              height: 80,
-              background: 'rgb(var(--surface) / 0.8)',
-              backdropFilter: 'blur(12px)',
-              boxShadow: '0 0 30px rgba(0,255,157,0.15), inset 0 1px 0 rgba(255,255,255,0.05)',
+              width: 84,
+              height: 84,
+              background: 'rgb(var(--surface) / 0.85)',
+              backdropFilter: 'blur(16px)',
+              boxShadow: '0 0 35px rgba(0,255,157,0.22), inset 0 1px 0 rgba(255,255,255,0.08)',
             }}
           >
-            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-ink-faint">
-              BOTIFYX
-            </span>
-            <span
-              className="mt-0.5 text-[20px] font-bold"
-              style={{
-                background: 'linear-gradient(135deg, #00ff9d, #00e5ff)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                color: 'transparent',
-              }}
-            >
-              7
-            </span>
-            <span className="font-mono text-[7px] uppercase tracking-[0.2em] text-ink-faint">
-              DISCIPLINES
-            </span>
+            <BotifyXLogo
+              variant="icon"
+              height={44}
+              alt="BotifyX Logo"
+              className="drop-shadow-[0_0_14px_rgba(0,255,157,0.45)]"
+            />
           </div>
         </div>
 

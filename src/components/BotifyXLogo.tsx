@@ -24,7 +24,7 @@ export const BotifyXLogo: React.FC<BotifyXLogoProps> = ({
   let logoSrc = '/botifyx-logo-header-dark.png';
 
   if (variant === 'icon') {
-    logoSrc = '/botifyx-icon.png';
+    logoSrc = isDark ? '/botifyx-icon-dark.png' : '/botifyx-icon.png';
   } else if (variant === 'full' || showTagline) {
     logoSrc = isDark ? '/botifyx-logo-full-dark.png' : '/botifyx-logo-full.png';
   } else {
